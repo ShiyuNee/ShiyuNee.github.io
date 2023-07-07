@@ -18,6 +18,7 @@ Education
     * Advisor: Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/)
   * **Shandong University**
     * B.E. in Artificial Intelligence, 2019 - 2023
+    * Rank: 2/53
 
 Hornors and Awards
 ------
