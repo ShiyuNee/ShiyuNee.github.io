@@ -23,7 +23,7 @@ Education
 Hornors and Awards
 ------
 
-- Outstanding Graduate, Department of Education, Shandong Province, China, 2023
+- Outstanding Graduate, Shandong Province, China, 2023
 
 - Outstanding Graduate, Shandong University, China, 2023
 - Dean's Scholarship, School of Computer Science, Shandong University, China, 2022
