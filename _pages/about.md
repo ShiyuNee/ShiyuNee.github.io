@@ -19,6 +19,7 @@ Education
   * **Shandong University**
     * B.E. in Artificial Intelligence, 2019 - 2023
     * Rank: 2/53
+    * Advisor: Prof. [Dong Xuan](https://web.cse.ohio-state.edu/~xuan.3/)
 
 Hornors and Awards
 ------
