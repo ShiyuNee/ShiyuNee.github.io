@@ -9,7 +9,5 @@ redirect_from:
 
 IN THE YEAR OF 2023
 ------
-- **A Comparative Study of Training Objectives for Clarification Facet Generation **[[Code](https://github.com/ShiyuNee/Facet-Generation)] <br>
-  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>
-  
-  **SIGIR-AP'2023**: Proceedings of the 1st International ACM SIGIR Conference on Information Retrieval in the Asia Pacific
+- **A Comparative Study of Training Objectives for Clarification Facet Generation** [[Code](https://github.com/ShiyuNee/Facet-Generation)] <br>
+  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>**SIGIR-AP'2023**: Proceedings of the 1st International ACM SIGIR Conference on Information Retrieval in the Asia Pacific
