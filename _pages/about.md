@@ -15,7 +15,7 @@ Education
 ------
   * **Institute of Computing Technology, Chinese Academy of Sciences**
     * Ph.D. in Computer Science, 2023 - present
-    * Advisor: Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/)
+    * Advisor: Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/) and Prof. [Keping Bi](https://sites.google.com/site/irkepingbi/)
   * **Shandong University**
     * B.E. in Artificial Intelligence, 2019 - 2023
     * Rank: 2/53
