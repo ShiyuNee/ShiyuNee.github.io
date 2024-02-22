@@ -8,7 +8,7 @@ redirect_from:
 
 ## IN THE YEAR OF 2024
 
-- **When Do LLMs Need Retrieval Augmentation? Mitigating LLMs' Overconfidence Helps Retrieval Augmentation** [[Arxiv]](https://arxiv.org/abs/2402.11457) <br>
+- **When Do LLMs Need Retrieval Augmentation? Mitigating LLMs' Overconfidence Helps Retrieval Augmentation** [[Arxiv](https://arxiv.org/abs/2402.11457)] [[Blog](https://mp.weixin.qq.com/s/yhkGXXjYdoM-KIhHGgdjdA)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>
 
 IN THE YEAR OF 2023

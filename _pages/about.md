@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I am a first-year Ph.D. student in Computer Science at [Institute of Computing Technology](http://www.ict.ac.cn/), [Chinese Academy of Sciences](http://www.cas.cn/), advised by Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/). I am a member of [CAS Key Lab of Web Data Science and Technology](http://www.bigdatalab.ac.cn/). My research interests lie in the general area of Information Retrieval (IR), with a special focus on query facet generation, LLM's awareness, and retrieval-augmentation.
+I am a first-year Ph.D. student in Computer Science at [Institute of Computing Technology](http://www.ict.ac.cn/), [Chinese Academy of Sciences](http://www.cas.cn/), advised by Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/). I am a member of [CAS Key Lab of Web Data Science and Technology](http://www.bigdatalab.ac.cn/). My research interests lie in the general area of Information Retrieval (IR), with a special focus on query facet generation, LLMs' knowledge boundary, and retrieval-augmentation.
 
 ## Highlight
 
