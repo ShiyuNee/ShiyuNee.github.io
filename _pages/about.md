@@ -19,6 +19,7 @@ I am a first-year Ph.D. student in Computer Science at [Institute of Computing T
 
 ## News
 
+- [May 2024] One paper is accepted by ACL 2024.
 - [Sep 2023] One paper is accepted by SIGIR-AP 2023.
 
 Education
