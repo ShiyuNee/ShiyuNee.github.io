@@ -9,9 +9,8 @@ redirect_from:
 ## IN THE YEAR OF 2024
 
 - **When Do LLMs Need Retrieval Augmentation? Mitigating LLMs' Overconfidence Helps Retrieval Augmentation** [[Arxiv](https://arxiv.org/abs/2402.11457)] [[Blog](https://mp.weixin.qq.com/s/yhkGXXjYdoM-KIhHGgdjdA)]<br>
-  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>
+  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>**ACL' 2024**:  Findings of the Association for Computational Linguistics, 2024
   
-  **ACL' 2024**:  Findings of Association for Computational Linguistics, 2024
 
 IN THE YEAR OF 2023
 ------
