@@ -56,7 +56,7 @@ alexa_site_verification  :
 yandex_site_verification :
 
 # Social Sharing
-twitter:
+twitter: https://x.com/Shictyu
   username               : &twitter
 facebook:
   username               :
@@ -86,7 +86,7 @@ author:
   location         : "Beijing, China"
   employer         :  
   pubmed           : 
-  googlescholar    : 
+  googlescholar    : https://www.semanticscholar.org/author/Shiyu-Ni/2249761536
   email            : 
   researchgate     :  
   uri              :
