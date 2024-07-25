@@ -19,8 +19,7 @@ I am a first-year Ph.D. student in Computer Science at [Institute of Computing T
 
 ## News
 
-- [July 2024] We win **2nd** place in **ICML 2024 Challenges** on Automated Math Reasoning Track 1-1.Autoformalization
-
+- [July 2024] We win **2nd** place in **ICML 2024 Challenges** on Automated Math Reasoning Track 1-1.
 - [May 2024] One paper is accepted by **ACL 2024**.
 - [Sep 2023] One paper is accepted by **SIGIR-AP 2023**.
 
