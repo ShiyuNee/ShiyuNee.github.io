@@ -19,8 +19,10 @@ I am a first-year Ph.D. student in Computer Science at [Institute of Computing T
 
 ## News
 
-- [May 2024] One paper is accepted by ACL 2024.
-- [Sep 2023] One paper is accepted by SIGIR-AP 2023.
+- [July 2024] We win **2nd** place in **ICML 2024 Challenges** on Automated Math Reasoning Track 1-1.Autoformalization
+
+- [May 2024] One paper is accepted by **ACL 2024**.
+- [Sep 2023] One paper is accepted by **SIGIR-AP 2023**.
 
 Education
 ------
@@ -36,9 +38,9 @@ Education
 Hornors and Awards
 ------
 
-- Outstanding Graduate, Shandong Province, China, 2023
+- Outstanding Graduate, Shandong Province, 2023
 
-- Outstanding Graduate, Shandong University, China, 2023
-- Dean's Scholarship, School of Computer Science, Shandong University, China, 2022
+- Outstanding Graduate, Shandong University, 2023
+- Dean's Scholarship, School of Computer Science, Shandong University, 2022
 - National Scholarship, Ministry of Education, China, 2021
-- Merit Student, Shandong University, China, 2020, 2022
+- Merit Student, Shandong University, 2020, 2022
