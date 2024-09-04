@@ -12,7 +12,7 @@ redirect_from:
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>**ACL' 2024**:  Findings of the Association for Computational Linguistics, 2024
 
 - **Are Large Language Models More Honest in Their Probabilistic or Verbalized Confidence?**[[Arxiv](https://arxiv.org/pdf/2408.09773)]<br>
-  <ins>**Shiyu Ni**</ins>, Keping Bi and Jiafeng Guo  <br>**CCIR' 2024**: The 30th China Conference on Information Retrieval
+  <ins>**Shiyu Ni**</ins>, Keping Bi, Lulu Yu and Jiafeng Guo  <br>**CCIR' 2024**: The 30th China Conference on Information Retrieval
   
   
 
