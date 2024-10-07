@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I am a second-year Ph.D. student in Computer Science at [Institute of Computing Technology](http://www.ict.ac.cn/), [Chinese Academy of Sciences](http://www.cas.cn/), advised by Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/). I am a member of [CAS Key Lab of Web Data Science and Technology](http://www.bigdatalab.ac.cn/). My research interests lie in the general area of Information Retrieval (IR) and NLP, with a special focus on Hallucination Detection, LLMs' knowledge boundaries, and RAG.
+I am a second-year Ph.D. student in Computer Science at [Institute of Computing Technology](http://www.ict.ac.cn/), [Chinese Academy of Sciences](http://www.cas.cn/), advised by Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/). I am a member of [CAS Key Lab of Web Data Science and Technology](http://www.bigdatalab.ac.cn/). My research interests lie in the general area of Information Retrieval (IR) and NLP, with a special focus on Hallucination Detection, LLMs' Knowledge Boundaries, and RAG.
 
 ## Highlight
 
@@ -18,7 +18,7 @@ I am a second-year Ph.D. student in Computer Science at [Institute of Computing 
   - [Awesome-Conversation-Clarifying-Questions-for-Information-Retrieval](https://github.com/ShiyuNee/Awesome-Conversation-Clarifying-Questions-for-Information-Retrieval)
 
 ## News
-
+- [Sep 2024] One paper is accepted by **CCIR 2024**
 - [July 2024] We win **2nd** place in **ICML 2024 Challenges** on Automated Math Reasoning Track 1-1.
 - [May 2024] One paper is accepted by **ACL 2024**.
 - [Sep 2023] One paper is accepted by **SIGIR-AP 2023**.
@@ -28,11 +28,11 @@ Education
 
   * **Institute of Computing Technology, Chinese Academy of Sciences**
     * Ph.D. in Computer Science, 2023 - present
-    * Advisor: Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/) and Prof. [Keping Bi](https://sites.google.com/site/irkepingbi/)
+    * Advisor: Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/) and Dr. [Keping Bi](https://sites.google.com/site/irkepingbi/)
   * **Shandong University**
     * B.E. in Artificial Intelligence, 2019 - 2023
     * Rank: 2/53
-    * Advisor: Prof. [Dong Xuan](https://web.cse.ohio-state.edu/~xuan.3/)
+    * Advisor: Prof. [Dong Xuan](https://web.cse.ohio-state.edu/~xuan.3/)(IEEE Fellow)
 
 Hornors and Awards
 ------
