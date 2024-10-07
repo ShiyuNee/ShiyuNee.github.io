@@ -25,4 +25,5 @@ IN THE YEAR OF 2023
 ## Preprint
 - **Contextual Dual Learning Algorithm with Listwise Distillation for Unbiased Learning to Rank**[[Arxiv](https://arxiv.org/pdf/2408.09817)]  <br>
   Lulu Yu, Keping Bi, <ins>**Shiyu Ni**</ins> and Jiafeng Guo 
+- **Is Factuality Enhancement a Free Lunch For LLMs? Better Factuality Can Lead to Worse Context-Faithfulness**[[Arxiv](https://arxiv.org/abs/2404.00216)]  <br>Baolong Bi, Shenghua Liu, Yiwei Wang, Lingrui Mei, Junfeng Fang, Hongcheng Gao, <ins>**Shiyu Ni**</ins> and Xueqi Cheng 
 
