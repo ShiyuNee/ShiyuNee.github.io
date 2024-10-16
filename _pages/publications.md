@@ -23,7 +23,9 @@ IN THE YEAR OF 2023
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>**SIGIR-AP' 2023**: Proceedings of the 1st International ACM SIGIR Conference on Information Retrieval in the Asia Pacific
 
 ## Preprint
+- **Towards Fully Exploiting LLM Internal States for Enhanced Knowledge Boundary Perception**<br>
+  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Baolong Bi, Lulu Yu and Xueqi Cheng
+- **Is Factuality Enhancement a Free Lunch For LLMs? Better Factuality Can Lead to Worse Context-Faithfulness**[[Arxiv](https://arxiv.org/abs/2404.00216)]  <br>Baolong Bi, Shenghua Liu, Yiwei Wang, Lingrui Mei, Junfeng Fang, Hongcheng Gao, <ins>**Shiyu Ni**</ins> and Xueqi Cheng 
 - **Contextual Dual Learning Algorithm with Listwise Distillation for Unbiased Learning to Rank**[[Arxiv](https://arxiv.org/pdf/2408.09817)]  <br>
   Lulu Yu, Keping Bi, <ins>**Shiyu Ni**</ins> and Jiafeng Guo 
-- **Is Factuality Enhancement a Free Lunch For LLMs? Better Factuality Can Lead to Worse Context-Faithfulness**[[Arxiv](https://arxiv.org/abs/2404.00216)]  <br>Baolong Bi, Shenghua Liu, Yiwei Wang, Lingrui Mei, Junfeng Fang, Hongcheng Gao, <ins>**Shiyu Ni**</ins> and Xueqi Cheng 
 
