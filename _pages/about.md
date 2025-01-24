@@ -15,9 +15,10 @@ I am a second-year Ph.D. student in Computer Science at [Institute of Computing 
 
 - **Curated lists of awesome papers**
   - [Awesome-Information-Retrieval-in-the-Age-of-Large-Language-Model](https://github.com/IR-LLM/Awesome-Information-Retrieval-in-the-Age-of-Large-Language-Model)
-  - [Awesome-Conversation-Clarifying-Questions-for-Information-Retrieval](https://github.com/ShiyuNee/Awesome-Conversation-Clarifying-Questions-for-Information-Retrieval)
+  - [Awesome-When-To-Retrieve-Papers](https://github.com/ShiyuNee/Awesome-When-To-Retrieve-Papers)
 
 ## News
+- [Jan 2025] One paper is accepted by **ICLR 2025**
 - [Sep 2024] One paper is accepted by **CCIR 2024**
 - [July 2024] We win **2nd** place in **ICML 2024 Challenges** on Automated Math Reasoning Track 1-1.
 - [May 2024] One paper is accepted by **ACL 2024**.
@@ -32,14 +33,13 @@ Education
   * **Shandong University**
     * B.E. in Artificial Intelligence, 2019 - 2023
     * Rank: 2/53
-    * Advisor: Prof. [Dong Xuan](https://web.cse.ohio-state.edu/~xuan.3/)(IEEE Fellow)
+    * Advisor: Prof. [Dong Xuan](https://web.cse.ohio-state.edu/~xuan.3/) (IEEE Fellow)
 
 Hornors and Awards
 ------
-
+- Merit Student, University of Chinese Academy of Sciences, 2024
 - Outstanding Graduate, Shandong Province, 2023
-
 - Outstanding Graduate, Shandong University, 2023
-- Dean's Scholarship, School of Computer Science, Shandong University, 2022
-- National Scholarship, Ministry of Education, China, 2021
+- Dean's Scholarship, School of Computer Science, Shandong University, 2022 (1/53)
+- National Scholarship, Ministry of Education, China, 2021 (1/53)
 - Merit Student, Shandong University, 2020, 2022
