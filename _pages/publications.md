@@ -33,7 +33,7 @@ IN THE YEAR OF 2023
   
 
 ## Preprint
-- **Towards Fully Exploiting LLM Internal States for Enhanced Knowledge Boundary Perception**<br>
-  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Baolong Bi, Lulu Yu and Xueqi Cheng
+- **Towards Fully Exploiting LLM Internal States to Enhance Knowledge Boundary Perception**[[Arxiv](https://arxiv.org/abs/2502.11677)] [[Code](https://github.com/ShiyuNee/LLM-Knowledge-Boundary-Perception-via-Internal-States)]<br>
+  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Lulu Yu, Baolong Bi, and Xueqi Cheng
 - **Contextual Dual Learning Algorithm with Listwise Distillation for Unbiased Learning to Rank**[[Arxiv](https://arxiv.org/pdf/2408.09817)]  <br>
   Lulu Yu, Keping Bi, <ins>**Shiyu Ni**</ins> and Jiafeng Guo 
