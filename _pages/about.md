@@ -18,6 +18,7 @@ I am a second-year Ph.D. student in Computer Science at [Institute of Computing 
   - [Awesome-When-To-Retrieve-Papers](https://github.com/ShiyuNee/Awesome-When-To-Retrieve-Papers)
 
 ## News
+- [May 2025] One paper is accepted by **ACL 2025**
 - [Jan 2025] One paper is accepted by **ICLR 2025**
 - [Sep 2024] One paper is accepted by **CCIR 2024**
 - [July 2024] We win **2nd** place in **ICML 2024 Challenges** on Automated Math Reasoning Track 1-1.
