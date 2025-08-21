@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I am a second-year Ph.D. student in Computer Science at [Institute of Computing Technology](http://www.ict.ac.cn/), [Chinese Academy of Sciences](http://www.cas.cn/), advised by Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/) and Prof. [Keping Bi](https://kepingbi.github.io/). I am a member of [CAS Key Lab of Web Data Science and Technology](http://www.bigdatalab.ac.cn/). My research interests lie in the general area of Information Retrieval (IR) and NLP, with a special focus on Hallucination Detection, LLMs' Knowledge Boundaries, and RAG.
+I am a third-year Ph.D. student in Computer Science at [Institute of Computing Technology](http://www.ict.ac.cn/), [Chinese Academy of Sciences](http://www.cas.cn/), advised by Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/) and Prof. [Keping Bi](https://kepingbi.github.io/). I am a member of [CAS Key Lab of Web Data Science and Technology](http://www.bigdatalab.ac.cn/). My research interests lie in the general area of Information Retrieval (IR) and NLP, with a special focus on Hallucination Detection, LLMs' Knowledge Boundaries, and RAG.
 
 ## Highlight
 
@@ -18,6 +18,7 @@ I am a second-year Ph.D. student in Computer Science at [Institute of Computing 
   - [Awesome-When-To-Retrieve-Papers](https://github.com/ShiyuNee/Awesome-When-To-Retrieve-Papers)
 
 ## News
+- [Aug 2025] One paper is accepted by **EMNLP 2025**
 - [May 2025] One paper is accepted by **ACL 2025**
 - [Jan 2025] One paper is accepted by **ICLR 2025**
 - [Sep 2024] One paper is accepted by **CCIR 2024**
