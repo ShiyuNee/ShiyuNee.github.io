@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-> *means students under my supervision
+> *means works co-advised by me
 
 ## IN THE YEAR OF 2025
 
