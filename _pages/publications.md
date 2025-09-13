@@ -26,7 +26,7 @@ redirect_from:
 ## Works under My Supervision
 
 - **Do LVLMs Know What They Know? A Systematic Study of Knowledge Boundary Perception in LVLMs**[[Arxiv](https://arxiv.org/abs/2508.19111)]<br>Zhikai Ding, <ins>**Shiyu Ni**</ins>, and Keping Bi  <br>**EMNLP' 2025**:  Findings of Empirical Methods in Natural Language Processing
-- **Injecting External Knowledge into the Reasoning Process Enhances Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2507.19333)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jiafeng Guo and Keping Bi  <br>
+- **Injecting External Knowledge into the Reasoning Process Enhances Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2507.19333)] [[Code](https://github.com/mh-tang/Passage-Injection)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jiafeng Guo and Keping Bi  <br>**SIGIR-AP' 2025**: Proceedings of the 3rd International ACM SIGIR Conference on Information Retrieval in the Asia Pacific
 
 ## Other Collaborations
 

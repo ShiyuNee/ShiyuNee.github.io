@@ -19,6 +19,7 @@ I am a third-year Ph.D. student in Computer Science at [Institute of Computing T
   - [Awesome-When-To-Retrieve-Papers](https://github.com/ShiyuNee/Awesome-When-To-Retrieve-Papers)
 
 ## News
+- [Sep 2025] One paper is accepted by **SIGIR-AP 2025**
 - [Aug 2025] One paper is accepted by **EMNLP 2025**
 - [May 2025] One paper is accepted by **ACL 2025**
 - [Jan 2025] One paper is accepted by **ICLR 2025**
