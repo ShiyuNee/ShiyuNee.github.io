@@ -19,12 +19,12 @@ I am a third-year Ph.D. student in Computer Science at [Institute of Computing T
   - [Awesome-When-To-Retrieve-Papers](https://github.com/ShiyuNee/Awesome-When-To-Retrieve-Papers)
 
 ## News
+- [Oct 2025] We release [Annotation-Efficient Universal Honesty Alignment](https://arxiv.org/abs/2510.17509)!
 - [Sep 2025] One paper is accepted by **SIGIR-AP 2025**
 - [Aug 2025] One paper is accepted by **EMNLP 2025**
 - [May 2025] One paper is accepted by **ACL 2025**
 - [Jan 2025] One paper is accepted by **ICLR 2025**
 - [Sep 2024] One paper is accepted by **CCIR 2024**
-- [July 2024] We win **2nd** place in **ICML 2024 Challenges** on Automated Math Reasoning Track 1-1.
 - [May 2024] One paper is accepted by **ACL 2024**.
 - [Sep 2023] One paper is accepted by **SIGIR-AP 2023**.
 
@@ -41,10 +41,10 @@ Education
 
 Hornors and Awards
 ------
+- First-Class Academic Scholarship, University of Chinese Academy of Sciences, 2025
 - Merit Student, University of Chinese Academy of Sciences, 2024
 - E Fund Financial Technology New Talent Scholarship, 2024
-- Outstanding Graduate, Shandong Province, 2023
-- Outstanding Graduate, Shandong University, 2023
-- Dean's Scholarship, School of Computer Science, Shandong University, 2022 (Top 1/53)
-- National Scholarship, Ministry of Education, China, 2021 (Top 1/53)
+- Outstanding Graduate, Shandong Province & Shandong University, 2023
+- Dean's Scholarship, School of Computer Science, Shandong University, 2022 (**Top 1**/53)
+- National Scholarship, Ministry of Education, China, 2021 (**Top 1**/53)
 - Merit Student, Shandong University, 2020, 2022
