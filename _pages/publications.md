@@ -34,6 +34,7 @@ redirect_from:
 ## Collaborations
 
 - **Is Factuality Enhancement a Free Lunch For LLMs? Better Factuality Can Lead to Worse Context-Faithfulness**[[Arxiv](https://arxiv.org/abs/2404.00216)]  <br>Baolong Bi, Shenghua Liu, Yiwei Wang, Lingrui Mei, Junfeng Fang, Hongcheng Gao, <ins>**Shiyu Ni**</ins> and Xueqi Cheng  <br>**ICLR' 2025**:  The Thirteenth International Conference on Learning Representations
+- **Deep Research: A Systematic Survey**[[Arxiv](https://www.preprints.org/manuscript/202511.2077)] [[Repo](https://github.com/mangopy/Deep-Research-Survey?tab=readme-ov-file)]   <br>Zhengliang Shi, Yiqun Chen, Haitao Li, Weiwei Sun, <ins>**Shiyu Ni**</ins>, Yougang Lyu, Runze Fan et.al.<br>**Preprint 2025**<br>Write Section 3.2.2 and Section 6.1.
 
 
 
