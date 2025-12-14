@@ -15,7 +15,7 @@ redirect_from:
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>**ACL' 2024**:  Findings of the Association for Computational Linguistics, 2024
 - **Are Large Language Models More Honest in Their Probabilistic or Verbalized Confidence?**[[Arxiv](https://arxiv.org/pdf/2408.09773)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Lulu Yu and Jiafeng Guo  <br>**CCIR' 2024**: The 30th China Conference on Information Retrieval
-- **Do LVLMs Know What They Know? A Systematic Study of Knowledge Boundary Perception in LVLMs**[[Arxiv](https://arxiv.org/abs/2508.19111)] [[Code](https://github.com/ShiyuNee/LVLM-Knowledge-Boundary-Perception)]<br>Zhikai Ding, <ins>**Shiyu Ni**</ins>, and Keping Bi  <br>**EMNLP' 2025**:  Findings of Empirical Methods in Natural Language Processing
+- **Do LVLMs Know What They Know? A Systematic Study of Knowledge Boundary Perception in LVLMs**[[Arxiv](https://arxiv.org/abs/2508.19111)] [[Code](https://github.com/ShiyuNee/LVLM-Knowledge-Boundary-Perception)]<br>Zhikai Ding, <ins>**Shiyu Ni**</ins>, and Keping Bi  <br>**EMNLP' 2025**:  Findings of Empirical Methods in Natural Language Processing<br>*Propose the idea and refine the whole paper.*
 - **How Knowledge Popularity Influences and Enhances LLM Knowledge Boundary Perception**[[Arxiv](https://arxiv.org/pdf/2505.17537)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>
 - **Annotation-Efficient Universal Honesty Alignment**[[Arxiv](https://arxiv.org/abs/2510.17509)] [[Code](https://github.com/Trustworthy-Information-Access/Annotation-Efficient-Universal-Honesty-Alignment)]<br>
@@ -28,13 +28,13 @@ redirect_from:
 
 > **Knowledge Utilization**
 
-- **Injecting External Knowledge into the Reasoning Process Enhances Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2507.19333)] [[Code](https://github.com/mh-tang/Passage-Injection)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jiafeng Guo and Keping Bi  <br>**SIGIR-AP' 2025**: Proceedings of the 3rd International ACM SIGIR Conference on Information Retrieval in the Asia Pacific
-- **The Role of Parametric Injection-A Systematic Study of Parametric Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2510.12668)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jingtong Wu, Zengxin Han and Keping Bi  <br>
+- **Injecting External Knowledge into the Reasoning Process Enhances Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2507.19333)] [[Code](https://github.com/mh-tang/Passage-Injection)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jiafeng Guo and Keping Bi  <br>**SIGIR-AP' 2025**: Proceedings of the 3rd International ACM SIGIR Conference on Information Retrieval in the Asia Pacific<br>*Write abstract, introduction, refine the whole paper and conduct experimental analysis*
+- **The Role of Parametric Injection-A Systematic Study of Parametric Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2510.12668)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jingtong Wu, Zengxin Han and Keping Bi  <br>*Write abstract, introduction and refine the whole paper*
 
 ## Collaborations
 
 - **Is Factuality Enhancement a Free Lunch For LLMs? Better Factuality Can Lead to Worse Context-Faithfulness**[[Arxiv](https://arxiv.org/abs/2404.00216)]  <br>Baolong Bi, Shenghua Liu, Yiwei Wang, Lingrui Mei, Junfeng Fang, Hongcheng Gao, <ins>**Shiyu Ni**</ins> and Xueqi Cheng  <br>**ICLR' 2025**:  The Thirteenth International Conference on Learning Representations
-- **Deep Research: A Systematic Survey**[[Arxiv](https://www.preprints.org/manuscript/202511.2077)] [[Repo](https://github.com/mangopy/Deep-Research-Survey?tab=readme-ov-file)]   <br>Zhengliang Shi, Yiqun Chen, Haitao Li, Weiwei Sun, <ins>**Shiyu Ni**</ins>, Yougang Lyu, Runze Fan et.al.<br>**Preprint 2025**<br>Write Section 3.2.2 and Section 6.1.
+- **Deep Research: A Systematic Survey**[[Arxiv](https://www.preprints.org/manuscript/202511.2077)] [[Repo](https://github.com/mangopy/Deep-Research-Survey?tab=readme-ov-file)]   <br>Zhengliang Shi, Yiqun Chen, Haitao Li, Weiwei Sun, <ins>**Shiyu Ni**</ins>, Yougang Lyu, Runze Fan et.al.<br>**Preprint 2025**<br>*Write Section 3.2.2 and Section 6.1.*
 
 
 
