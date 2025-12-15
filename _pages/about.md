@@ -19,6 +19,7 @@ I am a third-year Ph.D. student in Computer Science at [Institute of Computing T
   - [Awesome-When-To-Retrieve-Papers](https://github.com/ShiyuNee/Awesome-When-To-Retrieve-Papers)
 
 ## News
+- [Dec 2025] Selected for the 2025 China Association for Science and Technology Young Talent Cultivation Program - Doctoral Track (**中国科协青年科技人才培育工程博士生专项计划**)
 - [Oct 2025] We release [Annotation-Efficient Universal Honesty Alignment](https://arxiv.org/abs/2510.17509)!
 - [Sep 2025] One paper is accepted by **SIGIR-AP 2025**
 - [Aug 2025] One paper is accepted by **EMNLP 2025**
@@ -41,6 +42,7 @@ Education
 
 Hornors and Awards
 ------
+- China Association for Science and Technology Young Talent Cultivation Program - Doctoral Track (**中国科协青年科技人才培育工程博士生专项计划**), China Association for Science and Technology, 2025
 - First-Class Academic Scholarship, University of Chinese Academy of Sciences, 2025
 - Merit Student, University of Chinese Academy of Sciences, 2024
 - E Fund Financial Technology New Talent Scholarship, 2024
