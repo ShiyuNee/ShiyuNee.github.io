@@ -9,7 +9,8 @@ redirect_from:
 ## Core Works
 
 > **LLM Knowledge Boundary Perception**
-
+- **Annotation-Efficient Universal Honesty Alignment**[[Arxiv](https://arxiv.org/abs/2510.17509)] [[Code](https://github.com/Trustworthy-Information-Access/Annotation-Efficient-Universal-Honesty-Alignment)]<br>
+  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Minghao Tang, Jingtong Wu, Zengxin Han and Xueqi Cheng  <br>**ICLR' 2026**:  The Fourteenth International Conference on Learning Representations
 - **Towards Fully Exploiting LLM Internal States to Enhance Knowledge Boundary Perception**[[Arxiv](https://arxiv.org/abs/2502.11677)] [[Code](https://github.com/ShiyuNee/LLM-Knowledge-Boundary-Perception-via-Internal-States)] [[Poster](https://github.com/Trustworthy-Information-Access/LLM-Knowledge-Boundary-Perception-via-Internal-States/blob/master/poster.pdf)]<br><ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Lulu Yu, Baolong Bi and Xueqi Cheng  <br>**ACL' 2025**:  The 63rd Annual Meeting of the Association for Computational Linguistics
 - **When Do LLMs Need Retrieval Augmentation? Mitigating LLMs' Overconfidence Helps Retrieval Augmentation**[[Arxiv](https://arxiv.org/abs/2402.11457)] [[Blog](https://mp.weixin.qq.com/s/yhkGXXjYdoM-KIhHGgdjdA)] [[Code](https://github.com/ShiyuNee/When-to-Retrieve)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>**ACL' 2024**:  Findings of the Association for Computational Linguistics, 2024
@@ -18,8 +19,7 @@ redirect_from:
 - **Do LVLMs Know What They Know? A Systematic Study of Knowledge Boundary Perception in LVLMs**[[Arxiv](https://arxiv.org/abs/2508.19111)] [[Code](https://github.com/ShiyuNee/LVLM-Knowledge-Boundary-Perception)]<br>Zhikai Ding, <ins>**Shiyu Ni**</ins>, and Keping Bi  <br>**EMNLP' 2025**:  Findings of Empirical Methods in Natural Language Processing<br>*Propose the idea and refine the whole paper.*
 - **How Knowledge Popularity Influences and Enhances LLM Knowledge Boundary Perception**[[Arxiv](https://arxiv.org/pdf/2505.17537)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>
-- **Annotation-Efficient Universal Honesty Alignment**[[Arxiv](https://arxiv.org/abs/2510.17509)] [[Code](https://github.com/Trustworthy-Information-Access/Annotation-Efficient-Universal-Honesty-Alignment)]<br>
-  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Minghao Tang, Jingtong Wu, Zengxin Han and Xueqi Cheng  <br>
+
 
 > **Clarifying Question Generation/Facet Generation**
 
