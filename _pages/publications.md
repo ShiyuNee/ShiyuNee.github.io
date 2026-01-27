@@ -9,6 +9,7 @@ redirect_from:
 ## Core Works
 
 > **LLM Knowledge Boundary Perception**
+
 - **Annotation-Efficient Universal Honesty Alignment**[[Arxiv](https://arxiv.org/abs/2510.17509)] [[Code](https://github.com/Trustworthy-Information-Access/Annotation-Efficient-Universal-Honesty-Alignment)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Minghao Tang, Jingtong Wu, Zengxin Han and Xueqi Cheng  <br>**ICLR' 2026**:  The Fourteenth International Conference on Learning Representations
 - **Towards Fully Exploiting LLM Internal States to Enhance Knowledge Boundary Perception**[[Arxiv](https://arxiv.org/abs/2502.11677)] [[Code](https://github.com/ShiyuNee/LLM-Knowledge-Boundary-Perception-via-Internal-States)] [[Poster](https://github.com/Trustworthy-Information-Access/LLM-Knowledge-Boundary-Perception-via-Internal-States/blob/master/poster.pdf)]<br><ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Lulu Yu, Baolong Bi and Xueqi Cheng  <br>**ACL' 2025**:  The 63rd Annual Meeting of the Association for Computational Linguistics
