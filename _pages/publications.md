@@ -20,6 +20,7 @@ redirect_from:
 - **Do LVLMs Know What They Know? A Systematic Study of Knowledge Boundary Perception in LVLMs**[[Arxiv](https://arxiv.org/abs/2508.19111)] [[Code](https://github.com/ShiyuNee/LVLM-Knowledge-Boundary-Perception)]<br>Zhikai Ding, <ins>**Shiyu Ni**</ins>, and Keping Bi  <br>**EMNLP' 2025**:  Findings of Empirical Methods in Natural Language Processing<br>*Propose the idea and refine the whole paper.*
 - **How Knowledge Popularity Influences and Enhances LLM Knowledge Boundary Perception**[[Arxiv](https://arxiv.org/pdf/2505.17537)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>
+- **Evaluating and Calibrating LLM Confidence on Questions with Multiple Correct Answers**[[Arxiv](https://arxiv.org/abs/2602.07842)] [[Code](https://github.com/Trustworthy-Information-Access/Calibration-Under-Multiple-Correct-Answers)]<br>Yuhan Wang=, <ins>**Shiyu Ni=**</ins>, Zhikai Ding, Zihang Zhan, Yuanzi Li and Keping Bi<br>
 
 
 > **Clarifying Question Generation/Facet Generation**
