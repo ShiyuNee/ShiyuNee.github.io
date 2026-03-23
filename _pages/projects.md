@@ -1,5 +1,5 @@
 ---
-permalink: /intern students/
+permalink: /projetcs/
 title: "Intern Students"
 author_profile: true
 redirect_from: 
