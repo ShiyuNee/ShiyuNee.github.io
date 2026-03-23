@@ -1,12 +1,10 @@
 ---
-permalink: /projects/
+permalink: /intern students/
 title: "Intern Students"
 author_profile: true
 redirect_from: 
   - /projects.html
 ---
-
-# Intern Students
 
 Zhikai Ding (2025/03 - 2025/08) 
 
