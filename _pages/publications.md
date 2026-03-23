@@ -31,7 +31,7 @@ redirect_from:
 > **Knowledge Utilization**
 
 - **Injecting External Knowledge into the Reasoning Process Enhances Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2507.19333)] [[Code](https://github.com/mh-tang/Passage-Injection)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jiafeng Guo and Keping Bi  <br>**SIGIR-AP' 2025**: Proceedings of the 3rd International ACM SIGIR Conference on Information Retrieval in the Asia Pacific<br>*Write abstract, introduction, refine the whole paper and conduct experimental analysis*
-- **The Role of Parametric Injection-A Systematic Study of Parametric Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2510.12668)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jingtong Wu, Zengxin Han and Keping Bi  <br>*Write abstract, introduction and refine the whole paper*
+- **The Role of Parametric Injection-A Systematic Study of Parametric Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2510.12668)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jingtong Wu, Zengxin Han and Keping Bi  <br>*Write abstract, introduction and refine the whole paper (Version 1)*
 
 ## Collaborations
 
