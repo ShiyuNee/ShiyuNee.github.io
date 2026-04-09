@@ -31,8 +31,11 @@ I am a third-year Ph.D. student in Computer Science at [Institute of Computing T
 - [May 2024] One paper is accepted by **ACL 2024**.
 - [Sep 2023] One paper is accepted by **SIGIR-AP 2023**.
 
-Education
-------
+## Talks
+
+- [March 2026] [Annotation-Efficient Universal Honesty Alignment](https://github.com/Trustworthy-Information-Access/Annotation-Efficient-Universal-Honesty-Alignment/tree/master/slides) at Baidu
+
+## Education
 
   * **Institute of Computing Technology, Chinese Academy of Sciences**
     * Ph.D. in Computer Science, 2023 - present

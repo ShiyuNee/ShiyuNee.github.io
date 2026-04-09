@@ -20,5 +20,5 @@ Yuhan Wang (2025/10 - 2026/01)
 Minzhu Tu (2025/10 - 2026/01)
 
 - Beijing University of Posts and Telecommunications
-- **How Long Reasoning Chains Influence LLMs’ Judgment of Answer Factuality**[[Code](https://github.com/Trustworthy-Information-Access/Reasoning-Affects-LLM-Judge)]<br>Minzhu Tu, <ins>**Shiyu Ni=**</ins> and Keping Bi<br>**ACL' 2026**:  The 64th Annual Meeting of the Association for Computational Linguistics
+- **How Long Reasoning Chains Influence LLMs’ Judgment of Answer Factuality** [[Arxiv](https://arxiv.org/pdf/2604.06756)] [[Code](https://github.com/Trustworthy-Information-Access/Reasoning-Affects-LLM-Judge)]<br>Minzhu Tu=, <ins>**Shiyu Ni=**</ins> and Keping Bi<br>**ACL' 2026**:  The 64th Annual Meeting of the Association for Computational Linguistics
 
