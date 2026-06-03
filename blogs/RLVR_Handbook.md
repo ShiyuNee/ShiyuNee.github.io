@@ -865,7 +865,55 @@ Prompt ──→ Rollout ──→ Sample ──→ rollout_data ──→ DataI
 
 ### 2.3 Rollout 阶段
 
-#### 2.3.1 数据准备
+#### 2.3.1 总体流程：`generate` 函数
+
+**核心函数**：`slime/ray/rollout.py::RolloutWorker.generate`
+
+一轮 Rollout 的完整流程由 `generate` 方法调度：
+
+```python
+def generate(self, rollout_id):
+    start_time = time.time()
+    self.rollout_id = rollout_id
+    self.health_monitoring_resume()
+    if self.args.ci_test and self.args.use_fault_tolerance and rollout_id >= 2:
+        self._try_ci_fault_injection()
+
+    # ── 第一步：取数据 + 生成 + 计算 Reward ──
+    data, metrics = self._get_rollout_data(rollout_id=rollout_id)
+
+    # ── 日志 & 调试 ──
+    self._save_debug_rollout_data(data, rollout_id=rollout_id, evaluation=False)
+    _log_rollout_data(rollout_id, self.args, data, metrics, time.time() - start_time)
+    if self.args.debug_rollout_only:
+        return  # debug 模式：只跑 rollout，不训练
+
+    # ── 第二步：Reward 后处理 + 样本转训练数据 ──
+    data = self._convert_samples_to_train_data(data)
+
+    # ── 第三步：按 DP 切分数据 ──
+    return self._split_train_data_by_dp(data)
+```
+
+三步对应的关系：
+
+| 步骤 | 函数 | 做什么 | 对应训练循环图中的步骤 |
+|------|------|--------|---------------------|
+| 1 | `_get_rollout_data` | 取 Prompt → 生成 Response → 计算 Reward | Step 1-3 |
+| 2 | `_convert_samples_to_train_data` | Reward 后处理（组内归一化等）+ 将 Sample 转为 rollout_data tensor | Step 4-6 |
+| 3 | `_split_train_data_by_dp` | 按 DP rank 负载均衡切分 | Step 5 |
+
+> **关键**：Reward 后处理不是在计算 reward 之后立即做的，而是在 `_convert_samples_to_train_data` 中完成。这样设计是因为后处理（如 GRPO 的组内归一化）需要拿到**同一组所有 response 的 reward**，而 rollout 生成是异步的，只有所有 response 都收集齐后才能做归一化。
+
+下面分别展开每一步的细节。
+
+---
+
+#### 2.3.2 第一步：`_get_rollout_data` — 取数据 + 生成 + 计算 Reward
+
+这个函数内部依次调用：数据准备 → 生成 → Reward 计算。
+
+##### 数据准备
 
 **数据源类**：`slime/rollout/data_source.py`
 
@@ -885,7 +933,7 @@ class RolloutDataSourceWithBuffer(RolloutDataSource):
 
 > **Partial Rollout 的 On-policy 处理**：当 buffer 中的 partial rollout 数据被当前轮次使用时，这些数据确实是由**上一轮模型**（已更新过参数）生成的——从状态分布的角度看是 off-policy 的。Slime 通过 `--mask-offpolicy-in-partial-rollout` 来处理这个问题：对于 buffer 数据，把旧模型生成的 token 部分的 loss_mask 置为 0，只保留当前模型新生成的 token 参与 loss 计算。这样**动作采样（action）层面保持了 on-policy**——只对当前模型实际生成的 token 计算梯度。但**状态分布层面仍然是 off-policy 的**——prompt 后面跟的是旧模型的 response 前缀，当前模型的生成是在旧前缀的条件下进行的。这在工程上是可接受的权衡：加速了训练，同时避免了最严重的 off-policy 风险（对从未采样的动作计算梯度）。
 
-#### 2.3.2 生成过程
+##### 生成过程
 
 **核心函数**：`slime/rollout/sglang_rollout.py::generate_rollout_async`
 
@@ -912,7 +960,7 @@ while 有效数据 < 需求量:
 
 > **⚠️ 截断样本默认参与训练**：当模型的 response 达到 `max_new_tokens` 限制时，会被标记为 `TRUNCATED` 状态，但**默认仍然会进入训练数据流**，正常计算 loss 和梯度。截断样本的 `loss_mask` 默认全 1，advantage 正常计算。如果需要过滤截断样本，必须自行实现过滤函数并通过 `--dynamic-sampling-filter-path` 或 `--rollout-sample-filter-path` 指定。截断比例可通过日志中的 `truncated_ratio` 监控。
 
-#### 2.3.3 Reward 计算
+##### Reward 计算
 
 **入口**：`slime/rollout/rm_hub/__init__.py`
 
@@ -928,19 +976,40 @@ if rm_type == "math":
 - 实现一个函数，返回 reward 值（float 或 dict）
 - 通过 `--rm-type` 或 `--custom-rm-path` 指定
 
-#### 2.3.4 Reward 后处理（Group 归一化）
+---
 
-**函数**：`slime/ray/rollout.py::_post_process_rewards`
+#### 2.3.3 第二步：`_convert_samples_to_train_data` — Reward 后处理 + 数据转换
 
-对于 GRPO 类算法，需要在组内做归一化：
+这个函数做两件事：
+
+**1. Reward 后处理**
+
+调用 `_post_process_rewards` 对 reward 做后处理。对于 GRPO 类算法（需要组内归一化），这一步执行：
 
 ```python
-# 将展平的数据恢复成组
+# 将展平的数据恢复成组（同一个 prompt 的 n_samples_per_prompt 个 response 为一组）
 # 组内 reward 归一化：(reward - mean) / std
 # 返回 raw_rewards 和 normalized rewards
 ```
 
+> **为什么归一化放在这里而不是 Reward 计算之后？** GRPO 的组内归一化需要同一组所有 response 的 reward 都算完才能做。而 rollout 是异步的，不同 group 的 reward 计算完成时间不同。`_convert_samples_to_train_data` 是在所有 rollout 数据收集完毕后才调用的，此时所有 reward 已就绪，可以安全地做组内归一化。此外，如果需要自定义 reward 后处理（如 DCPO 的分别归一化），也在这里通过 `--custom-reward-post-process-path` 注入。
+
 归一化后的 reward 就是每个 response 的 advantage（GRPO 中所有 token 共享同一个 advantage）。
+
+**2. 样本 → 训练数据转换**
+
+将 `Sample` 对象列表转为 `rollout_data`（dict of tensors），供后续 Megatron 训练使用：
+
+```
+Sample (list)                    rollout_data (dict[str, list])
+├── sample.tokens          →      rollout_data["tokens"]
+├── sample.log_probs       →      rollout_data["log_probs"]
+├── sample.reward          →      rollout_data["rewards"]       ← 归一化后的 reward
+├── sample.raw_reward      →      rollout_data["raw_reward"]   ← 原始 reward
+├── sample.loss_mask       →      rollout_data["loss_masks"]
+├── sample.response_length →      rollout_data["response_lengths"]
+└── sample.train_metadata  →      rollout_data["metadata"]     ← 包含归一化 advantage 等
+```
 
 ---
 
