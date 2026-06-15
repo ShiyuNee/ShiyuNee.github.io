@@ -6,11 +6,21 @@ redirect_from:
   - /publications.html
 ---
 
-## Core Works
+# Research Roadmap
 
-> **LLM Knowledge Boundary Perception**
+My research centers on building trustworthy knowledge-intensive AI systems, organized around a unified question-answering pipeline: given a user query, (1) understanding what the query is truly asking, (2) assessing whether the model knows the answer, (3) evaluating whether external evidence is reliable, and (4) effectively leveraging external knowledge when needed. Each stage addresses a critical challenge in ensuring that AI systems produce accurate, honest, and well-grounded responses.
 
-- **How Long Reasoning Chains Influence LLMs’ Judgment of Answer Factuality**[[Arxiv](https://arxiv.org/pdf/2604.06756)] [[Code](https://github.com/Trustworthy-Information-Access/Reasoning-Affects-LLM-Judge)]<br>Minzhu Tu=, <ins>**Shiyu Ni=**</ins> and Keping Bi<br>**ACL' 2026**:  The 64th Annual Meeting of the Association for Computational Linguistics
+## What is the Query asking for?
+
+> **Clarifying Question Generation/Facet Generation**
+
+- **A Comparative Study of Training Objectives for Clarification Facet Generation**[[PDF](https://arxiv.org/pdf/2310.00703v1.pdf)] [[Code](https://github.com/ShiyuNee/Facet-Generation)] [[PPT](https://github.com/ShiyuNee/Facet-Generation/blob/master/SIGIR-AP2023-Shiyu.pptx)] <br>
+  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>**SIGIR-AP' 2023**: Proceedings of the 1st International ACM SIGIR Conference on Information Retrieval in the Asia Pacific
+
+## Does the Model Know the Answer?
+
+> **LLM Honesty Alignment (Self-assessment)** 
+
 - **Annotation-Efficient Universal Honesty Alignment**[[Arxiv](https://arxiv.org/abs/2510.17509)] [[Code](https://github.com/Trustworthy-Information-Access/Annotation-Efficient-Universal-Honesty-Alignment)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Minghao Tang, Jingtong Wu, Zengxin Han and Xueqi Cheng  <br>**ICLR' 2026**:  The Fourteenth International Conference on Learning Representations
 - **Towards Fully Exploiting LLM Internal States to Enhance Knowledge Boundary Perception**[[Arxiv](https://arxiv.org/abs/2502.11677)] [[Code](https://github.com/ShiyuNee/LLM-Knowledge-Boundary-Perception-via-Internal-States)] [[Poster](https://github.com/Trustworthy-Information-Access/LLM-Knowledge-Boundary-Perception-via-Internal-States/blob/master/poster.pdf)]<br><ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Lulu Yu, Baolong Bi and Xueqi Cheng  <br>**ACL' 2025**:  The 63rd Annual Meeting of the Association for Computational Linguistics
@@ -21,17 +31,27 @@ redirect_from:
 - **Do LVLMs Know What They Know? A Systematic Study of Knowledge Boundary Perception in LVLMs**[[Arxiv](https://arxiv.org/abs/2508.19111)] [[Code](https://github.com/ShiyuNee/LVLM-Knowledge-Boundary-Perception)]<br>Zhikai Ding, <ins>**Shiyu Ni**</ins>, and Keping Bi  <br>**EMNLP' 2025**:  Findings of Empirical Methods in Natural Language Processing<br>*Propose the idea and refine the whole paper.*
 - **How Knowledge Popularity Influences and Enhances LLM Knowledge Boundary Perception**[[Arxiv](https://arxiv.org/pdf/2505.17537)]<br>
   <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>
-- **Evaluating and Calibrating LLM Confidence on Questions with Multiple Correct Answers**[[Arxiv](https://arxiv.org/abs/2602.07842)] [[Code](https://github.com/Trustworthy-Information-Access/Calibration-Under-Multiple-Correct-Answers)]<br>Yuhan Wang=, <ins>**Shiyu Ni=**</ins>, Zhikai Ding, Zihang Zhan, Yuanzi Li and Keping Bi<br>
+- **Evaluating and Calibrating LLM Confidence on Questions with Multiple Correct Answers**[[Arxiv](https://arxiv.org/abs/2602.07842)] [[Code](https://github.com/Trustworthy-Information-Access/Calibration-Under-Multiple-Correct-Answers)]<br>Yuhan Wang<sup>†</sup>, <ins>**Shiyu Ni<sup>†</sup>**</ins>, Zhikai Ding, Zihang Zhan, Yuanzi Li and Keping Bi<br>
 
+> **LLM-as-a-judge (External Verifier)**
 
-> **Clarifying Question Generation/Facet Generation**
+- **How Long Reasoning Chains Influence LLMs’ Judgment of Answer Factuality**[[Arxiv](https://arxiv.org/pdf/2604.06756)] [[Code](https://github.com/Trustworthy-Information-Access/Reasoning-Affects-LLM-Judge)]<br>Minzhu Tu<sup>†</sup>, <ins>**Shiyu Ni<sup>†</sup>**</ins> and Keping Bi<br>**ACL' 2026**:  The 64th Annual Meeting of the Association for Computational Linguistics
 
-- **A Comparative Study of Training Objectives for Clarification Facet Generation**[[PDF](https://arxiv.org/pdf/2310.00703v1.pdf)] [[Code](https://github.com/ShiyuNee/Facet-Generation)] [[PPT](https://github.com/ShiyuNee/Facet-Generation/blob/master/SIGIR-AP2023-Shiyu.pptx)] <br>
-  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo and Xueqi Cheng  <br>**SIGIR-AP' 2023**: Proceedings of the 1st International ACM SIGIR Conference on Information Retrieval in the Asia Pacific
+## Is External Evidence Good?
 
-> **Knowledge Utilization**
+> **Query Performance Prediction**
+
+- **Can LLM Rerankers Predict Their Own Ranking Performance?**[[Arxiv](https://arxiv.org/abs/2606.03535)]<br>
+  <ins>**Shiyu Ni**</ins>, Keping Bi, Jiafeng Guo, Jingtong Wu, Zengxin Han and Xueqi Cheng  <br>
+
+## How to Leverage External Knowledge?
+
+> **Interact Using Tokens**
 
 - **Injecting External Knowledge into the Reasoning Process Enhances Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2507.19333)] [[Code](https://github.com/mh-tang/Passage-Injection)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jiafeng Guo and Keping Bi  <br>**SIGIR-AP' 2025**: Proceedings of the 3rd International ACM SIGIR Conference on Information Retrieval in the Asia Pacific<br>*Write abstract, introduction, refine the whole paper and conduct experimental analysis*
+
+> **Parametric Injection**
+
 - **The Role of Parametric Injection-A Systematic Study of Parametric Retrieval-Augmented Generation**[[Arxiv](https://www.arxiv.org/abs/2510.12668)]<br>Minghao Tang, <ins>**Shiyu Ni**</ins>, Jingtong Wu, Zengxin Han and Keping Bi  <br>*Write abstract, introduction and refine the whole paper (Version 1)*
 
 ## Collaborations
@@ -39,9 +59,4 @@ redirect_from:
 - **Is Factuality Enhancement a Free Lunch For LLMs? Better Factuality Can Lead to Worse Context-Faithfulness**[[Arxiv](https://arxiv.org/abs/2404.00216)]  <br>Baolong Bi, Shenghua Liu, Yiwei Wang, Lingrui Mei, Junfeng Fang, Hongcheng Gao, <ins>**Shiyu Ni**</ins> and Xueqi Cheng  <br>**ICLR' 2025**:  The Thirteenth International Conference on Learning Representations
 - **Deep Research: A Systematic Survey**[[Arxiv](https://www.preprints.org/manuscript/202511.2077)] [[Repo](https://github.com/mangopy/Deep-Research-Survey?tab=readme-ov-file)]   <br>Zhengliang Shi, Yiqun Chen, Haitao Li, Weiwei Sun, <ins>**Shiyu Ni**</ins>, Yougang Lyu, Runze Fan et.al.<br>**Preprint 2025**<br>*Write Section 3.2.2 and Section 6.1.*
 
-
-
-
-
-
-
+<sup>†</sup> Equal contribution.
