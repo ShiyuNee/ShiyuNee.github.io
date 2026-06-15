@@ -6,8 +6,6 @@ redirect_from:
   - /publications.html
 ---
 
-# Research Roadmap
-
 My research centers on building trustworthy knowledge-intensive AI systems, organized around a unified question-answering pipeline: given a user query, (1) understanding what the query is truly asking, (2) assessing whether the model knows the answer, (3) evaluating whether external evidence is reliable, and (4) effectively leveraging external knowledge when needed. Each stage addresses a critical challenge in ensuring that AI systems produce accurate, honest, and well-grounded responses.
 
 ## What is the Query asking for?
