@@ -6,7 +6,7 @@ author_profile: true
 
 记录我对前沿技术的思考与探索，包括技术解读、工具实践和研究笔记。
 
-## RLVR 基础与 Slime 框架解读
+## RLVR 实战手册 — 从强化学习理论到 Slime 框架
 
 面向有深度学习基础但未接触过强化学习的读者，从 RL 理论基础讲起，逐步过渡到 LLM 强化学习训练框架 Slime 的实战使用。内容涵盖 Policy Gradient、PPO、GRPO 的推导，以及 Slime 框架从 Rollout 到训练的完整流程，并附以 DCPO 自定义修改案例。
 
