@@ -3,14 +3,16 @@ permalink: /blogs/RLVR_Handbook/
 title: "RLVR 实战手册 — 从强化学习理论到 Slime 框架"
 layout: single
 author_profile: true
-toc: true
-toc_label: "目录"
-toc_sticky: true
 ---
 
 > 本手册面向有深度学习基础但未接触过强化学习的读者，从 RL 理论（只关注当前火热的RLVR）基础讲起，逐步过渡到 LLM 强化学习训练框架 Slime 的实战使用。
 
-{% include toc %}
+{::options toc_levels="2-3" /}
+
+**目录**
+
+* TOC
+{:toc}
 
 ---
 

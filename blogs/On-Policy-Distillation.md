@@ -3,14 +3,16 @@ permalink: /blogs/On-Policy-Distillation/
 title: "On-Policy Distillation 的前世今生"
 layout: single
 author_profile: true
-toc: true
-toc_label: "目录"
-toc_sticky: true
 ---
 
 > 本文探讨 On-Policy Distillation 的核心思想、与 RL/SFT 的对比，以及它在持续学习中的潜力。
 
-{% include toc %}
+{::options toc_levels="2-3" /}
+
+**目录**
+
+* TOC
+{:toc}
 
 ---
 
