@@ -73,7 +73,7 @@ $$
 - 奖励高的轨迹 → 增加其中动作的概率
 - 奖励低的轨迹 → 降低其中动作的概率
 
-> 在优化的时候，我们优化的是 policy 的参数 $\theta$，它改变的是 $P(a|s)$，即一个状态下模型该有什么行为。如果在 s 下做 a 可以得到 reward，那我们应该提高 $P(a|s)$ 的概率，而不是优化外部的 reward。
+> 在优化的时候，我们优化的是 policy 的参数 $\theta$，它改变的是 $P(a\mid s)$，即一个状态下模型该有什么行为。如果在 s 下做 a 可以得到 reward，那我们应该提高 $P(a\mid s)$ 的概率，而不是优化外部的 reward。
 
 #### 梯度公式推导
 
@@ -82,23 +82,23 @@ $$
 我们的目标是最大化 expected reward：
 
 $$
-J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}[R(\tau)] = \sum_\tau P(\tau|\theta) \times R(\tau)
+J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}[R(\tau)] = \sum_\tau P(\tau\mid\theta) \times R(\tau)
 $$
 
-其中 $\tau$ 是一条完整轨迹 $(s_1,a_1,r_1,s_2,a_2,r_2,...)$，$P(\tau|\theta)$ 是在策略 $\pi_\theta$ 下这条轨迹出现的概率。
+其中 $\tau$ 是一条完整轨迹 $(s_1,a_1,r_1,s_2,a_2,r_2,...)$，$P(\tau\mid\theta)$ 是在策略 $\pi_\theta$ 下这条轨迹出现的概率。
 
 **Step 2：求梯度**
 
 $$
-\nabla J(\theta) = \sum_\tau \nabla P(\tau|\theta) \times R(\tau)
+\nabla J(\theta) = \sum_\tau \nabla P(\tau\mid\theta) \times R(\tau)
 $$
 
 $$
-= \sum_\tau P(\tau|\theta) \times \nabla \log P(\tau|\theta) \times R(\tau) \quad \text{利用 } \nabla f = f \times \nabla \log f
+= \sum_\tau P(\tau\mid\theta) \times \nabla \log P(\tau\mid\theta) \times R(\tau) \quad \text{利用 } \nabla f = f \times \nabla \log f
 $$
 
 $$
-= \mathbb{E}_{\tau \sim \pi_\theta} [ \nabla \log P(\tau|\theta) \times R(\tau) ]
+= \mathbb{E}_{\tau \sim \pi_\theta} [ \nabla \log P(\tau\mid\theta) \times R(\tau) ]
 $$
 
 **Step 3：展开轨迹概率**
@@ -106,25 +106,25 @@ $$
 一条轨迹的概率：
 
 $$
-P(\tau|\theta) = P(s_1) \times \pi_\theta(a_1|s_1) \times P(s_2|s_1,a_1) \times \pi_\theta(a_2|s_2) \times \cdots
+P(\tau\mid\theta) = P(s_1) \times \pi_\theta(a_1\mid s_1) \times P(s_2\mid s_1,a_1) \times \pi_\theta(a_2\mid s_2) \times \cdots
 $$
 
 取 log 后：
 
 $$
-\log P(\tau|\theta) = \log P(s_1) + \sum_t \left[ \log \pi_\theta(a_t|s_t) + \log P(s_{t+1}|s_t,a_t) \right]
+\log P(\tau\mid\theta) = \log P(s_1) + \sum_t \left[ \log \pi_\theta(a_t\mid s_t) + \log P(s_{t+1}\mid s_t,a_t) \right]
 $$
 
-求导时，环境转移概率 $P(s_{t+1}|s_t,a_t)$ 和初始状态 $P(s_1)$ 与 $\theta$ 无关，梯度为 0：
+求导时，环境转移概率 $P(s_{t+1}\mid s_t,a_t)$ 和初始状态 $P(s_1)$ 与 $\theta$ 无关，梯度为 0：
 
 $$
-\nabla \log P(\tau|\theta) = \sum_t \nabla \log \pi_\theta(a_t|s_t)
+\nabla \log P(\tau\mid\theta) = \sum_t \nabla \log \pi_\theta(a_t\mid s_t)
 $$
 
 **最终得到轨迹级 Policy Gradient**：
 
 $$
-\nabla J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ \sum_t \nabla \log \pi_\theta(a_t|s_t) \times R(\tau) \right]
+\nabla J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ \sum_t \nabla \log \pi_\theta(a_t\mid s_t) \times R(\tau) \right]
 $$
 
 > 注意：求期望时天然要求是 on-policy（从 $\pi_\theta$ 中采样），因为公式中的期望是对 $\pi_\theta$ 的分布求的。
@@ -146,7 +146,7 @@ $$
 我们要证明：
 
 $$
-\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t|s_t) \times R_{<t} ] = 0
+\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t\mid s_t) \times R_{<t} ] = 0
 $$
 
 **直觉**：t 时刻之前的 reward 已经发生了，和 t 时刻选择什么动作无关。无论 policy 在 t 时刻做什么选择，都不影响之前的收益，因此不该影响 policy 的梯度。
@@ -156,45 +156,45 @@ $$
 将轨迹期望按时间拆分。对于 t 时刻之前的 reward r_k（k < t），考虑：
 
 $$
-\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t|s_t) \times r_k ]
+\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t\mid s_t) \times r_k ]
 $$
 
-关键观察：$r_k$ 只依赖于 $(s_k, a_k, s_{k+1})$，即 t 时刻之前的历史。而 $\nabla \log \pi_\theta(a_t|s_t)$ 依赖于 $(s_t, a_t)$。
+关键观察：$r_k$ 只依赖于 $(s_k, a_k, s_{k+1})$，即 t 时刻之前的历史。而 $\nabla \log \pi_\theta(a_t\mid s_t)$ 依赖于 $(s_t, a_t)$。
 
 将期望按条件分解——先对 t 时刻及之后的变量求期望，再对之前的变量求期望：
 
 $$
-\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t|s_t) \times r_k ]
-= \mathbb{E}_{\tau_{<t}} \left[ r_k \times \mathbb{E}_{a_t|s_t} [ \nabla \log \pi_\theta(a_t|s_t) ] \right]
+\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t\mid s_t) \times r_k ]
+= \mathbb{E}_{\tau_{<t}} \left[ r_k \times \mathbb{E}_{a_t\mid s_t} [ \nabla \log \pi_\theta(a_t\mid s_t) ] \right]
 $$
 
 其中内层期望为：
 
 $$
-\mathbb{E}_{a_t \sim \pi_\theta(\cdot|s_t)} [ \nabla \log \pi_\theta(a_t|s_t) ]
+\mathbb{E}_{a_t \sim \pi_\theta(\cdot\mid s_t)} [ \nabla \log \pi_\theta(a_t\mid s_t) ]
 $$
 
 $$
-= \sum_a \pi_\theta(a|s_t) \times \nabla \log \pi_\theta(a|s_t)
+= \sum_a \pi_\theta(a\mid s_t) \times \nabla \log \pi_\theta(a\mid s_t)
 $$
 
 $$
-= \sum_a \pi_\theta(a|s_t) \times \frac{\nabla \pi_\theta(a|s_t)}{\pi_\theta(a|s_t)}
+= \sum_a \pi_\theta(a\mid s_t) \times \frac{\nabla \pi_\theta(a\mid s_t)}{\pi_\theta(a\mid s_t)}
 $$
 
 $$
-= \sum_a \nabla \pi_\theta(a|s_t) = \nabla \sum_a \pi_\theta(a|s_t) = \nabla 1 = 0
+= \sum_a \nabla \pi_\theta(a\mid s_t) = \nabla \sum_a \pi_\theta(a\mid s_t) = \nabla 1 = 0
 $$
 
-**核心引理**：$\mathbb{E}_{a \sim \pi}[\nabla \log \pi(a|s)] = 0$，即 score function 的期望恒为零。这是因为概率分布归一化（所有概率之和为 1，其梯度为 0）。
+**核心引理**：$\mathbb{E}_{a \sim \pi}[\nabla \log \pi(a\mid s)] = 0$，即 score function 的期望恒为零。这是因为概率分布归一化（所有概率之和为 1，其梯度为 0）。
 
 因此，无论 $r_k$ 取什么值，整个表达式都等于 0。对所有 $k < t$ 的 $r_k$ 求和仍为 0：
 
 $$
-\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t|s_t) \times R_{<t} ] = \sum_{k<t} \mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t|s_t) \times r_k ] = 0
+\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t\mid s_t) \times R_{<t} ] = \sum_{k<t} \mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t\mid s_t) \times r_k ] = 0
 $$
 
-> **推论**：任何只依赖于 $s_t$（而不依赖 $a_t$）的函数 $b(s_t)$ 都满足 $\mathbb{E}[\nabla \log \pi(a_t|s_t) \times b(s_t)] = 0$。这就是为什么 baseline $V(s)$ 不影响梯度期望——它和 $R_{<t}$ 一样，与 $a_t$ 的选择无关。
+> **推论**：任何只依赖于 $s_t$（而不依赖 $a_t$）的函数 $b(s_t)$ 都满足 $\mathbb{E}[\nabla \log \pi(a_t\mid s_t) \times b(s_t)] = 0$。这就是为什么 baseline $V(s)$ 不影响梯度期望——它和 $R_{<t}$ 一样，与 $a_t$ 的选择无关。
 
 **Step 3：用 Q 替换 G**
 
@@ -207,31 +207,31 @@ $$
 经过 Step 2，我们已经得到：
 
 $$
-\nabla J(\theta) = \mathbb{E}_\tau \left[ \sum_t \nabla \log \pi_\theta(a_t|s_t) \times G_t \right]
+\nabla J(\theta) = \mathbb{E}_\tau \left[ \sum_t \nabla \log \pi_\theta(a_t\mid s_t) \times G_t \right]
 $$
 
 对于每个时刻 t，考虑单项：
 
 $$
-\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t|s_t) \times G_t ]
+\mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t\mid s_t) \times G_t ]
 $$
 
 利用条件期望的 tower property（全期望公式）：先对 $(s_t, a_t)$ 条件化，再对 $(s_t, a_t)$ 求期望：
 
 $$
-= \mathbb{E}_{s_t, a_t} \left[ \nabla \log \pi_\theta(a_t|s_t) \times \mathbb{E}[G_t \mid s_t, a_t] \right]
+= \mathbb{E}_{s_t, a_t} \left[ \nabla \log \pi_\theta(a_t\mid s_t) \times \mathbb{E}[G_t \mid s_t, a_t] \right]
 $$
 
-这一步的关键在于：$\nabla \log \pi_\theta(a_t|s_t)$ 在给定 $(s_t, a_t)$ 后是确定值（不再是随机变量），可以提到内层条件期望外面。而 $\mathbb{E}[G_t \mid s_t, a_t]$ 正是 $Q^\pi(s_t, a_t)$ 的定义。因此：
+这一步的关键在于：$\nabla \log \pi_\theta(a_t\mid s_t)$ 在给定 $(s_t, a_t)$ 后是确定值（不再是随机变量），可以提到内层条件期望外面。而 $\mathbb{E}[G_t \mid s_t, a_t]$ 正是 $Q^\pi(s_t, a_t)$ 的定义。因此：
 
 $$
-= \mathbb{E}_{s_t, a_t} \left[ \nabla \log \pi_\theta(a_t|s_t) \times Q^\pi(s_t, a_t) \right]
+= \mathbb{E}_{s_t, a_t} \left[ \nabla \log \pi_\theta(a_t\mid s_t) \times Q^\pi(s_t, a_t) \right]
 $$
 
 反过来，从 Q 出发也可以还原回 G：
 
 $$
-\mathbb{E}_{s_t, a_t} \left[ \nabla \log \pi_\theta(a_t|s_t) \times Q^\pi(s_t, a_t) \right] = \mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t|s_t) \times G_t ] \quad \text{tower property 反向}
+\mathbb{E}_{s_t, a_t} \left[ \nabla \log \pi_\theta(a_t\mid s_t) \times Q^\pi(s_t, a_t) \right] = \mathbb{E}_\tau [ \nabla \log \pi_\theta(a_t\mid s_t) \times G_t ] \quad \text{tower property 反向}
 $$
 
 两者相等，证毕。
@@ -241,7 +241,7 @@ $$
 **最终得到 (s,a) 级 Policy Gradient**：
 
 $$
-\nabla J(\theta) = \mathbb{E}_{s,a \sim \pi_\theta} \left[ \sum_t \nabla \log \pi_\theta(a_t|s_t) \times Q^\pi(s_t, a_t) \right]
+\nabla J(\theta) = \mathbb{E}_{s,a \sim \pi_\theta} \left[ \sum_t \nabla \log \pi_\theta(a_t\mid s_t) \times Q^\pi(s_t, a_t) \right]
 $$
 
 **Step 4：用 A 替换 Q**
@@ -253,19 +253,19 @@ $$
 只需证明减去 $V(s_t)$ 不影响梯度，即证：
 
 $$
-\mathbb{E}_{s_t, a_t \sim \pi_\theta} [ \nabla \log \pi_\theta(a_t|s_t) \times V(s_t) ] = 0
+\mathbb{E}_{s_t, a_t \sim \pi_\theta} [ \nabla \log \pi_\theta(a_t\mid s_t) \times V(s_t) ] = 0
 $$
 
 将期望拆分为先对 $a_t$ 求期望，再对 $s_t$ 求期望：
 
 $$
-= \mathbb{E}_{s_t} \left[ V(s_t) \times \mathbb{E}_{a_t \sim \pi_\theta(\cdot|s_t)} [ \nabla \log \pi_\theta(a_t|s_t) ] \right]
+= \mathbb{E}_{s_t} \left[ V(s_t) \times \mathbb{E}_{a_t \sim \pi_\theta(\cdot\mid s_t)} [ \nabla \log \pi_\theta(a_t\mid s_t) ] \right]
 $$
 
 $V(s_t)$ 不依赖 $a_t$，可以提到内层期望外面。而内层期望正是 Step 2 中证明过的 score function 期望：
 
 $$
-\mathbb{E}_{a_t \sim \pi_\theta(\cdot|s_t)} [ \nabla \log \pi_\theta(a_t|s_t) ] = 0 \quad \text{Score function 引理}
+\mathbb{E}_{a_t \sim \pi_\theta(\cdot\mid s_t)} [ \nabla \log \pi_\theta(a_t\mid s_t) ] = 0 \quad \text{Score function 引理}
 $$
 
 因此整个表达式为 0，证毕。
@@ -275,7 +275,7 @@ $$
 **最终的 Policy Gradient 公式**：
 
 $$
-\nabla J(\theta) = \mathbb{E}_{s,a \sim \pi_\theta} \left[ \sum_t \nabla \log \pi_\theta(a_t|s_t) \times A^\pi(s_t, a_t) \right]
+\nabla J(\theta) = \mathbb{E}_{s,a \sim \pi_\theta} \left[ \sum_t \nabla \log \pi_\theta(a_t\mid s_t) \times A^\pi(s_t, a_t) \right]
 $$
 
 这就是最终的 Policy Gradient 公式。从"绝对好坏"变成了"比平均好多少"，方差大幅下降。
@@ -289,7 +289,7 @@ $$
 解决：减去一个 baseline b（通常是 reward 的均值），这同时也有降低方差的作用：
 
 $$
-\nabla J(\theta) = \mathbb{E}[ \nabla \log \pi(a|s) \times (R - b) ]
+\nabla J(\theta) = \mathbb{E}[ \nabla \log \pi(a\mid s) \times (R - b) ]
 $$
 
 **改进 2：Assign Credit**
@@ -299,7 +299,7 @@ $$
 解决：每个动作只考虑它之后的累积奖励：
 
 $$
-\nabla J(\theta) = \mathbb{E}\left[ \sum_t \nabla \log \pi(a_t|s_t) \times G_t \right]
+\nabla J(\theta) = \mathbb{E}\left[ \sum_t \nabla \log \pi(a_t\mid s_t) \times G_t \right]
 $$
 
 其中 $G_t = r_t + r_{t+1} + \cdots$ 是从 t 时刻开始的未来回报。
@@ -354,22 +354,22 @@ $$
 将 on-policy 的梯度公式改写为 off-policy：
 
 $$
-\nabla J(\theta) = \mathbb{E}_{\tau \sim \pi_{old}} \left[ \frac{\pi_\theta(a|s)}{\pi_{old}(a|s)} \times \nabla \log \pi_\theta(a|s) \times A(s,a) \right]
+\nabla J(\theta) = \mathbb{E}_{\tau \sim \pi_{old}} \left[ \frac{\pi_\theta(a\mid s)}{\pi_{old}(a\mid s)} \times \nabla \log \pi_\theta(a\mid s) \times A(s,a) \right]
 $$
 
 从梯度推导出优化目标（对 $\nabla \log \pi$ 积分）：
 
 $$
-J(\theta) = \mathbb{E}_{s \sim \pi_{old}, a \sim \pi_{old}} \left[ \frac{\pi_\theta(a|s)}{\pi_{old}(a|s)} \times A(s,a) \right]
+J(\theta) = \mathbb{E}_{s \sim \pi_{old}, a \sim \pi_{old}} \left[ \frac{\pi_\theta(a\mid s)}{\pi_{old}(a\mid s)} \times A(s,a) \right]
 $$
 
 这里用了两个近似（因为工程上算不出来精确值）：
 1. **新的优势 → 旧的优势**：用旧策略计算的 A 替代新策略的 A
 2. **新策略的状态分布 → 旧策略的状态分布**：假设新旧策略很接近，状态分布差不多
 
-> 求导的时候只对新策略的 $P(a|s)$ 求导，其他的（旧策略相关的部分）都相当于常数。
+> 求导的时候只对新策略的 $P(a\mid s)$ 求导，其他的（旧策略相关的部分）都相当于常数。
 
-**现在的问题**：如果新旧策略对 $P(a|s)$ 的概率差得多，importance weight 会很大或很小，导致更新幅度不可控，策略崩溃。这就引出了 PPO。
+**现在的问题**：如果新旧策略对 $P(a\mid s)$ 的概率差得多，importance weight 会很大或很小，导致更新幅度不可控，策略崩溃。这就引出了 PPO。
 
 ---
 
@@ -388,7 +388,7 @@ J_{PPO} = \mathbb{E}\left[ \min\left(\text{ratio} \times A, \; \text{clip}(\text
 $$
 
 其中：
-- $\text{ratio} = \frac{\pi_{new}(a|s)}{\pi_{old}(a|s)}$ — 新旧策略的概率比
+- $\text{ratio} = \frac{\pi_{new}(a\mid s)}{\pi_{old}(a\mid s)}$ — 新旧策略的概率比
 - $A$ — Advantage（当前动作比平均好多少）
 - $\varepsilon$ — clip 参数（通常 0.2）
 
@@ -727,7 +727,7 @@ $$
 **Step 1：最基本的 Policy Gradient Loss（REINFORCE）**
 
 $$
-\text{loss} = -\log \pi(a|s) \times \text{advantage}
+\text{loss} = -\log \pi(a\mid s) \times \text{advantage}
 $$
 
 直觉：
@@ -1476,7 +1476,7 @@ kl = log_ratio.exp() - 1 - log_ratio
 
 > **数据从哪来？** `policy_loss_function` 需要的所有数据通过 `get_batch(data_iterator, keys)` 从 `rollout_data` 中按 micro-batch 切片获取。GRPO 需要的核心字段为：`tokens`、`log_probs`（rollout 时的 log P）、`ref_log_probs`（ref model 的 log P）、`advantages`、`loss_masks`、`response_lengths`。这些字段在 `compute_advantages_and_returns` 及之前的步骤中已被填充。
 
-> **On-policy 下 ratio=1，loss 是否和当前模型无关？** 这是一个常见的困惑点。当 on-policy 第一次 forward 时，$\text{ratio} = \pi_{new} / \pi_{old} \approx 1$，所以 $\text{loss} \approx -\text{advantage}$。但这**并不意味着 loss 和模型参数无关**：虽然 ratio 系数≈1，但 $\text{loss} = -\text{ratio} \times \text{advantage}$ 中的 advantage 是常数（从 rollout 时计算好的），而梯度是通过 $\text{ratio} = \exp(\text{new\_log\_prob} - \text{old\_log\_prob})$ 中的 `new_log_prob` 对模型参数 $\theta$ 求导得到的。即梯度为 $-\text{ratio} \times \nabla_\theta \log \pi(a|s) \times \text{advantage}$（其中 $\nabla_\theta$ 表示对 $\theta$ 求梯度）。当 ratio≈1 时，梯度近似为 $-\nabla_\theta \log \pi(a|s) \times \text{advantage}$——这正是 REINFORCE 的梯度公式。所以 loss 的**值**看起来和模型无关（≈-advantage），但 loss 的**梯度**完全依赖当前模型的概率分布。或者说：$\text{loss} = -\text{ratio} \times \text{advantage}$ 中的 `ratio` 是一个关于 $\theta$ 的函数，不是常数 1；只是在这一步，ratio 的**取值**碰巧是 1。
+> **On-policy 下 ratio=1，loss 是否和当前模型无关？** 这是一个常见的困惑点。当 on-policy 第一次 forward 时，$\text{ratio} = \pi_{new} / \pi_{old} \approx 1$，所以 $\text{loss} \approx -\text{advantage}$。但这**并不意味着 loss 和模型参数无关**：虽然 ratio 系数≈1，但 $\text{loss} = -\text{ratio} \times \text{advantage}$ 中的 advantage 是常数（从 rollout 时计算好的），而梯度是通过 $\text{ratio} = \exp(\text{new\_log\_prob} - \text{old\_log\_prob})$ 中的 `new_log_prob` 对模型参数 $\theta$ 求导得到的。即梯度为 $-\text{ratio} \times \nabla_\theta \log \pi(a\mid s) \times \text{advantage}$（其中 $\nabla_\theta$ 表示对 $\theta$ 求梯度）。当 ratio≈1 时，梯度近似为 $-\nabla_\theta \log \pi(a\mid s) \times \text{advantage}$——这正是 REINFORCE 的梯度公式。所以 loss 的**值**看起来和模型无关（≈-advantage），但 loss 的**梯度**完全依赖当前模型的概率分布。或者说：$\text{loss} = -\text{ratio} \times \text{advantage}$ 中的 `ratio` 是一个关于 $\theta$ 的函数，不是常数 1；只是在这一步，ratio 的**取值**碰巧是 1。
 
 **函数**：`slime/backends/megatron_utils/loss.py::policy_loss_function`
 
