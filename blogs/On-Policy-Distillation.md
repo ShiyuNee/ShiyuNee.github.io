@@ -104,8 +104,9 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 
 ## 后续研究
 
-### Self-distillation
+### OPSD: On-Policy-Self-Distillation
 
+让一个模型同时充当student和teacher，teacher可以获得一些特权信息。比如把正确答案给teacher作为输入，让它对student model rollout的内容来打分。
 
 - [Self-Distillation Enables Continual Learning](https:/to/arxiv.org/abs/2601.19897) (SDFT)
 
@@ -114,3 +115,25 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 ![on-policy-distillation-self-distillation](/images/on-policy-distillation-self-distillation.png)
 
 - [Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models](https://arxiv.org/pdf/2601.18734) (OPSD)
+
+- [2026-03-25]: Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs?(https://arxiv.org/abs/2603.24472): 什么
+  > - **[问题]**: 自蒸馏常被认为可以高效地在RL框架下训练模型，输出长度变短且效果变好。但是文章发现，在数学上用这个会导致生成长度缩短但是性能下降。为什么？
+  > - **[解释]**: 上下文提供给teacher model的信息越多，teacher model的回答会越准确和自信，大幅减少不确定性表达。这导致teacher model更少表达 'Wait', 'Hmm'等词，在数学上性能下降
+  > - **[结论]**: teacher model不确定性表达减少和两个因素有关：信息量，任务覆盖广度。信息量大，模型少表达不确定性，答案准确，可以加快in-domain上的收敛速度。但是任务多或者任务难的时候，不确定性表达减少会导致模型反思变少，性能下降
+
+- [2026-04-06] [Self-Distilled RLVR](https://arxiv.org/abs/2604.03128): 解决基于自蒸馏的on-policy学习中的特权信息泄漏与训练不稳定问题。
+  > - **[问题]** 自蒸馏导致 1.特权信息泄漏（引用训练阶段见过的特权信息）2. 性能退化（虽然早期上升很快，但达到峰值后迅速下降）3. KL散度停滞，教师与学生的分布差异无法持续收敛，存在不可约的下界。
+  > - **[做法]** 文章认为根本原因在于信息不对称，teacher model有特权信息，而student model没有。通过解偶更新的方向和力度来解决: 方向信号可以稀疏但必须准确（由环境奖励提供），更新幅度应该尽可能密集 (由自蒸馏提供)
+  > - **[缺点]** 又回到了GRPO被诟病的问题，一个response上token的更新方向一致
+
+### OPD的修正
+
+- [2026-03-26] [Revisiting On-Policy Distillation: Empirical Failure Modes and Simple Fixes](https://arxiv.org/abs/2603.25562): 
+  > - **[问题]**: 1. 只对当前token监督，不考虑后续结果是否正确 (全局)  2.模型会学会“看起来像 teacher 喜欢的 token”，但整体行为是错的 3. student 生成的前缀可能偏离 teacher 的训练分布teacher 在这些位置的概率不可靠。
+  > - **[解释]**: OPD惩罚student model在logits上大于teacher model的token，而**大部分token**都是这样的，导致**被惩罚**。在student model token logits < teacher model的时候才会得到奖励。这样的token是少数。这导致优化被少数token主导, 模型会学些teacher model某些局部偏好的词，比如犹豫词等这些对给出答案没有帮助的token
+  > - **[方法]**: 不只看一个token，看一小组token的概率分布。希望student model的top-k token和teacher model的token-k token分布接近
+  > - **[观点]**: keep supervision local enough to control variance, while making the local comparison less brittle than a one-token point estimate.
+
+- [2026-04-10] [Demystifying OPD: Length Inflation and Stabilization Strategies for Large Language Models](https://arxiv.org/abs/2604.08527): 解决opd训练中长度激增与生成重复带来的影响
+  >  **[问题]** 训练过程中student model输出长度会激增，且主要模式是重复饱和: student生成大量重复token。重复token会获得较大reverse-KL优势 + 重复token主导更新->进一步鼓励重复生成->序列增长->更多截断->截断样本主导训练
+  > **[做法]** 1.限制学生相比ref model的偏移，抑制无控制的策略漂移和rollout过度扩展; 2.讲on-policy学生rollout和高质量off-policy gold轨迹混合
