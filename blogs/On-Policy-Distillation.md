@@ -135,5 +135,5 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
   > - **[观点]**: keep supervision local enough to control variance, while making the local comparison less brittle than a one-token point estimate.
 
 - [2026-04-10] [Demystifying OPD: Length Inflation and Stabilization Strategies for Large Language Models](https://arxiv.org/abs/2604.08527): 解决opd训练中长度激增与生成重复带来的影响
-  >  **[问题]** 训练过程中student model输出长度会激增，且主要模式是重复饱和: student生成大量重复token。重复token会获得较大reverse-KL优势 + 重复token主导更新->进一步鼓励重复生成->序列增长->更多截断->截断样本主导训练
-  > **[做法]** 1.限制学生相比ref model的偏移，抑制无控制的策略漂移和rollout过度扩展; 2.讲on-policy学生rollout和高质量off-policy gold轨迹混合
+  > - **[问题]** 训练过程中student model输出长度会激增，且主要模式是重复饱和: student生成大量重复token。重复token会获得较大reverse-KL优势 + 重复token主导更新->进一步鼓励重复生成->序列增长->更多截断->截断样本主导训练
+  > - **[做法]** 1.限制学生相比ref model的偏移，抑制无控制的策略漂移和rollout过度扩展; 2.讲on-policy学生rollout和高质量off-policy gold轨迹混合
