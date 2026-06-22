@@ -102,9 +102,9 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 
 ---
 
-## 后续研究
+## OPD与OPSD相关文章介绍
 
-### OPSD: On-Policy-Self-Distillation
+## OPSD: On-Policy-Self-Distillation
 
 让一个模型同时充当student和teacher，teacher可以获得一些特权信息。比如把正确答案给teacher作为输入，让它对student model rollout的内容来打分。
 
@@ -116,7 +116,7 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 
 - [Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models](https://arxiv.org/pdf/2601.18734) (OPSD)
 
-- [2026-03-25]: Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs?(https://arxiv.org/abs/2603.24472): 什么
+- [2026-03-25]: [Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs?](https://arxiv.org/abs/2603.24472):
   > - **[问题]**: 自蒸馏常被认为可以高效地在RL框架下训练模型，输出长度变短且效果变好。但是文章发现，在数学上用这个会导致生成长度缩短但是性能下降。为什么？
   > - **[解释]**: 上下文提供给teacher model的信息越多，teacher model的回答会越准确和自信，大幅减少不确定性表达。这导致teacher model更少表达 'Wait', 'Hmm'等词，在数学上性能下降
   > - **[结论]**: teacher model不确定性表达减少和两个因素有关：信息量，任务覆盖广度。信息量大，模型少表达不确定性，答案准确，可以加快in-domain上的收敛速度。但是任务多或者任务难的时候，不确定性表达减少会导致模型反思变少，性能下降
@@ -126,7 +126,7 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
   > - **[做法]** 文章认为根本原因在于信息不对称，teacher model有特权信息，而student model没有。通过解偶更新的方向和力度来解决: 方向信号可以稀疏但必须准确（由环境奖励提供），更新幅度应该尽可能密集 (由自蒸馏提供)
   > - **[缺点]** 又回到了GRPO被诟病的问题，一个response上token的更新方向一致
 
-### OPD的修正
+## OPD的修正
 
 - [2026-03-26] [Revisiting On-Policy Distillation: Empirical Failure Modes and Simple Fixes](https://arxiv.org/abs/2603.25562): 
   > - **[问题]**: 1. 只对当前token监督，不考虑后续结果是否正确 (全局)  2.模型会学会“看起来像 teacher 喜欢的 token”，但整体行为是错的 3. student 生成的前缀可能偏离 teacher 的训练分布teacher 在这些位置的概率不可靠。
