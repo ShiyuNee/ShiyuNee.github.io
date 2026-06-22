@@ -100,6 +100,81 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 
 ---
 
+# 大厂对 OPD 的使用
+
+OPD 最初是学术界的 idea，但 2025-2026 年间，三大国产大模型团队都在自己的技术报告中采用了 OPD，且用法各不相同。以下按时间顺序梳理。
+
+## [2025-05] Qwen3：Strong-to-Weak Distillation
+
+[Qwen3 Technical Report](https://arxiv.org/abs/2505.09388)
+
+Qwen3 把 OPD 用于**大模型到小模型的知识转移**，称为 Strong-to-Weak Distillation，分两步：
+
+1. **Off-policy distillation**：用旗舰模型（Qwen3-235B-A22B）在 `/think` 和 `/no_think` 两种模式下生成 response，小模型直接学习这些输出
+2. **On-policy distillation**：小模型自己生成 response，然后用教师模型的 logits 对齐——学生在自己的轨迹上，逐 token 匹配教师的 next-token 分布
+
+**效果**：只需要完整四阶段训练 1/10 的 GPU hours，Pass@1 和 Pass@64 都有提升。教师是跑完完整四阶段训练的旗舰模型，学生是 0.6B~32B 的小模型，直接蒸馏 logits 省去了重复走四阶段的过程。
+
+## [2026-02] GLM-5 / 5.1 / 5.2：On-Policy Cross-Stage Distillation
+
+[GLM-5 Technical Report](https://arxiv.org/abs/2602.15763)
+
+智谱的用法最特殊——用 OPD 解决**多阶段 RL 的灾难性遗忘**。
+
+训练流水线：
+
+```
+SFT → Reasoning RL → Agentic RL → General RL → On-Policy Cross-Stage Distillation
+```
+
+问题：每做一阶段 RL，前一阶段的能力会退化（比如做完 Agentic RL 后推理能力下降）。
+
+做法：
+- **教师是前面各阶段的最终 checkpoint**（如 Reasoning RL checkpoint、General RL checkpoint）
+- 从每个教师对应的 RL 训练集中按比例采样 prompt
+- 学生在自己生成的轨迹上，用教师的 logits 计算 advantage
+
+核心公式（替换 GRPO 的 advantage）：
+
+$$
+\hat{A}_{i,t} = \text{sg}\left[\log \frac{\pi_{\theta_{\text{teacher}}}(y_{i,t} \mid x, y_{i,<t})}{\pi_{\theta}(y_{i,t} \mid x, y_{i,<t})}\right]
+$$
+
+- `sg` = stop gradient，教师分布不参与梯度计算
+- advantage 就是学生和教师 log 概率的比值——学生偏离教师越远，advantage 越大
+- **group size 设为 1**（不需要组内比较了，advantage 直接来自教师）
+- 基于 **slime 框架**实现
+
+## [2026-04] DeepSeek-V4：用 OPD 替换 mixed RL
+
+[DeepSeek-V4 Technical Report](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro)
+
+DeepSeek-V4 做了最激进的选择——**把 V3.2 中的 mixed RL 阶段整个换成了 OPD**。
+
+流程：
+1. **先训练领域专家模型**：每个领域先 SFT，再 GRPO，得到 math、code、agent 等多个 specialist
+2. **再用 OPD 合并**：学生模型自己采样 rollout，**10+ 个 specialist 教师模型**同时在这些轨迹上提供 target 分布
+
+关键技术细节：
+- **Full-vocabulary logit distillation**：不是只匹配采样到的 token，而是匹配教师完整的 vocab 分布
+- 为了让这可行，**缓存教师的 last-layer hidden states**，用对应的 teacher head 在线重建 logits
+- RL 仍然被使用，但主要目的是**训练出强 specialist**，最终模型不直接经过 RL
+
+## 三家对比
+
+| | Qwen3 | GLM-5 | DeepSeek-V4 |
+|--|-------|-------|-------------|
+| **OPD 用途** | 大→小知识转移 | 防止多阶段 RL 灾难性遗忘 | 替换 mixed RL，合并 specialist |
+| **教师是谁** | 旗舰模型（跑完完整训练） | 前面各阶段的 checkpoint | 10+ 领域 specialist |
+| **学生是谁** | 0.6B~32B 小模型 | 最终模型本身 | 最终模型本身 |
+| **蒸馏粒度** | logits（next-token 分布） | logits（reverse KL） | full-vocabulary logits |
+| **RL 是否还用** | 旗舰模型用了，小模型不用 | 每阶段都用，OPD 是最后一阶段 | 用于训练 specialist |
+| **核心动机** | 省算力（1/10 GPU hours） | 解决多阶段 RL 的能力退化 | 避免单一 composite reward 无法覆盖所有能力 |
+
+**共同点**：三家都用学生自己的 rollout（on-policy），都用教师的 logits 做 per-token supervision（dense reward），而不是序列级 reward。这正是 OPD 相比 RL 的核心优势——每个 token 都有监督信号。
+
+---
+
 # OPD与OPSD相关文章介绍
 
 ## OPSD: On-Policy-Self-Distillation
