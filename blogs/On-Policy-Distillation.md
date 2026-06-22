@@ -48,7 +48,7 @@ author_profile: true
 
 The core idea of on-policy distillation is to sample trajectories from the *student* model and use a high-performing teacher to grade *each token* of each trajectory.
 
-![on-policy-distillation](https://thinkingmachines.ai/blog/on-policy-distillation/svgs/on-policy-distillation.svg)
+![on-policy-distillation](/images/on-policy-distillation.svg)
 
 ![on-policy-distillation-overview](/images/on-policy-distillation-overview.png)
 
@@ -106,15 +106,11 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 
 ### Self-distillation
 
-- [Self-Distillation Enables Continual Learning](https://arxiv.org/abs/2601.19897) (SDFT)
+
+- [Self-Distillation Enables Continual Learning](https:/to/arxiv.org/abs/2601.19897) (SDFT)
 
 - [Reinforcement Learning via Self-Distillation](https://arxiv.org/abs/2601.20802) (SDPO): 通过上下文增强模型能力，从而充当 teacher model，来给自己 rollout 出来的路径作为 supervision。
 
 ![on-policy-distillation-self-distillation](/images/on-policy-distillation-self-distillation.png)
 
 - [Self-Distilled Reasoner: On-Policy Self-Distillation for Large Language Models](https://arxiv.org/pdf/2601.18734) (OPSD)
-
-|              | 找到有用信息 | 找到没用信息 |
-| ------------ | ------------ | ------------ |
-| 模型自己会   | 惩罚❌        | 惩罚❌        |
-| 模型自己不会 | 奖励✅        | 惩罚❌        |
