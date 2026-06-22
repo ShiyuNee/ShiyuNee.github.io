@@ -12,6 +12,12 @@ author_profile: true
 
 [阅读全文](/blogs/RLVR_Handbook)
 
+## On-Policy Distillation 的前世今生
+
+从后训练的两条路（on-policy RL vs off-policy SFT）讲起，分析各自的优缺点，引出 On-Policy Distillation 的核心思想：在学生模型生成的轨迹上，用教师模型逐 token 打分。文章对比了 RL、SFT 和 On-Policy Distillation 在奖励密度、数据复用、持续学习等方面的差异，并介绍了 Self-Distillation 的最新研究进展。
+
+[阅读全文](/blogs/On-Policy-Distillation)
+
 ## Arxiv Daily Papers Agent
 
 通过 Skill 让 AI Agent 每天自动追踪 arXiv 最新论文，按研究方向智能分类，为每篇论文生成精炼的中文 TL;DR，让你在 10 分钟内掌握当日研究动态。支持 30+ 研究方向分类，涵盖 Agent/RL、大模型核心、NLP 基础任务、检索、多模态等。每日更新 cs.CL 报告，可直接阅读，也可自定义类别和日期自行生成。
