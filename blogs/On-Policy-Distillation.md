@@ -5,13 +5,11 @@ layout: single
 author_profile: true
 ---
 
-# On-Policy Distillation 的前世今生
-
 > 本文探讨 On-Policy Distillation 的核心思想、与 RL/SFT 的对比，以及它在持续学习中的潜力。
 
 ---
 
-## 前言：后训练的两条路
+# 前言：后训练的两条路
 
 模型训练可以分为三个阶段：
 
@@ -23,7 +21,7 @@ author_profile: true
 
 后训练可以分为两类：
 
-### On-policy training
+## On-policy training
 
 从学生模型自身采样 rollout，并赋予某种 reward。
 
@@ -68,17 +66,17 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 
 ---
 
-## Discussion
+# Discussion
 
-### Dense supervision 大幅提升计算效率
+## Dense supervision 大幅提升计算效率
 
 强化学习和 On-policy Distillation 都通过反向 KL 散度进行学习，剪除基础策略中存在的行为空间。它们的区别在于**奖励的密度**。强化学习每个 episode 只教授 $O(1)$ 比特的信息，而蒸馏每个 episode 能教授 $O(N)$ 比特的信息，其中 $N$ 是 token 的数量。相比于 RL，on-policy distillation 速度快很多。
 
-### Distillation 可以有效复用训练数据
+## Distillation 可以有效复用训练数据
 
 在实践中，收集大规模训练 prompt 往往困难且昂贵，因此希望能多次复用同一批 prompt。但在 RL 中，对同一个 prompt 训练多个 epoch 往往导致模型**记住最终答案**。相比之下，**on-policy 蒸馏**是通过最小化反向 KL 来逼近教师的**完整分布**，而不是记住单个答案，因此可以在同一个 prompt 上采样很多次进行训练。
 
-### RL 的价值在于"发现"，而非"记忆"
+## RL 的价值在于"发现"，而非"记忆"
 
 与预训练不同，RL 并没有把大量算力花在梯度更新本身上（学习），而主要把计算资源花在**搜索**。
 
@@ -87,7 +85,7 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 - On-policy distillation 不需要建模 RL 中大量的中间步骤，而直接去学习 RL 结束之后的最终策略。on-policy distillation 不需要大量试错，rollout 出来的样本不是为了大量搜索，而是对比自己和老师哪里不一样，直接进行纠正，算力没有浪费。
 - **为什么 RL 后的本领容易蒸馏，而预训练不好蒸馏**：在科学研究中，需要花很多时间来寻找答案和找 idea，但是发现结果后，很容易交给别人。这对应 RL 所带来的技能很容易蒸馏。但是物理技能比如运动，不好教会别人，因为肌肉记忆等需要个人长时间训练来体会。这对应预训练带来的技能不好蒸馏。
 
-### On-policy learning 作为持续学习的工具
+## On-policy learning 作为持续学习的工具
 
 - **SFT 的目标是对给定数据做最大似然**，在学新知识时，旧的行为习惯迅速崩坏。即使模型学习自己产生的数据仍然会变笨。实际操作中，我们要采样模型的输出然后按 batch 进行 SFT，采样的数量以及 batch 大小都有限，因此每个 batch 和模型原本都有偏差，并不能反映模型的期望能力。训练之后模型的分布会逐渐漂移。随着训练进行，训练逐渐变成 off-policy。
 
@@ -102,7 +100,7 @@ The core idea of on-policy distillation is to sample trajectories from the *stud
 
 ---
 
-## OPD与OPSD相关文章介绍
+# OPD与OPSD相关文章介绍
 
 ## OPSD: On-Policy-Self-Distillation
 
