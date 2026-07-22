@@ -1,0 +1,14 @@
+{% case include.label %}
+  {% when 'Code', 'Repository' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4ZM16 6l-1.4 1.4 4.6 4.6-4.6 4.6L16 18l6-6-6-6ZM10.7 21l2.6-18h-2L8.7 21h2Z"/></svg>
+  {% when 'Slides', 'Poster' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3h18v12H3V3Zm2 2v8h14V5H5Zm5 11h4v2h3v2H7v-2h3v-2Z"/></svg>
+  {% when 'Blog' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m4 17.2-.8 3.6 3.6-.8L18.4 8.4l-2.8-2.8L4 17.2Zm13.7-13a1 1 0 0 0-1.4 0l-1.1 1.1L18 8.1l1.1-1.1a1 1 0 0 0 0-1.4l-1.4-1.4Z"/></svg>
+  {% when 'Google Scholar' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3Zm-6 9.3V16c0 2.2 2.7 4 6 4s6-1.8 6-4v-3.7l-6 3.3-6-3.3Z"/></svg>
+  {% when 'ResearchGate' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM5 7a2.5 2.5 0 1 0 0 5A2.5 2.5 0 0 0 5 7Zm14 0a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm-7 4c-3.2 0-5.8 1.8-5.8 4v3h11.6v-3c0-2.2-2.6-4-5.8-4ZM2 14.5V18h3v-3c0-1 .4-1.9 1.1-2.6A5.8 5.8 0 0 0 2 14.5Zm16 0c0 0-1.4 0-4.1-2.1.7.7 1.1 1.6 1.1 2.6v3h3v-3.5Z"/></svg>
+  {% else %}
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 2h8l4 4v16H6V2Zm7 1.5V7h3.5L13 3.5ZM8 10h8v1.8H8V10Zm0 4h8v1.8H8V14Zm0 4h5v1.8H8V18Z"/></svg>
+{% endcase %}

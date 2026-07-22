@@ -1,0 +1,245 @@
+- section: What is the Query asking for?
+  subtitle: Clarifying Question Generation / Facet Generation
+  papers:
+    - title: A Comparative Study of Training Objectives for Clarification Facet Generation
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, and Xueqi Cheng"
+      venue: "SIGIR-AP 2023 · Proceedings of the 1st ACM SIGIR Conference on Information Retrieval in the Asia Pacific"
+      description: "A comparative study of training objectives for generating useful clarification facets from ambiguous information needs."
+      theme: Query understanding
+      accent: blue
+      thumbnail: /images/publications/facet-generation.jpg
+      conference: SIGIR-AP'23
+      google_citations: 10
+      links:
+        - label: PDF
+          icon: ai ai-arxiv
+          url: https://arxiv.org/pdf/2310.00703v1.pdf
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/ShiyuNee/Facet-Generation
+        - label: Slides
+          icon: fas fa-file-powerpoint
+          url: https://github.com/ShiyuNee/Facet-Generation/blob/master/SIGIR-AP2023-Shiyu.pptx
+
+- section: Does the Model Know the Answer?
+  subtitle: LLM Honesty Alignment / Self-assessment
+  papers:
+    - title: Annotation-Efficient Universal Honesty Alignment
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, Minghao Tang, Jingtong Wu, Zengxin Han, and Xueqi Cheng"
+      venue: "ICLR 2026 · The Fourteenth International Conference on Learning Representations"
+      description: "We introduce a pretraining-finetuning paradigm for honesty alignment and HonestyBench which supports large-scale training and evaluation."
+      theme: Honesty alignment
+      accent: purple
+      thumbnail: /images/publications/honesty-alignment.jpg
+      conference: ICLR'26
+      google_citations: 4
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://arxiv.org/abs/2510.17509
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/Trustworthy-Information-Access/Annotation-Efficient-Universal-Honesty-Alignment
+    - title: Towards Fully Exploiting LLM Internal States to Enhance Knowledge Boundary Perception
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, Lulu Yu, Baolong Bi, and Xueqi Cheng"
+      venue: "ACL 2025 · The 63rd Annual Meeting of the Association for Computational Linguistics"
+      description: "Uses LLM internal states to improve self-assessment of whether an LLM knows an answer. We show that LLMs know what they know before generation."
+      theme: Knowledge boundaries
+      accent: teal
+      thumbnail: /images/publications/internal-states.jpg
+      conference: ACL'25
+      google_citations: 26
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://arxiv.org/abs/2502.11677
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/ShiyuNee/LLM-Knowledge-Boundary-Perception-via-Internal-States
+        - label: Poster
+          icon: fas fa-image
+          url: https://github.com/Trustworthy-Information-Access/LLM-Knowledge-Boundary-Perception-via-Internal-States/blob/master/poster.pdf
+    - title: When Do LLMs Need Retrieval Augmentation? Mitigating LLMs' Overconfidence Helps Retrieval Augmentation
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, and Xueqi Cheng"
+      venue: "Findings of ACL 2024"
+      description: "Shows how mitigating overconfidence can help models decide when retrieval augmentation (Adaptive RAG) is needed."
+      theme: Retrieval decisions
+      accent: orange
+      thumbnail: /images/publications/when-to-retrieve.jpg
+      conference: ACL'24 Findings
+      google_citations: 68
+      researchgate_citations: 77
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://arxiv.org/abs/2402.11457
+        - label: Blog
+          icon: fas fa-pencil-alt
+          url: https://mp.weixin.qq.com/s/yhkGXXjYdoM-KIhHGgdjdA
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/ShiyuNee/When-to-Retrieve
+    - title: Are Large Language Models More Honest in Their Probabilistic or Verbalized Confidence?
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Lulu Yu, and Jiafeng Guo"
+      venue: "CCIR 2024 · The 30th China Conference on Information Retrieval"
+      description: "Compares probabilistic and verbalized confidence as signals of LLM honesty."
+      theme: Confidence
+      accent: rose
+      thumbnail: /images/publications/confidence-honesty.jpg
+      conference: CCIR'24
+      google_citations: 26
+      links:
+        - label: PDF
+          icon: ai ai-arxiv
+          url: https://arxiv.org/pdf/2408.09773
+    - title: Do LVLMs Know What They Know? A Systematic Study of Knowledge Boundary Perception in LVLMs
+      authors: "Zhikai Ding, <strong>Shiyu Ni</strong>, and Keping Bi"
+      venue: "Findings of EMNLP 2025"
+      description: "A systematic study of knowledge-boundary perception in large vision-language models."
+      theme: Multimodal knowledge
+      accent: teal
+      thumbnail: /images/publications/lvlm-boundary.jpg
+      conference: EMNLP'25 Findings
+      google_citations: 1
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://arxiv.org/abs/2508.19111
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/ShiyuNee/LVLM-Knowledge-Boundary-Perception
+    - title: How Knowledge Popularity Influences and Enhances LLM Knowledge Boundary Perception
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, and Xueqi Cheng"
+      venue: Preprint
+      description: "We provide a knowledge-popularity perspective for understanding and mitigating model overconfidence."
+      theme: Knowledge popularity
+      accent: blue
+      thumbnail: /images/publications/knowledge-popularity.jpg
+      conference: arXiv
+      google_citations: 9
+      links:
+        - label: PDF
+          icon: ai ai-arxiv
+          url: https://arxiv.org/pdf/2505.17537
+    - title: Evaluating and Calibrating LLM Confidence on Questions with Multiple Correct Answers
+      authors: "Yuhan Wang<sup>†</sup>, <strong>Shiyu Ni<sup>†</sup></strong>, Zhikai Ding, Zihang Zhan, Yuanzi Li, and Keping Bi"
+      venue: Preprint
+      description: "Evaluates and calibrates model confidence for questions with more than one valid answer."
+      theme: Confidence calibration
+      accent: purple
+      thumbnail: /images/publications/multiple-answers.jpg
+      conference: arXiv
+      google_citations: 4
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://arxiv.org/abs/2602.07842
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/Trustworthy-Information-Access/Calibration-Under-Multiple-Correct-Answers
+
+- section: Does the Model Know the Answer?
+  subtitle: LLM-as-a-judge / External Verifier
+  papers:
+    - title: How Long Reasoning Chains Influence LLMs' Judgment of Answer Factuality
+      authors: "Minzhu Tu<sup>†</sup>, <strong>Shiyu Ni<sup>†</sup></strong>, and Keping Bi"
+      venue: "ACL 2026 · The 64th Annual Meeting of the Association for Computational Linguistics"
+      description: "Examines how long reasoning chains affect an LLM judge's factuality assessments."
+      theme: Factuality judging
+      accent: orange
+      thumbnail: /images/publications/reasoning-factuality.jpg
+      conference: ACL'26
+      google_citations: 4
+      links:
+        - label: PDF
+          icon: ai ai-arxiv
+          url: https://arxiv.org/pdf/2604.06756
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/Trustworthy-Information-Access/Reasoning-Affects-LLM-Judge
+
+- section: Is External Evidence Good?
+  subtitle: Query Performance Prediction
+  papers:
+    - title: Can LLM Rerankers Predict Their Own Ranking Performance?
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, Jingtong Wu, Zengxin Han, and Xueqi Cheng"
+      venue: Preprint
+      description: "Investigates whether LLM rerankers can estimate the quality of their own rankings and how to enhance such ability."
+      theme: Ranking prediction
+      accent: blue
+      thumbnail: /images/publications/reranker-prediction.jpg
+      conference: arXiv
+      google_citations: 0
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://arxiv.org/abs/2606.03535
+
+- section: How to Leverage External Knowledge?
+  subtitle: Interact Using Tokens
+  papers:
+    - title: Injecting External Knowledge into the Reasoning Process Enhances Retrieval-Augmented Generation
+      authors: "Minghao Tang, <strong>Shiyu Ni</strong>, Jiafeng Guo, and Keping Bi"
+      venue: "SIGIR-AP 2025 · Proceedings of the 3rd ACM SIGIR Conference on Information Retrieval in the Asia Pacific"
+      description: "We leverage reasoning models' self-reflection capabilities by inserting documents into the reasoning process rather than the prompt, improving robustness to noisy documents."
+      theme: RAG reasoning
+      accent: teal
+      thumbnail: /images/publications/passage-injection.jpg
+      conference: SIGIR-AP'25
+      google_citations: 6
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://www.arxiv.org/abs/2507.19333
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/mh-tang/Passage-Injection
+
+- section: How to Leverage External Knowledge?
+  subtitle: Parametric Injection
+  papers:
+    - title: The Role of Parametric Injection-A Systematic Study of Parametric Retrieval-Augmented Generation
+      authors: "Minghao Tang, <strong>Shiyu Ni</strong>, Jingtong Wu, Zengxin Han, and Keping Bi"
+      venue: Preprint
+      description: "A systematic study of parametric knowledge injection for retrieval-augmented generation, explaining how it works and analyzing its strengths and limitations."
+      theme: Parametric RAG
+      accent: rose
+      thumbnail: /images/publications/parametric-injection.jpg
+      conference: arXiv
+      google_citations: 1
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://www.arxiv.org/abs/2510.12668
+
+- section: Collaborations
+  papers:
+    - title: Is Factuality Enhancement a Free Lunch For LLMs? Better Factuality Can Lead to Worse Context-Faithfulness
+      authors: "Baolong Bi, Shenghua Liu, Yiwei Wang, Lingrui Mei, Junfeng Fang, Hongcheng Gao, <strong>Shiyu Ni</strong>, and Xueqi Cheng"
+      venue: "ICLR 2025 · The Thirteenth International Conference on Learning Representations"
+      description: "Shows a potential trade-off between improving factuality and preserving context-faithfulness."
+      theme: Factuality trade-offs
+      accent: orange
+      thumbnail: /images/publications/factuality-tradeoff.jpg
+      conference: ICLR'25
+      google_citations: 30
+      links:
+        - label: arXiv
+          icon: ai ai-arxiv
+          url: https://arxiv.org/abs/2404.00216
+    - title: "Deep Research: A Systematic Survey"
+      authors: "Zhengliang Shi, Yiqun Chen, Haitao Li, Weiwei Sun, <strong>Shiyu Ni</strong>, Yougang Lyu, Runze Fan, et al."
+      venue: "Preprint 2025"
+      description: "A systematic survey of deep-research systems, methods, and open challenges."
+      theme: Deep research
+      accent: purple
+      thumbnail: /images/publications/deep-research-survey.jpg
+      conference: arXiv
+      google_citations: 36
+      links:
+        - label: Preprint
+          icon: fas fa-file-alt
+          url: https://www.preprints.org/manuscript/202511.2077
+        - label: Repository
+          icon: fab fa-github
+          url: https://github.com/mangopy/Deep-Research-Survey?tab=readme-ov-file
