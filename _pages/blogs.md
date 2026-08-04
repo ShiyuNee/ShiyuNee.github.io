@@ -30,4 +30,12 @@ author_profile: true
     <p class="blog-card__description">自动追踪 arXiv 最新论文，按研究方向分类并生成中文 TL;DR，帮助你快速掌握当日研究动态。</p>
     <span class="blog-card__action">查看 GitHub <span aria-hidden="true">↗</span></span>
   </a>
+
+  <a class="blog-card blog-card--memory" href="{{ '/blogs/Memory-Benchmark-Evolution/' | relative_url }}">
+    <span class="blog-card__tag">Agentic Memory · Survey</span>
+    <h2 class="blog-card__title">Memory Benchmark 演化</h2>
+    <p class="blog-card__subtitle">从长期对话到完整 Memory Lifecycle</p>
+    <p class="blog-card__description">系统梳理 Agent Memory Benchmark 的演化脉络，对比历史来源、Agent 场景、任务闭环、监督粒度与诊断能力。</p>
+    <span class="blog-card__action">阅读全文 <span aria-hidden="true">→</span></span>
+  </a>
 </div>
