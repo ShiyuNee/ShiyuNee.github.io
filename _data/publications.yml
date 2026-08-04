@@ -48,7 +48,7 @@
       accent: teal
       thumbnail: /images/publications/internal-states.jpg
       conference: ACL'25
-      google_citations: 26
+      google_citations: 28
       links:
         - label: arXiv
           icon: ai ai-arxiv
@@ -67,7 +67,7 @@
       accent: orange
       thumbnail: /images/publications/when-to-retrieve.jpg
       conference: ACL'24 Findings
-      google_citations: 68
+      google_citations: 72
       researchgate_citations: 77
       links:
         - label: arXiv
@@ -87,7 +87,7 @@
       accent: rose
       thumbnail: /images/publications/confidence-honesty.jpg
       conference: CCIR'24
-      google_citations: 26
+      google_citations: 27
       links:
         - label: PDF
           icon: ai ai-arxiv
@@ -116,7 +116,7 @@
       accent: blue
       thumbnail: /images/publications/knowledge-popularity.jpg
       conference: arXiv
-      google_citations: 9
+      google_citations: 10
       links:
         - label: PDF
           icon: ai ai-arxiv
@@ -186,7 +186,7 @@
       accent: teal
       thumbnail: /images/publications/passage-injection.jpg
       conference: SIGIR-AP'25
-      google_citations: 6
+      google_citations: 7
       links:
         - label: arXiv
           icon: ai ai-arxiv
@@ -206,7 +206,7 @@
       accent: rose
       thumbnail: /images/publications/parametric-injection.jpg
       conference: arXiv
-      google_citations: 1
+      google_citations: 2
       links:
         - label: arXiv
           icon: ai ai-arxiv
@@ -222,7 +222,7 @@
       accent: orange
       thumbnail: /images/publications/factuality-tradeoff.jpg
       conference: ICLR'25
-      google_citations: 30
+      google_citations: 29
       links:
         - label: arXiv
           icon: ai ai-arxiv
