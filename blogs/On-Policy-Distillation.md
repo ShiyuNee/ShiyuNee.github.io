@@ -1,6 +1,7 @@
 ---
 permalink: /blogs/On-Policy-Distillation/
 title: "On-Policy Distillation 的前世今生"
+date: 2026-06-22
 layout: single
 author_profile: true
 ---

@@ -1,6 +1,7 @@
 ---
 permalink: /blogs/Memory-Benchmark-Evolution/
 title: "Memory Benchmark 演化"
+date: 2026-08-04
 layout: single
 author_profile: true
 ---

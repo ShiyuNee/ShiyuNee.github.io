@@ -1,6 +1,7 @@
 ---
 permalink: /blogs/RLVR_Handbook/
 title: "RLVR 实战手册 — 从强化学习理论到 Slime 框架"
+date: 2026-06-03
 layout: single
 author_profile: true
 ---
