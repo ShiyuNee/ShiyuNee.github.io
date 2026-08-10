@@ -77,7 +77,7 @@ $$
 2. **Agent harness self-improvement**：改进 prompt、memory、tool、skill、workflow 等 agent 组件。
 3. **Model learning without gold answers**：在没有标准答案的情况下更新模型权重。
 
-![Models, harness, and artifacts](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805093209284.png)
+![Models, harness, and artifacts]({{ '/images/rsi/models-harness-artifacts.png' | relative_url }})
 
 这套 taxonomy 的逻辑因此是：名称本身不能清楚区分工作 → 先确定系统由 Model、Harness、Artifact 三个对象构成 → 再按照直接发生变化的对象，把现有 self-evolving systems 分成三层。除了“什么在变”，还要继续说明系统由什么 feedback 驱动，以及 loop 最终闭合在哪里。
 
@@ -138,7 +138,7 @@ Weng 特别提出 deployment system，是因为 raw model 与真实世界 contex
 
 一个常见范式是：人给定目标、背景知识、初步方案和评估标准，agent 不断寻找可以改进的地方，产生新结果，并检查是否达到标准；如果没有，就继续循环。Codex、Claude Code 等工具都具有相似的工作模式。
 
-![Artifact iterative optimization](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805093615187.png)
+![Artifact iterative optimization]({{ '/images/rsi/artifact-iterative-optimization.png' | relative_url }})
 
 这个想法本身并不新，只不过相比于之前的研究，现在的LLM，尤其是 coding model，使循环变得更加灵活：
 
@@ -189,7 +189,7 @@ Weng 在同一节明确区分：AlphaEvolve 等方法主要关注 solution impro
 
 ### 4.2 Weng：[Harness 的三个基础设计模式](https://lilianweng.github.io/posts/2026-07-04-harness/#harness-design-patterns)
 
-![Harness design patterns](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805141336212.png)
+![Harness design patterns]({{ '/images/rsi/harness-design-patterns.png' | relative_url }})
 
 #### Pattern 1：Workflow Automation
 
@@ -282,9 +282,9 @@ Curator 不反复重写完整 prompt，而是生成 `(identifier, description)` 
 
 不过，**ACE 的更新规则和角色分工仍由人预先设计**。即使具体写入什么经验来自 rollout，如何更新 context、采用什么结构、由 Generator、Reflector、Curator 中的哪些角色完成更新，仍然是人工预设的机制。
 
-![ACE](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805144258480.png)
+![ACE]({{ '/images/rsi/ace-overview.png' | relative_url }})
 
-![ACE 中的 structured playbook](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805145604752.png)
+![ACE 中的 structured playbook]({{ '/images/rsi/ace-structured-playbook.png' | relative_url }})
 
 [**MCE（Meta Context Engineering）**](https://arxiv.org/abs/2601.21557)进一步把 mechanism 与 artifact content 分开：
 
@@ -295,15 +295,15 @@ Curator 不反复重写完整 prompt，而是生成 `(identifier, description)` 
 
 一个 skill 会定义一套 context function；context function 实际执行并决定怎样生成 context。也就是说，skill 和 context function 都需要在双层循环中搜索和更新。
 
-![MCE 中 mechanism 与 artifact content 的关系](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805152753592.png)
+![MCE 中 mechanism 与 artifact content 的关系]({{ '/images/rsi/mce-mechanism-artifact.png' | relative_url }})
 
 它采用双层优化：内层在给定 skill 的情况下，根据训练数据寻找较好的 context function；外层根据验证集表现寻找较好的 skill。Skill database 保存历史 skill、context function 和评估分数，meta-level agent 参考历史产生新 skill，base-level agent 再在其指导下从 rollout feedback 中学习 context function。
 
 > 便于理解的例子：skill 可以规定“对失败案例聚类、总结高频错误规则、保存代表性样例、按输入类型检索，并在验证集不再提升时停止扩充”；context function 则是根据这些要求实际写出的 pipeline、code 和判断规则。也就是说，$c$ 是 $s$ 的产物：外层优化 $s$，内层优化由 $s$ 产生的 $c$。
 
-![MCE 的双层优化](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805152937905.png)
+![MCE 的双层优化]({{ '/images/rsi/mce-bilevel-optimization.png' | relative_url }})
 
-![MCE](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805150332206.png)
+![MCE]({{ '/images/rsi/mce-overview.png' | relative_url }})
 
 实现上，一个 context function 被实例化为专用目录中的一组文件，其中既有静态组件（如 `skill.md`），也有动态组件（context 和 data rollouts）。Meta level 和 base level 都运行在 agentic coding environment 中，并使用 `Read`、`Write`、`Edit`、`Bash`、`Glob`、`Grep`、`TodoWrite` 等标准工具。
 
@@ -333,7 +333,7 @@ Workflow 可以由领域专家手工设计，也可以被视为搜索问题。
 
 目标是产生难度“恰到好处”的问题，即 strong solver 能够解决、weak solver 无法解决。Challenger prompt 根据 solver 和 verifier 的反馈迭代更新。Weng 同时指出其限制：合成任务用于 fine-tune weak solver，却不用于改进 strong solver；如果循环不能继续提高 strong model，它更像在生成的 prompt distribution 上进行间接蒸馏，RSI 的意味较弱。
 
-![AutoData](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805155959508.png)
+![AutoData]({{ '/images/rsi/autodata.png' | relative_url }})
 
 [**ADAS（Automated Design of Agentic Systems）**](https://arxiv.org/abs/2408.08435)把 agent design 本身表示成优化问题，也就是把“agent 应该以什么 workflow 工作”作为被搜索的对象：
 
@@ -343,7 +343,7 @@ Workflow 可以由领域专家手工设计，也可以被视为搜索问题。
 4. 评估新 agent，将表现较好的候选加入 archive；
 5. 重复直到达到最大迭代次数。
 
-![ADAS](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805160414529.png)
+![ADAS]({{ '/images/rsi/adas.png' | relative_url }})
 
 [**AFlow**](https://arxiv.org/abs/2410.10762) 把 agent workflow 表示成图：节点是调用 LLM 的 action，边是在代码中实现的逻辑关系和控制流。它不是让模型一次写出最终 workflow，而是使用 MCTS 在 workflow tree 中逐步搜索：
 
@@ -383,7 +383,7 @@ STOP 的目标不是直接优化某一个 $s$，而是让 $I$ 在一组 downstre
 
 Weng 对此提出安全担忧：如果程序可以修改 OS，抽象边界会被打破。因此可编辑范围需要严格设计，permission control 和 security layer 应位于自我修改循环之外，reward hacking 风险也仍然存在，例如系统可能只是让任务运行得更久，或者试图修改 verifier，而不是真正改进 harness。
 
-![Self-Harness](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805163959909.png)
+![Self-Harness]({{ '/images/rsi/self-harness.png' | relative_url }})
 
 [**AHE（Agentic Harness Engineering）**](https://arxiv.org/abs/2604.25850)认为 harness evolution 的主要瓶颈是 **observability**：rollout 失败时，系统不仅要看到“失败了”，还必须知道哪个 harness component 负责；每次 edit 也必须能够追溯到证据。它建立三个支柱：
 
@@ -406,7 +406,7 @@ Weng 还转述了其结果：在 Terminal-Bench-2 上，除 Hard tier 外，AHE 
 
 但是 harness-benefit 呈非单调关系，中等模型获益最多。真正利用 harness 要求模型能够在正确时间调用 skill/tool，并保持较好的 long-horizon instruction following：较弱模型可能加载失败，或者加载后执行错误；最强模型则可能已经接近任务性能上限。因此，“谁能提出修改”和“谁能从修改中获益”必须分开评估。
 
-![Harness updating and benefit](/Users/shiyuni/Library/Application Support/typora-user-images/image-20260805163438235.png)
+![Harness updating and benefit]({{ '/images/rsi/harness-updating-benefit.png' | relative_url }})
 
 ### 4.6 Weng：Evolutionary Search 与 DGM
 
