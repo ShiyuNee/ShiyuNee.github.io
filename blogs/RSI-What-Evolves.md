@@ -594,6 +594,10 @@ Harness 是近期最容易获得工程收益的一层，因为它像软件一样
 
 真正有价值的 harness self-improvement，也不只是为某个 benchmark 找到一套更长的 prompt，而是让系统逐渐学会：该保留什么 context、该创建什么工具、该如何组织实验、该在什么时候修改 artifact、harness 或 weights。换句话说，Harness 应从一组人为拼接的技巧，走向支持改进方法本身的 **meta-methodology**。
 
+### 8.5 RSI的核心是feedback从哪来，评估准不准
+
+分类博客呼吁关注三个问题：什么在变，系统由什么 feedback 驱动，以及 loop 最终闭合在哪里。我认为最重要的是feedback，即如何获得准确，细粒度的feedback促进agent system的更新
+
 ### 8.5 最后：RSI 的核心不是“无人参与”，而是“反馈能够积累”
 
-现阶段的 evaluator 仍然不完美，真实世界反馈昂贵且缓慢，reward hacking、diversity collapse 和长期目标错配也都没有解决。因此，RSI 不应被理解成简单地把人移出 loop。更现实的目标，是让人把目标、约束、权限和关键判断放在合适的抽象层级，把可验证、可重复的局部搜索交给系统，并让每一轮反馈都能成为下一轮真正可用的经验。这里面最重要的可能就是**评估要准，feedback要可靠**
+现阶段的 evaluator 仍然不完美，真实世界反馈昂贵且缓慢，reward hacking、diversity collapse 和长期目标错配也都没有解决。因此，RSI 不应被理解成简单地把人移出 loop。更现实的目标，是让人把目标、约束、权限和关键判断放在合适的抽象层级，把可验证、可重复的局部搜索交给系统，并让每一轮反馈都能成为下一轮真正可用的经验。
