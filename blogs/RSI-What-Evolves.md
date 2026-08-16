@@ -97,14 +97,8 @@ Weng 特别提出 deployment system，是因为 raw model 与真实世界 contex
 
 [知乎博客原文](https://zhuanlan.zhihu.com/p/2065227313973825752)在文章前部和结尾采用了宽窄两种表述，这两部分都需要保留，不能只选其中一种：
 
-- 在第 2-3 页介绍三层分类时，文章先写“**三个方向都是自进化**”，紧接着又写“**三者都算 RSI**”；随后解释三个层面区别在于优化目标，共同点是模型都在 loop 中不断改进。这里是follow了分类博客。
-- 同一部分继续写道，三层边界正在模糊并相互反哺：Harness 经验可以变成训练数据和训练基础设施；更强的 model 与 harness 产生更好的 artifact；artifact 又可以成为 harness 的新工具；三个方向最终形成闭环。我们把"改脚手架 → 训练 → 完成任务"这整个过程包成一个 loop，让它自己不断循环下去—这就出现了 RSI。
-- 在结尾，文章又给出更严格的区分：自进化是那把大伞，模型/harness/artifacts 只要在某个 loop 里自己变好了，都算；RSI 是伞下面更严格的那部分——不只是变好，是"变好的能力"本身也在变好，一圈套一圈地往前滚；当前大多数案例仍属于前者，真正具有递归性的案例较少。
-
-因此，知乎文章本身既使用了较宽的“各层都算 RSI”说法，也在结尾使用了更严格的 RSI 定义。本报告不替作者消除这一口径差异，而是分别说明：
-
-1. **按优化对象分类时**，Model、Harness、Artifact 三层都属于 self-evolving；知乎文章前部也把三层都放入 RSI 的讨论。
-2. **强调 recursive 时**，采用文章结尾的严格表述：改进机制或“变好的能力”继续得到改进；三层彼此反哺、共同形成闭环，是文章描绘的完整 RSI 路径。
+- follow分类博客，认为三个自进化方向都算RSI；认为三层边界正在模糊并相互反哺：Harness 经验可以变成训练数据和训练基础设施；更强的 model 与 harness 产生更好的 artifact；artifact 又可以成为 harness 的新工具；三个方向最终形成闭环。我们把"改脚手架 → 训练 → 完成任务"这整个过程包成一个 loop，让它自己不断循环下去—这就出现了 RSI。
+- 在结尾，文章又给出更严格的区分：RIS是"变好的能力"本身也在变好，一圈套一圈地往前滚；当前大多数案例仍属于“变好”的范畴，真正具有递归性的案例较少。
 
 ### 1.5 三篇博客各自承担什么角色？
 
@@ -114,8 +108,6 @@ Weng 特别提出 deployment system，是因为 raw model 与真实世界 contex
 | [Harness Engineering for Self-Improvement](https://lilianweng.github.io/posts/2026-07-04-harness/) | Harness 如何设计、如何成为优化对象并贡献于 RSI？ | 提供 Harness 的设计模式、优化路径、案例和挑战 |
 | [自进化（Self-evolving／RSI），一篇就够了](https://zhuanlan.zhihu.com/p/2065227313973825752) | 基于分类博客的三分类，介绍三种分类下有哪些实际案例？它们如何相互反哺并走向 RSI？ | 补充 Autoresearch、AlphaEvolve、Hermes、RHI、AIDE²、SIA 等案例、反面评估和整体闭环 |
 
----
-
 ## 2. 三层 Self-evolving Taxonomy 总览
 
 | 层级 | 直接优化对象 | 模型权重是否更新 | 典型反馈—更新闭环 | 博客中的例子 |
@@ -124,9 +116,15 @@ Weng 特别提出 deployment system，是因为 raw model 与真实世界 contex
 | Agent harness self-improvement | Prompt、memory、tool、skill、workflow、harness code | 否 | 从 rollout、失败轨迹和 benchmark 中提炼问题 → 提出 harness 修改 → 用 held-in / held-out 回归测试验证 → 接受、合并或回退 | [ACE](https://arxiv.org/abs/2510.04618)、[MCE](https://arxiv.org/abs/2601.21557)、[Meta-Harness](https://arxiv.org/abs/2603.28052)、[ADAS](https://arxiv.org/abs/2408.08435)、[AFlow](https://arxiv.org/abs/2410.10762)、[STOP](https://arxiv.org/abs/2310.02304)、[Self-Harness](https://arxiv.org/abs/2606.09498)、[AHE](https://arxiv.org/abs/2604.25850)、[DGM](https://arxiv.org/abs/2505.22954)、[RHI](https://arxiv.org/abs/2607.15524)、[AIDE²](https://www.weco.ai/blog/first-evidence-of-recursive-self-improvement) |
 | Model learning without gold answers | 模型参数 | 是 | 从 pseudo label、内部信号、self-play 或环境弱信号获得监督或 reward → 通过 SFT、RL 或 test-time update 更新模型 | [Self-training](https://arxiv.org/abs/2202.12040)、[TTRL](https://arxiv.org/abs/2504.16084)、[SPIN](https://arxiv.org/abs/2401.01335)、[Absolute Zero](https://arxiv.org/abs/2505.03335)、[TTT](https://test-time-training.github.io/) |
 
-这三层的主要差别在于优化对象，而不是具体使用哪一种优化算法。例如 evolutionary search 可以用于改 prompt、solution program 或 harness code，因此它是一种优化方法，不是第四个顶层分类。**这三种彼此未必是独立的，也可以共同优化**。
+- 这三层的主要差别在于优化对象，而不是具体使用哪一种优化算法。
+- 这三种彼此未必是独立的，也可以共同优化。
 
 进化的经典流程：做题 -> 测试 -> 分析失败/成功原因 -> 反馈 -> 优化
+
+> ==**本节人话summary**==: 从宽泛的意义上，只要模型能让自己最后的产出变好（通过修改产物本身，harness，模型参数）都可以算RSI。但严格意义上，只有让“变好”的这个机制也变好了，才算RSI。
+>
+> - 比如反复修改文章，文章越来越好这不算RSI。优化文章的人本身从改文章中学到了知识，以后更会改文章了，导致 "改文章" -> “文章质量提高” -> "人更会改了" -> “文章更好了” -> "人更会改了"这个循环真正能转起来，才是严格意义上的RSI
+> - 上述三个类别无论是从哪个角度去优化，最终都是希望我们能得到更加高质量的输出。上述三分类只是说明，可以从哪些角度来优化，使得产物更好。我认为真正要实现RSI未必需要上面三者互相能迭代优化，三者互相促进只是RSI的一种比较现实的实现手段。比如如果模型够牛，可以固定harness，只给模型提供必要的访问环境的接口，模型或许可以通过产物和模型参数的优化循环来实现RSI。
 
 ---
 
@@ -145,23 +143,17 @@ Weng 特别提出 deployment system，是因为 raw model 与真实世界 contex
 - 以前通常由人设计 operator 或 action，再围绕这些算子搜索或者提优化策略；现在模型既可以充当 operator，提出候选方案，也可以充当 optimizer，检查已有结果并决定下一步搜索方向。因此，搜索空间更大，启发式搜索器也更强。
 - LLM 的长程任务能力增强后，“执行—验证—改正”循环可以运行更久，并减少人工介入。
 
-[FARS](https://arxiv.org/abs/2606.31651) 是[分类博客](https://lsl.zone/blog/2026/a-taxonomy-of-self-evolving-agents/)中的一个例子：系统运行 417 小时，产生了 166 篇完全由 AI 生成的论文。这里被持续优化的是论文等 artifact，而不是 agent 自身。
+[FARS](https://arxiv.org/abs/2606.31651) 也是一个经典的例子：系统运行 417 小时，产生了 166 篇完全由 AI 生成的论文。这里被持续优化的是论文等 artifact，而不是 agent 自身。
 
-> 我的一个感觉：优化其实不应该follow人类的启发式经验，而是我们把问题定义清楚，formulate好，把他**变成一个搜索问题**，不断地去搜索各种可能的解。从搜索问题的角度来说，能够搜索的空间越大，搜索越快，最后性能可能就越好。从Weng的博客中可以感知到，现在的模型不太擅长保留错误的样本，因为大部分训练的样本都是正确的。而**错误的样本**对搜索其实很关键，他的作用是否定一些路径，**缩小搜索空间**从而更快达到final solution
+> 我的一个感觉：优化问题很多时候就是搜索问题。我们要把问题定义清楚，formulate好，把他**变成一个搜索问题**，不断地去搜索各种可能的解。从搜索问题的角度来说，能够搜索的空间越大，搜索越快，最后性能可能就越好。从Weng的博客中可以感知到，由于大部分训练的样本都是正确的，现在的模型不太擅长保留错误的样本。而**错误的样本**对搜索其实很关键，他的作用是否定一些路径，**缩小搜索空间**，从而更快达到final solution
 
 ### 3.2 [Autoresearch](https://github.com/karpathy/autoresearch)：优化训练代码
 
-[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)介绍了 Karpathy 的 [Autoresearch](https://github.com/karpathy/autoresearch)：agent 可以整夜自动修改 `train.py`，迭代模型架构、超参数和优化器等内容，再使用客观的验证集指标进行评分。
-
-[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)给出的具体设置是：agent 每次固定训练 5 分钟，以 validation bits-per-byte 作为客观指标，改进就保留、没有改进就丢弃。博客还引用 Karpathy 展示的一次约两天实验：约 700 次自主改动中有约 20 次被保留，把训练到 GPT-2 水平所需时间从 2.02 小时缩短到 1.80 小时。
-
-这里直接产生并选择的是更好的训练程序，因此按三层 taxonomy，首先属于 Artifact iterative optimization。
+[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)介绍了 Karpathy 的 [Autoresearch](https://github.com/karpathy/autoresearch)：agent 可以整夜自动修改 `train.py`，迭代模型架构、超参数和优化器等内容，再使用客观的验证集指标进行评分。具体设置是：agent 每次固定训练 5 分钟，以 validation bits-per-byte 作为客观指标，改进就保留、没有改进就丢弃。博客还引用 Karpathy 展示的一次约两天实验：约 700 次自主改动中有约 20 次被保留，把训练到 GPT-2 水平所需时间从 2.02 小时缩短到 1.80 小时。
 
 ### 3.3 [AlphaEvolve](https://arxiv.org/abs/2506.13131)：优化基础设施算法
 
-[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)的另一个例子是 Google DeepMind 的 [AlphaEvolve](https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/)：Gemini 生成候选代码，自动 evaluator 打分，进化算法保留表现较好的候选，再继续产生修改，从而获得更好的算法。
-
-[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)进一步强调“成果反哺训练”：它报告 AlphaEvolve 曾让 Gemini 使用的矩阵乘法核心提速 23%、FlashAttention 提速 32.5%，这些基础设施改进又被用于 Gemini 训练。正因为 artifact 的改进重新进入模型训练流程，文章说 AlphaEvolve 也因此常被当成 RSI 已经在生产环境里悄悄发生的例证。
+[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)的另一个例子是 Google DeepMind 的 [AlphaEvolve](https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/)：Gemini 生成候选代码，自动 evaluator 打分，进化算法保留表现较好的候选，再继续产生修改，从而获得更好的算法。文章近一步指出，成果可以反哺训练：它报告 AlphaEvolve 曾让 Gemini 使用的矩阵乘法核心提速 23%、FlashAttention 提速 32.5%，这些基础设施改进又被用于 Gemini 训练。正因为 artifact 的改进重新进入模型训练流程，文章说 AlphaEvolve 也因此常被当成 RSI 已经在生产环境里悄悄发生的例证。
 
 [Weng 博客的 Evolutionary Search 一节](https://lilianweng.github.io/posts/2026-07-04-harness/#evolutionary-search)补充了 AlphaEvolve 的实现细节：
 
@@ -169,11 +161,7 @@ Weng 特别提出 deployment system，是因为 raw model 与真实世界 contex
 - coding agent 可以访问完整 repository，但可修改区域由 `EVOLVE-BLOCK` 显式标记；
 - meta-prompt 可以与 instruction 和 context 一起演化。
 
-Weng 在同一节明确区分：AlphaEvolve 等方法主要关注 solution improvement
-
-### 3.4 当前环境与未来方向
-
-分类博客指出，当前多数 agent 运行在 codebase、browser、simulator、terminal 等数字环境中。更有挑战的方向是让 artifact optimization 进入真实世界，例如机器人、生物实验室和材料实验。
+Weng明确表示: AlphaEvolve 等方法主要关注 solution improvement
 
 ---
 
@@ -186,6 +174,11 @@ Weng 在同一节明确区分：AlphaEvolve 等方法主要关注 solution impro
 [Weng 的博客](https://lilianweng.github.io/posts/2026-07-04-harness/)对 harness 的定义更完整：它是围绕 base model 的系统，负责组织执行，并决定模型如何思考和规划、如何调用工具和行动、如何管理 context、如何保存 artifact，以及如何评估结果。Harness engineering 已经不只是 prompt template，而更接近 runtime 和软件系统设计。
 
 这两篇博客的关注点不同：分类博客主要回答“Agent Harness Self-improvement 可以分成哪些方向”，Weng 则从工程角度连续讨论“Harness 如何设计、它与模型核心能力是什么关系，以及 Harness 本身如何成为优化对象”。因此，下面先完整沿着 Weng 博客的顺序展开，再回到分类博客的 prompt / memory、tool / skill 和 multi-agent 视角。
+
+> 个人理解目前大家倾向于走这条路是因为下列两点
+>
+> - 优化harness带来其实就像软件工程，本身有很多优点，核心有几个：可组合，可追溯，可回滚，可解释。【这里可以加上deepseek harness的设计思路来说例子】
+> - 这个路子可能能够最快拿到收益，因此模型本身已经很强了，想要根据自己的feedback再去提升可能收益没那么大，但是harness本身是一个系统，比较复杂，且刚刚发展起来，可以优化的地方还有很多。
 
 ### 4.2 Weng：[Harness 的三个基础设计模式](https://lilianweng.github.io/posts/2026-07-04-harness/#harness-design-patterns)
 
@@ -203,7 +196,7 @@ Plan → Execute → Observe/Test → Improve → Execute again
 
 #### Pattern 2：File System as Persistent Memory
 
-长程任务中的实验日志、代码 diff、论文摘要、错误轨迹和历史 rollout 往往远超 context window。Harness 不应把全部状态塞进 prompt，而应把 durable state 保存在文件中。**文件系统**提供了一种对复杂状态保持简单控制的方式。
+长程任务中的实验日志、代码 diff、论文摘要、错误轨迹和历史 rollout 往往远超 context window。Harness 不应把全部状态塞进 prompt，而应把 durable state 保存在文件中。**文件系统提供了一种对复杂状态保持简单控制的方式。**
 
 #### Pattern 3：Sub-agent and Backend Jobs
 
@@ -236,11 +229,11 @@ Weng 随后用 coding agent harness 说明这三种 pattern 如何落到实际�
 
 在介绍三个 design patterns 后，Weng 紧接着讨论 Harness 在 RSI 中的定位，以及 Harness layer 与 model core intelligence 的关系。
 
-这里也可以和 Weng 在 patterns 之前提出的设计原则放在一起理解：**Harness 应当刻意保持简单和通用，以支持泛化。**她把 harness 类比为操作系统：内部可以封装复杂逻辑，但对模型暴露的 interface 应保持简单；config、tool interface 和其他 protocol 也可能逐渐标准化。Harness 的价值不是不断堆叠手工规则，而是提供少量、通用、可持续的机制，以及模型连接外部 context、tool 和真实环境所需的接口。
+==**Harness 应当刻意保持简单和通用，以支持泛化。**==她把 harness 类比为操作系统：==**内部可以封装复杂逻辑，但对模型暴露的 interface 应保持简单**==；config、tool interface 和其他 protocol 也可能逐渐标准化。Harness 的价值不是不断堆叠手工规则，而是提供少量、通用、可持续的机制，以及模型连接外部 context、tool 和真实环境所需的接口。
 
 Weng 认为，目前很难预测未来 RSI 会在多大程度上依赖 harness engineering，但近期路径不太可能从模型直接重写自身权重开始。她提出一条更现实的路径：
 
-1. Harness engineering 走向 **meta-methodology**：不只改进答案，而是改进产生更好答案的机制；harness 本身成为优化对象，启发式规则减少，更通用的机制增加。
+1. Harness engineering 走向 **meta-methodology**：不只改进答案，而是改进产生更好答案的机制；harness 本身成为优化对象，启发式规则减少，更通用的机制增加。这里叫meta是因为优化的角度在答案上，相比于直接去优化答案，优化harness是更进一步
 2. 成熟 harness 支持用于模型自我改进的 auto-research loop；更智能的模型又能避免 harness 被过度设计，使系统保持可持续。
 
 最终，许多 harness 改进可能被 **internalized** 到 model core behavior 中，但模型与外部 context 和 tool 的 interface 仍应保留。Weng 用 [prompt engineering](https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/) 类比这一变化：随着 instruction tuning 和模型推理能力增强，人工 prompt tricks 逐渐不再居于核心位置，但指定目标、约束、context 和 evaluation 的需要并没有消失。
@@ -251,9 +244,7 @@ Weng 认为，目前很难预测未来 RSI 会在多大程度上依赖 harness e
 2. **Harness 应保持简单、通用**：它可以在内部封装复杂逻辑，但不应依赖越来越多的 heuristic rules，更不应因为模型能力不足而无限堆叠补丁。
 3. **Harness 与模型能力会共同演化**：更好的 harness 支持 model self-improvement；更强的 model 又会把部分 harness 能力内化，并减少 overengineering，但外部 context 和 tool interface 仍然必要。
 
-> 我的理解：这个 Prompt Engineering 的类比很准确。希望不要过度设计 harness，而是把它当作模型和环境交流的接口。
-
-> 从进化角度看，更好的 harness 有助于支持 model evolution；model 进化后，许多原本需要 harness 显式完成的事情可以由模型自己完成，因此 harness 反而会趋向更简单。需要保留的，是与外部 context 和 tool 交互的接口。
+> 我的理解：这个 Prompt Engineering 的类比很准确。希望不要过度设计 harness，而是把它当作模型和环境交流的接口。从进化角度看，更好的 harness 有助于支持 model evolution。现在大家可能还在把harness变得很复杂，这是因为harness变复杂能在模型不动的情况下，让system做更多的事情，拿到更多的反馈，从而可以对system进行更新。但是把harness复杂化应该不是未来的道路，model 进化后，许多原本需要 harness 显式完成的事情可以由模型自己完成，因此 harness 反而会趋向更简单。需要保留的，是与外部 context 和 tool 交互的接口。
 
 ### 4.4 Weng：[Harness Optimization](https://lilianweng.github.io/posts/2026-07-04-harness/#harness-optimization) 应该从哪些方向进行？
 
@@ -307,7 +298,7 @@ Curator 不反复重写完整 prompt，而是生成 `(identifier, description)` 
 
 实现上，一个 context function 被实例化为专用目录中的一组文件，其中既有静态组件（如 `skill.md`），也有动态组件（context 和 data rollouts）。Meta level 和 base level 都运行在 agentic coding environment 中，并使用 `Read`、`Write`、`Edit`、`Bash`、`Glob`、`Grep`、`TodoWrite` 等标准工具。
 
-这里仍要保留一个边界：MCE 将“如何管理 context”也变成了可优化对象，但“外层优化 skill、内层优化 context”这一双层总体框架仍然由人设计。
+**这里仍要保留一个边界：MCE 将“如何管理 context”也变成了可优化对象，但“外层优化 skill、内层优化 context”这一双层总体框架仍然由人设计。**
 
 [**Meta-Harness**](https://arxiv.org/abs/2603.28052) 将优化对象进一步扩展为决定信息如何存储、检索和呈现的 harness code。正如名称中的 “Meta” 所表示的，**it is a harness for optimizing harnesses.** 它的关键不只是“再生成一个 prompt”，而是把完整 harness 变成 coding agent 可以搜索的 executable object：
 
@@ -439,7 +430,7 @@ Weng 在该 section 的结尾指出：这类进化式程序搜索适合候选能
 
 分类博客先介绍两类常见的 harness self-improvement：
 
-1. **Prompt learning and memory**：与其记住每个问题和答案，更可扩展的做法是从轨迹中提取可复用规则，存入 prompt、playbook 或 memory。虽然一些方法名称中包含 learning，但它们不更新模型权重；如果把 harness 视为 agent 的一部分，更新 prompt 和 memory 仍可以视为 agent learning。
+1. **Prompt learning and memory**：与其记住每个问题和答案，更可扩展的做法是从轨迹中提取可复用规则，存入 prompt、playbook 或 memory。
 2. **Tool and skill creation**：文字记忆不总是够用。例如，要从长视频中抽取关键帧，更需要一个可执行工具。Tool 由代码编码，agent 可以直接生成；**skill 可以视为 tool 的更高层封装**，也可以视为 context management，因为它避免把全部操作细节长期放进 context window。
 
 随着 playbook、tool 和 skill 增多，单个 agent 会变得低效或混乱。分类博客因此进一步讨论 **multi-agent self-evolving**：为不同任务建立 specialist，由 router 将任务分给合适的 expert。它也可以被看作 context management 的扩展，因为每个 expert 只携带与自身任务有关的 context。关键瓶颈是 routing，而有效 routing 往往需要更强的 base model 或人类专家。
@@ -466,7 +457,7 @@ Apodex-1.0 用 orchestrator 协调最多 150 个并行 sub-agent，结果进入�
 
 Recursive Harness Self-Improvement（RHI）的循环是：agent 用当前 harness 解决任务；LLM evaluator 把本次 output 与上一版做成对比较；偏好反馈进入 self-comparison history；harness optimizer 读取历史，把 harness 更新到下一版。
 
-RHI 把 harness 分为 agent design 与 agent workflow；workflow 又分为 contract 和 hop。它优先改 workflow，让 task-specific contract 精确规定 agent 之间真正需要传递的信息，从而减少冗余 context 传播、提高 KV-cache 命中率。知乎博客报告，在 30 个量化金融、机器人和制药方向的 ML research task 上，几轮迭代可以让低推理强度配置超过同模型的最高推理强度配置，并把推理成本最多降低 60%。
+RHI 把 harness 分为 agent design 与 agent workflow；workflow 又分为 contract 和 hop。它优先改 workflow，让 task-specific contract **精确规定 agent 之间真正需要传递的信息**，从而减少冗余 context 传播、提高 KV-cache 命中率。知乎博客报告，在 30 个量化金融、机器人和制药方向的 ML research task 上，几轮迭代可以让低推理强度配置超过同模型的最高推理强度配置，并把推理成本最多降低 60%。
 
 #### [Ai2 的反面评估](https://arxiv.org/abs/2607.12227)：预算对等后，Harness Evolution 未必更好
 
@@ -516,7 +507,36 @@ Continual learning 也常被称为 online learning 或 lifelong learning。经�
 
 ## 6. 三层如何相互反哺，并走向 RSI？
 
-### 6.1 三层边界逐渐模糊
+### 6.1 Harness 与 Model 的联合优化
+
+前面的案例大多固定 Model、优化 Harness，或固定 Harness、更新 Model weights。更完整的 self-improvement 则允许系统把两者放进同一个反馈循环。SIA 与 Continual Harness 分别展示了两种联合优化方式。
+
+#### [SIA](https://arxiv.org/abs/2605.27276)：在两个优化对象之间选择
+
+Weng 在 **Joint Optimization with Model Weights** 中指出，harness evolution 改变模型周围的非参数系统；为了实现更完整的 self-improvement，可以允许系统同时更新 model weights。SIA 是较早把 harness improvement 和 model-parameter update 放进同一个 optimization loop 的尝试：
+
+- **Meta-Agent**：提出初始 harness；
+- **Task-Specific Agent**：执行任务；
+- **Feedback-Agent**：根据近期轨迹，决定下一轮更新 harness，还是更新模型权重。
+
+知乎博客用“两个旋钮”帮助理解：harness 与 model weights 是同一反馈循环中两种可选择的更新对象，Feedback-Agent 负责决定当前应更新哪一个。Meta-Agent 根据 task specification 和 verifier 初始化 scaffold；Task-Specific Agent 在 environment 中执行并产生 trajectory；Feedback-Agent 读取 trajectory，决定修改 scaffold 还是触发 LoRA weight update，然后把新状态送回 Task-Specific Agent，直到用完 step budget。博客还报告，SIA-W+H 在 LawBench、TriMul GPU kernel 和 MAGIC 单细胞 RNA 去噪三个任务上都超过只更新 harness 的 SIA-H，并据此强调 weight update 不是一个没有作用的附加模块。
+
+Weng 同时强调 SIA 的证据仍是 provisional：实验中的 task-specific agent 明显弱于 Meta-Agent 和 Feedback-Agent，baseline 也较弱，使结果难以清晰解释；training stability 和 Goodhart effect 等问题仍未解决。
+
+这里两篇博客提供的是互补信息：知乎博客介绍系统设计及论文报告的正向结果；Weng 则提醒这些实验选择存在 confound，不能把论文结果直接扩写成已经得到充分验证的结论。
+
+#### [Continual Harness](https://arxiv.org/abs/2605.09998)：让两个循环以不同频率运行
+
+Weng 介绍的 Continual Harness 在长时程游戏环境中同时进行 harness update 和 policy model co-learning。
+
+[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)把它解释成两个不同频率的循环：
+
+- 内层在一局游戏中高频更新 prompt、sub-agent、skill 和 memory tree 等 harness state；
+- 外层跨迭代运行 policy model，由 PRM 对 trajectory 打分，强 teacher 重新标注低奖励片段，再用 soft SFT 更新 model weights，而且下一轮不重置上一轮状态。
+
+知乎博客报告，在较强的 Gemini Pro 档模型上，这一系统以 130 美元中位成本完成 100% 的游戏里程碑，而极简 baseline harness 以 215 美元达到 98%；但在较弱的 Flash-Lite 档位上，加入 Continual Harness 后完成度反而从 baseline 的 20% 降到 3%-13%，成本也更高。这个结果也说明，harness 能否带来收益仍取决于 base model 是否有能力正确利用它。
+
+### 6.2 三层边界逐渐模糊并相互促进
 
 分类博客的 **A Blurred Boundary** 与 **For the Real World** 两节指出，Model、Harness 与 Artifact 是三个不同入口，但不应永远孤立：
 
@@ -526,78 +546,9 @@ Continual learning 也常被称为 online learning 或 lifelong learning。经�
 
 分类博客把“每个模块最终一起改进”作为未来方向。它描述的是三层逐渐共同进化，而不是抹去三层在直接优化对象上的区别。
 
-### 6.2 Harness 与 Model 的联合优化：[SIA](https://arxiv.org/abs/2605.27276)
-
-Weng 在 **Joint Optimization with Model Weights** 中指出，harness evolution 改变模型周围的非参数系统；为了实现更完整的 self-improvement，可以允许系统同时更新 model weights。SIA 是较早把 harness improvement 和 model-parameter update 放进同一个 optimization loop 的尝试：
-
-- **Meta-Agent**：提出初始 harness；
-- **Task-Specific Agent**：执行任务；
-- **Feedback-Agent**：根据近期轨迹，决定下一轮更新 harness，还是更新模型权重。
-
-知乎博客用“两个旋钮”帮助理解：harness 与 model weights 是同一反馈循环中两种可选择的更新对象，Feedback-Agent 负责决定当前应更新哪一个。
-
-[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)进一步描述了完整循环：Meta-Agent 根据 task specification 和 verifier 初始化 scaffold；Task-Specific Agent 在 environment 中执行并产生 trajectory；Feedback-Agent 读取 trajectory，决定修改 scaffold 还是触发 LoRA weight update，然后把新状态送回 Task-Specific Agent，直到用完 step budget。博客还报告，SIA-W+H 在 LawBench、TriMul GPU kernel 和 MAGIC 单细胞 RNA 去噪三个任务上都超过只更新 harness 的 SIA-H，并据此强调 weight update 不是一个没有作用的附加模块。
-
-Weng 同时强调 SIA 的证据仍是 provisional：实验中的 task-specific agent 明显弱于 Meta-Agent 和 Feedback-Agent，baseline 也较弱，使结果难以清晰解释；training stability 和 Goodhart effect 等问题仍未解决。
-
-这里两篇博客提供的是互补信息：知乎博客介绍系统设计及论文报告的正向结果；Weng 则提醒这些实验选择存在 confound，不能把论文结果直接扩写成已经得到充分验证的结论。
-
-### 6.3 [Continual Harness](https://arxiv.org/abs/2605.09998)
-
-Weng 介绍的 Continual Harness 在长时程游戏环境中同时进行 harness update 和 policy model co-learning：对于低奖励轨迹，强 teacher model 产生标签，再将其蒸馏进 policy model。
-
-[知乎博客](https://zhuanlan.zhihu.com/p/2065227313973825752)把它解释成两个不同频率的循环：
-
-- 内层在一局游戏中高频更新 prompt、sub-agent、skill 和 memory tree 等 harness state；
-- 外层跨迭代运行 policy model，由 PRM 对 trajectory 打分，强 teacher 重新标注低奖励片段，再用 soft SFT 更新 model weights，而且下一轮不重置上一轮状态。
-
-知乎博客报告，在较强的 Gemini Pro 档模型上，这一系统以 130 美元中位成本完成 100% 的游戏里程碑，而极简 baseline harness 以 215 美元达到 98%；但在较弱的 Flash-Lite 档位上，加入 Continual Harness 后完成度反而从 baseline 的 20% 降到 3%-13%，成本也更高。这个结果也说明，harness 能否带来收益仍取决于 base model 是否有能力正确利用它。
-
-### 6.4 从自进化循环到 RSI
-
-知乎博客用一条整体路径说明三层如何相互促进：
-
-```text
-改进 Harness
-  → 支持并加速 Model 训练
-  → 更强 Model 改进 Harness，并完成更复杂的长程任务
-  → 产生更好的 Artifact
-  → Artifact 又成为工具、数据或基础设施，进入下一轮
-```
-
-当“改脚手架—训练—完成任务”不再由人逐轮手工拼接，而能被包成一个持续运行的 loop，使系统产生改进的能力也在下一轮得到加强时，知乎博客把它称为 RSI。
-
-这里需要保留两个层次：
-
-- Artifact、Harness、Model 的单层循环都可以讨论 self-evolving；
-- 三层相互反哺展示了向完整 RSI 发展的路径，RSI 的核心是改进机制进入递归反馈。
-
 ---
 
-## 7. 高层对比与汇报总结
-
-### 7.1 三层的核心差别
-
-| 问题 | Artifact | Harness | Model |
-|---|---|---|---|
-| 什么在变？ | Agent 的输出 | 把 model 组织成 agent 的非参数系统 | Model weights |
-| 改完后直接得到什么？ | 更好的代码、算法、论文或策略 | 更好的 context、tool、skill、workflow 或 agent runtime | 更新后的模型能力 |
-| 典型验证方式 | 测试、验证集、自动 evaluator | Rollout、失败轨迹、benchmark、回归测试 | Pseudo label、reward、self-play 或环境信号 |
-| 博客强调的困难 | 真实世界反馈慢且难控制 | 可观测性、安全边界、能否正确利用新 harness | 没有 gold answer、训练稳定性、灾难性遗忘 |
-
-### 7.2 不要混淆的三组关系
-
-1. **三篇博客使用 RSI 的口径并不完全相同。** 分类博客把 RSI 列为 self-evolving idea 曾使用过的名称之一，不把它另立为严格子集；Weng 用 RSI 指当前智能改进产生智能的 machinery 的反馈循环；知乎文章前部宽泛地说三层都算 RSI，结尾又把 RSI 严格到“变好的能力本身也变好”。汇报时应分别归因，不能合成一个三篇博客共同认可的定义。
-2. **优化对象与优化算法不是同一个问题。** Evolutionary search 可以优化 prompt、solution program 或 harness code，不能把它单独并列为第四层。
-3. **Harness 的设计模式与 Harness self-improvement 不是同一个阶段。** Workflow、文件系统和 sub-agent 是 harness 的基础设计；STOP、Self-Harness、AHE、DGM 等工作进一步把与 Harness 对应的 improver / scaffolding 或 harness code 本身变成优化对象。这里并不意味着它们已经开始优化“优化 Harness 的算法”。
-
-### 7.3 一句话总结
-
-> 分类博客把 RSI、continual learning、online learning、automated discovery 和 test-time adaptation 视为 self-evolving idea 在不同系统条件下出现过的名称，并用 Artifact、Harness、Model 回答“什么在变”；Weng 和知乎博客则进一步强调 recursive feedback loop。
-
----
-
-## 8. 共同挑战
+## 7. 共同挑战
 
 以下问题主要来自 [Weng 博客的 Future Challenges](https://lilianweng.github.io/posts/2026-07-04-harness/#future-challenges)：
 
@@ -611,20 +562,38 @@ Weng 介绍的 Continual Harness 在长时程游戏环境中同时进行 harness
 
 ---
 
-## 9. 结论
+## 8. Takeaways：我从 Self-evolving 走向 RSI 的几点理解
 
-这三篇博客可以组合成一条清晰的汇报主线：
+### 8.1 严格的RSI 不只是让结果变好，而是让“变好的机制”也变好
 
-1. 分类博客把 RSI、continual learning、online learning、automated discovery 和 test-time adaptation 看作 self-evolving idea 在不同系统条件下出现过的名称。因为名称不能说明具体机制，作者转而追问 what evolves、what feedback drives it、where the loop closes。
-2. 用 Model、Harness、Artifact 三个对象说明 agent system 的组成，再按直接优化对象划分 Artifact iterative optimization、Agent harness self-improvement、Model learning without gold answers 三层 taxonomy。
-3. Harness 是近期最具工程可行性的重点路径：优化对象从 prompt、structured context、workflow 扩展到完整 harness code；STOP 所说的 optimizer / improver 在类比中也对应 Harness，而不是更高一层的 Harness optimizer。
-4. 三层不会永远孤立。更强 model、可自我改进的 harness 和更好的 artifact 可以相互提供工具、数据、反馈与训练基础设施。
-5. Weng 用 RSI 描述改进产生智能的 machinery 的反馈循环；知乎文章前部宽泛地把三个方向都放入 RSI，结尾又以“变好的能力本身也变好”强调更严格的 recursive 含义。
+宽泛地说，持续改进 artifact、harness 或 model 中的任何一层，都可以放进 self-evolving 的讨论中。但我更愿意把 **RSI（Recursive Self-Improvement）** 留给一种更严格的循环：系统不仅在这一轮得到更好的结果，还能利用这一轮的经验，改进下一轮产生结果的机制。
 
-分类博客最后建议，与其只争论名称，不如追问三个问题：
+反复修改一篇文章，让文章越来越好，是 artifact optimization；如果系统还能从修改过程里总结出更好的评估标准、搜索策略或修改方法，并在下一篇文章中更有效地改进，这个循环才开始具有 recursive 的意味。关键不在于是否同时修改 Artifact、Harness 和 Model 三层，而在于：**改进能力本身有没有进入反馈循环。** 三层互相反哺，是目前实现这种循环的一条现实路径，但不是 RSI 的定义本身。
 
-- **What evolves?**
-- **What feedback drives it?**
-- **Where does the loop close?**
+因此，判断一个案例时，我认为最有用的不是先争论它是否配得上 RSI 这个名字，而是问：**什么在变？反馈从哪里来？反馈改变的是当前答案，还是产生答案的方法？这个 loop 下一轮能否因此运行得更好？**
 
-这三个问题也可以作为汇报每个案例时统一使用的分析框架。
+### 8.2 很多优化问题，本质上可以重新表述为搜索问题
+
+无论被优化的是代码、prompt、workflow 还是 model weights，一个 self-evolving loop 都可以理解成：定义搜索空间，提出候选，用反馈排除或保留路径，再决定下一步往哪里探索。LLM 带来的变化，是 candidate generator 和 optimizer 都变得更通用：它既能提出修改，也能阅读执行结果、分析失败并调整搜索方向。
+
+从这个视角看，系统性能不只取决于模型“有多聪明”，还取决于几个更具体的问题：目标能否被清楚地 formulate，反馈是否可靠，搜索空间是否足够大，候选生成是否足够快，以及系统能否记住已经验证过的路径。把一个模糊任务转成有候选、有验证器、有历史状态的搜索问题，往往就是构建 self-evolving system 最重要的一步。
+
+哪家效果更好可能要取决于哪家搜得快，比如单位时间内实验迭代的次数（我记得之前采访OpenAI研究员说过类似的观点）
+
+### 8.3 负样本不是搜索中的废料，而是对搜索空间的约束
+
+成功样本告诉系统哪条路可能有效，失败样本则告诉系统哪些区域不值得重复探索。后者不仅用于“复盘错误”，还在持续缩小搜索空间：一次失败的实验、一个被回滚的 patch、一条没有提升指标的 prompt，都可以成为下一轮搜索的边界条件。
+
+这也是为什么只保存 best result 不够。一个成熟的 loop 还应该保存失败发生时的假设、环境、修改、观测和判断依据，并区分“方案本身无效”与“评估噪声、执行错误或预算不足”。如果系统不能可靠地承认失败、记录失败和调用失败，它就容易反复走回同一条路；如果把未经判断的负样本全部塞回 context，又会制造新的噪声。真正重要的是让负面结果变成**可检索、可归因、能约束后续搜索**的经验。
+
+### 8.4 Harness 的未来不是无限复杂，而是成为简单、通用、可进化的接口
+
+Harness 是近期最容易获得工程收益的一层，因为它像软件一样可组合、可观测、可回滚，也能在不重新训练模型的情况下快速迭代。但短期有效不等于长期应该不断堆叠 workflow、agent role 和 heuristic rule。复杂 harness 往往是在替当前模型补能力缺口；随着模型变强，其中一部分机制会被内化到 model behavior 中。
+
+我更认同的方向是：**Harness 内部可以处理复杂性，对模型暴露的接口则应尽量简单、稳定和通用。** 它应该负责连接模型与外部 context、memory、tool、environment 和 evaluator，保存可复现的轨迹，并为搜索提供必要的状态与边界；至于具体怎样规划、推理和纠错，应尽量交还给模型，而不是固化成越来越厚的手工规则。
+
+真正有价值的 harness self-improvement，也不只是为某个 benchmark 找到一套更长的 prompt，而是让系统逐渐学会：该保留什么 context、该创建什么工具、该如何组织实验、该在什么时候修改 artifact、harness 或 weights。换句话说，Harness 应从一组人为拼接的技巧，走向支持改进方法本身的 **meta-methodology**。
+
+### 8.5 最后：RSI 的核心不是“无人参与”，而是“反馈能够积累”
+
+现阶段的 evaluator 仍然不完美，真实世界反馈昂贵且缓慢，reward hacking、diversity collapse 和长期目标错配也都没有解决。因此，RSI 不应被理解成简单地把人移出 loop。更现实的目标，是让人把目标、约束、权限和关键判断放在合适的抽象层级，把可验证、可重复的局部搜索交给系统，并让每一轮反馈都能成为下一轮真正可用的经验。这里面最重要的可能就是**评估要准，feedback要可靠**
