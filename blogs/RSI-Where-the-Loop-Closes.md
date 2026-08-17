@@ -14,7 +14,7 @@ author_profile: true
 
 这篇文章主要基于 **Melon** 的小红书长文[《万字深度：从 Self-Evolve 到 RSI》](https://www.xiaohongshu.com/discovery/item/6a71f07700000000220146bf)整理而成。原文从“AI 被允许修改什么”出发，系统梳理了 Self-Evolve 不断向外扩张的改进范围，并进一步提出 Everything as Service、Agent as Service，以及 Scoped → Joint → Recursive 的研究路线。这些是本文最重要的思想来源。
 
-原作者把大量分散的研究工作组织成了一条非常有启发性的主线。我的工作主要是依照这条主线重新编排学习笔记，补充相关论文与项目的链接、时间和机制说明，并把“可修改范围”与“递归依赖”“实验归因”之间的关系展开。文中的核心框架和研究判断应归功于原作者；本文不替代原文，也不把这些贡献视为自己的原创观点。推荐读者先后对照阅读原文与本文。
+原作者把大量分散的研究工作组织成了一条非常有启发性的主线。我主要是依照这条主线重新编排学习笔记，补充相关论文与项目的链接、时间和机制说明，并把“可修改范围”与“递归依赖”“实验归因”之间的关系展开。文中的核心框架和研究判断应归功于原作者；本文不替代原文，也不把这些贡献视为自己的原创观点。推荐读者先后对照阅读原文与本文。
 
 {::options toc_levels="1-4" /}
 
@@ -32,8 +32,9 @@ author_profile: true
 判断一个系统离 RSI 有多远，真正应该问的是：
 
 - AI 被允许改什么？
-
 - 被改进的东西，有没有重新成为下一轮更好的改进者？
+
+> 这里符合我们在上一个博客中说的严格的RSI的定义
 
 从这个角度看，目前的 self-evolve 工作不是一条简单的时间线，而是在**不断扩大可改进对象的 scope**：从内到外，第一层是模型输出，然后是模型参数，外面又包着harness，在外面是环境，然后是整个训练流程，最后是改进更外层的优化者本身。
 
@@ -49,7 +50,7 @@ author_profile: true
 
 - 最后，才是改进负责这些工作的 trainer 和 researcher。
 
-作者的核心思想，RSI不是给一个超级agent无限自由的修改空间，而是应该区分好RSI中的各个组件，每个组件都当作Service (Everything as Service)。这不是普通的工程优化，而是 RSI 的实验架构。这样才能研究好每个模块，进行优势/错误归因（可验证），进行组合和递归。不然修改空间太大一方面很难改好，另一方面归因也很困难。真正可验证、可组合、可递归的 RSI，**需要把不同改进对象拆成彼此隔离的 service**。
+作者的核心思想，**RSI不是给一个超级agent无限自由的修改空间，而是应该区分好RSI中的各个组件，每个组件都当作Service (Everything as Service)**。这不是普通的工程优化，而是 RSI 的实验架构。这样才能研究好每个模块，进行优势/错误归因（可验证），进行组合和递归。不然修改空间太大一方面很难改好，另一方面归因也很困难。真正可验证、可组合、可递归的 RSI，**需要把不同改进对象拆成彼此隔离的 service**。
 
 - Model as Service。
 - Data as Service。
@@ -75,7 +76,7 @@ author_profile: true
 - **05** 不再预先规定修改对象，而是把“下一步应该改什么”的判断权交给 researcher。
 - **06** 最后把负责完成这些 improvement 的 researcher / trainer 本身也变成优化对象。
 
-这个 scope 的扩张也是整篇博客理解 Self-Evolve → RSI 的主线：不是简单按年代排列，而是**可修改对象越来越外层，最终把“负责改进的系统”本身也变成改进对象**。
+这个 scope 的扩张也是整篇博客理解 Self-Evolve → RSI 的主线：不是简单按年代排列，而是**可修改对象越来越外层，最终把“负责改进的系统”本身也变成改进对象**。个人把每个阶段总结为下面这个表：
 
 | 阶段                                   | 核心关注的问题                                               | 我们归纳的典型套路                                           | 离严格 RSI 还差什么？                                        | 主要发生变化的对象                                           |
 | -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -92,12 +93,6 @@ author_profile: true
 4. **04：我会决定下一步学什么，但“可学习空间和 curriculum mechanism”还是人设计的。**
 5. **05：我会自己判断下一步该改什么，但“做这个判断的 researcher”本身还是固定的。**
 6. **06：我开始修改 researcher / trainer 本身；只有新的 improver 更强、重新进入下一轮并持续产生可累积 improvement，才真正开始闭合 RSI。**
-
-## 如何读下面的“核心定位”
-
-“核心定位”只总结**原论文明确支持、且最能帮助理解这篇工作为什么区别于同类方法的核心思想**。它不是关键词标签，也不重复完整流程：通常用 1–2 句话说明“这篇工作真正改变了什么问题设定/设计选择，以及这个选择为什么重要”。具体执行机制仍放在下一列展开。该列使用低饱和蓝色字体；若 Markdown 渲染器不支持 HTML 颜色，内容仍会正常显示为普通文本。
-
-**时间口径：**表格中的“首次发表时间”统一指该工作的 **arXiv v1 / 首次公开月份**，格式为 `YYYY-MM`。对于不是独立论文的子实验，沿用所属论文的首次公开月份并注明；若博客未能唯一确认对应论文，则标记为“未确认”，不做猜测。
 
 ## 改答案，reasoning，轨迹
 
@@ -129,12 +124,12 @@ author_profile: true
 | Title + Link | 首次发表时间 | 核心定位 | 具体做了什么（严格依据原论文） | 博客中对这个工作的描述 |
 |---|---|---|---|---|
 | [**Self-Instruct: Aligning Language Models with Self-Generated Instructions**](https://arxiv.org/abs/2212.10560) | 2022-12 | <font color="#4F6B8A">核心是把 instruction tuning 中最依赖人工的**指令数据构造**交给模型自己完成：从少量 seed tasks 扩展出新的 instruction–input–output，再过滤后回用于训练。它展示的是“模型自己扩充监督数据”这一自举路线。</font> | 论文从少量人工 seed tasks 出发，让已有语言模型迭代**生成新的 instruction tasks**。对每个生成 instruction，模型还会**生成对应 input/output**；系统随后用启发式规则过滤格式错误、重复或与已有任务过于相似的样本。保留下来的 synthetic instruction data 与原始数据一起用于 instruction tuning，从而把模型自己扩充出来的任务分布重新用于训练模型。 | 与 Evol-Instruct、WizardLM 一起概括为：**“让模型生成和演化 instruction data。”** |
-| [**WizardLM: Empowering Large Language Models to Follow Complex Instructions**](https://arxiv.org/abs/2304.12244)（Evol-Instruct） | 2023-04 | <font color="#4F6B8A">核心不是简单多采样 synthetic instructions，而是用 **Evol-Instruct 显式沿复杂度方向演化已有 instruction**，例如增加约束、深化推理等。重点从“自己造数据”推进到“自己系统性地产生更难的数据”。</font> | 论文提出 Evol-Instruct，用 LLM 对已有 instruction 做逐步“进化”，而不是只直接采样新 instruction。方法包含 in-depth evolution（增加约束、深化推理、提高复杂度等）和 in-breadth evolution（生成新的相关任务）等操作，把简单 instruction 改写成更复杂、更有挑战性的 instruction；演化后的 instruction 再生成 response，并用于 fine-tune LLaMA，得到 WizardLM。 | **“Self-Instruct、Evol-Instruct、WizardLM 一类工作让模型生成和演化 instruction data。”** |
-| [**SPIN: Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models**](https://arxiv.org/abs/2401.01335) | 2024-01 | <font color="#4F6B8A">核心是让**上一轮模型自己的 response 成为下一轮训练中的对手**：当前模型学习区分 human demonstrations 与旧模型生成结果。这样不需要新增人工 preference data，训练信号会随着模型版本共同变化。</font> | 论文从一个已有 SFT 模型开始，把当前模型视为 self-play 中的 opponent：它针对训练 prompts 生成自己的 responses，而数据中的 human demonstrations 作为更优 responses。下一轮模型通过偏好式目标学习区分 human response 与上一轮模型 response，使自己的分布逐渐远离旧模型、接近目标分布。更新后的模型再生成新的 responses，成为下一轮 opponent，因此训练信号随模型版本迭代更新。 | **“SPIN 让模型与自己的历史版本进行 self-play。”** |
-| [**Self-Rewarding Language Models**](https://arxiv.org/abs/2401.10020) | 2024-01 | <font color="#4F6B8A">核心是让模型同时承担**回答者和 judge/reward provider**：它不仅生成 candidate responses，也用 LLM-as-a-Judge 产生自己的 preference signal。论文关注的是 instruction-following ability 与 reward-giving ability 能否在同一迭代中共同提升。</font> | 论文让同一个语言模型同时具备两种角色：一方面作为 instruction-following model 生成 candidate responses，另一方面通过 LLM-as-a-Judge prompting 对候选回答打分/比较，产生自己的 preference data。每一轮根据这些 self-generated preferences 进行 DPO 更新；更新后的模型随后继续生成更强 responses，并再次充当 judge 产生下一轮 preference signal，从而形成 response generation、self-reward 和 preference optimization 的迭代。 | **“Self-Rewarding Language Models 让模型既生成答案，也参与生成 reward。”** |
-| [**Absolute Zero: Reinforced Self-play Reasoning with Zero Data**](https://arxiv.org/abs/2505.03335) | 2025-05 | <font color="#4F6B8A">核心是进一步去掉**外部题库和答案数据**：同一个模型既提出可验证的新任务，又求解这些任务，再由代码执行器验证有效性和答案。它把“出题—解题—验证—RL”闭成一个 zero-data reasoning self-play loop。</font> | 论文希望在没有人工问题和答案数据的情况下训练 reasoning model。单一模型同时承担 proposer 和 solver：proposer 自动生成可执行、可验证的 programming/reasoning tasks，solver 尝试求解；代码执行器既用于检查生成任务是否有效，也用于验证 solver 的答案。由任务有效性和求解结果得到的可验证 reward 同时训练“出题”和“解题”能力，于是形成“自己出题 → 自己解题 → 执行器验证 → RL 更新”的 closed-loop self-play。 | 与 R-Zero 一起概括为：**“进一步探索自动出题、自动解题、自动验证和自博弈。”** |
-| [**R-Zero: Self-Evolving Reasoning LLM from Zero Data**](https://arxiv.org/abs/2508.05004) | 2025-08 | <font color="#4F6B8A">核心是把 proposer–solver 拆成**独立共演化的 Challenger 与 Solver**。Challenger 的目标不是盲目制造难题，而是持续把任务推到 Solver 当前能力边界，因此问题分布会随 learner 能力动态变化。</font> | 论文从同一个 base LLM 初始化两个独立角色：Challenger 负责生成 reasoning problems，Solver 负责求解。Challenger 的目标不是单纯生成越难的问题，而是产生接近 Solver 当前能力边界、具有学习价值的问题；Solver 则根据这些问题的可验证结果获得训练信号。随着 Solver 变强，Challenger 所生成的问题也随之调整，两者交替更新并共同演化。 | 与 Absolute Zero 一起概括为：**“进一步探索自动出题、自动解题、自动验证和自博弈。”** |
-| [**SEAL: Self-Adapting Language Models**](https://arxiv.org/abs/2506.10943) | 2025-06 | <font color="#4F6B8A">核心是把**“如何更新自己”也做成模型需要生成的输出**：模型产生 self-edit 来决定 finetuning data、update directive 乃至部分优化设置。更新后模型的 downstream performance 又反过来训练模型生成更有效的 self-edit。</font> | 论文把 adaptation 本身变成模型需要生成的输出。面对新的知识或任务输入，模型先生成一个 self-edit；self-edit 可以指定如何重构信息、构造用于 fine-tuning 的数据、给出 update directive，并包含部分优化相关设置。系统按该 self-edit 执行梯度更新，再用更新后模型在目标任务上的表现评价这次 edit；该效果反过来可以训练模型产生更有效的 self-edit。最终被持久改变的是模型参数，而模型也在学习“应该生成怎样的更新指令”。 | **“SEAL 则让模型生成自己的 adaptation data 和 update directive，再通过训练更新自身能力。”** |
+| [**WizardLM: Empowering Large Language Models to Follow Complex Instructions**](https://arxiv.org/abs/2304.12244)（Evol-Instruct） | 2023-04 | <font color="#4F6B8A">核心不是简单多采样 synthetic instructions，而是用 **Evol-Instruct 显式沿复杂度方向演化已有 instruction**，例如增加约束、深化推理等。重点从“自己造数据”推进到“自己系统性地产生更难的数据”。</font> | 论文提出 Evol-Instruct，用 LLM 对已有 instruction 做逐步“进化”，而不是只直接采样新 instruction。方法包含 in-depth evolution（增加约束、深化推理、提高复杂度等）和 in-breadth evolution（生成新的相关任务）等操作，**把简单 instruction 改写成更复杂、更有挑战性的 instruction**；演化后的 instruction 再生成 response，并用于 fine-tune LLaMA，得到 WizardLM。 | **“Self-Instruct、Evol-Instruct、WizardLM 一类工作让模型生成和演化 instruction data。”** |
+| [**SPIN: Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models**](https://arxiv.org/abs/2401.01335) | 2024-01 | <font color="#4F6B8A">核心是让**上一轮模型自己的 response 成为下一轮训练中的对手**：当前模型学习区分 human demonstrations 与旧模型生成结果。这样不需要新增人工 preference data，训练信号会随着模型版本共同变化。</font> | 论文从一个已有 SFT 模型开始，把当前模型视为 self-play 中的 opponent：它针对训练 prompts 生成自己的 responses，而数据中的 human demonstrations 作为更优 responses。下一轮模型通过偏好式目标学习区分 human response 与上一轮模型 response，使自己的分布逐渐远离旧模型、接近目标分布。**更新后的模型再生成新的 responses，成为和human data的对比，去学习human data**，因此训练信号随模型版本迭代更新。 | **“SPIN 让模型与自己的历史版本进行 self-play。”** |
+| [**Self-Rewarding Language Models**](https://arxiv.org/abs/2401.10020) | 2024-01 | <font color="#4F6B8A">核心是让模型同时承担**回答者和 judge/reward provider**：它不仅生成 candidate responses，也用 LLM-as-a-Judge 产生自己的 preference signal。论文关注的是 instruction-following ability 与 reward-giving ability 能否在同一迭代中共同提升。</font> | 论文让同一个语言模型同时具备两种角色：一方面作为 instruction-following model **生成 candidate responses**，另一方面通过 LLM-as-a-Judge prompting **对候选回答打分**/比较，产生自己的 preference data。每一轮根据这些 self-generated preferences 进行 DPO 更新；更新后的模型随后继续生成更强 responses，并再次充当 judge 产生下一轮 preference signal，从而形成 response generation、self-reward 和 preference optimization 的迭代。 | **“Self-Rewarding Language Models 让模型既生成答案，也参与生成 reward。”** |
+| [**Absolute Zero: Reinforced Self-play Reasoning with Zero Data**](https://arxiv.org/abs/2505.03335) | 2025-05 | <font color="#4F6B8A">核心是进一步去掉**外部题库和答案数据**：同一个模型既提出可验证的新任务，又求解这些任务，再由代码执行器验证有效性和答案。它把“出题—解题—验证—RL”闭成一个 zero-data reasoning self-play loop。</font> | 论文希望在没有人工问题和答案数据的情况下训练 reasoning model。**单一模型同时承担 proposer 和 solver**：proposer 自动生成可执行、可验证的 programming/reasoning tasks，solver 尝试求解；代码执行器既用于检查生成任务是否有效，也用于验证 solver 的答案。由任务有效性和求解结果得到的可验证 reward 同时训练“出题”和“解题”能力，于是形成“自己出题 → 自己解题 → 执行器验证 → RL 更新”的 closed-loop self-play。 | 与 R-Zero 一起概括为：**“进一步探索自动出题、自动解题、自动验证和自博弈。”** |
+| [**R-Zero: Self-Evolving Reasoning LLM from Zero Data**](https://arxiv.org/abs/2508.05004) | 2025-08 | <font color="#4F6B8A">核心是把 proposer–solver 拆成**独立共演化的 Challenger 与 Solver**。Challenger 的目标不是盲目制造难题，而是持续把任务推到 Solver 当前能力边界，因此问题分布会随 learner 能力动态变化。</font> | 论文从同一个 base LLM 初始化两个独立角色：**Challenger 负责生成 reasoning problems，Solver 负责求解**。Challenger 的目标不是单纯生成越难的问题，而是产生接近 Solver 当前能力边界、具有学习价值的问题；Solver 则根据这些问题的可验证结果获得训练信号。随着 Solver 变强，Challenger 所生成的问题也随之调整，两者交替更新并共同演化。 | 与 Absolute Zero 一起概括为：**“进一步探索自动出题、自动解题、自动验证和自博弈。”** |
+| [**SEAL: Self-Adapting Language Models**](https://arxiv.org/abs/2506.10943) | 2025-06 | <font color="#4F6B8A">核心是把**“如何更新自己”也做成模型需要生成的输出**：模型产生 self-edit 来决定 finetuning data、update directive 乃至部分优化设置。更新后模型的 downstream performance 又反过来训练模型生成更有效的 self-edit。</font> | 论文希望模型自己决定应该学什么样的数据，以及怎么学。在面对新的知识或任务输入，模型先生成一个 self-edit，就是对训练数据自己进行修改，决定用于参数更新的训练内容；并在部分实验中进一步指定数据增强方式和训练超参数；系统按该 self-edit 执行梯度更新，再用更新后模型在目标任务上的表现评价这次 edit；该效果反过来可以训练模型产生更有效的 self-edit。最终被持久改变的是模型参数，而模型也在学习“应该生成怎样的更新指令”。 | **“SEAL 则让模型生成自己的 adaptation data 和 update directive，再通过训练更新自身能力。”** |
 
 ## 改 prompt、skill、tool 和 harness
 
@@ -156,11 +151,11 @@ Harness Updating Is Not Harness Benefit 将能力进一步拆成 **harness-updat
 
 | Title + Link | 首次发表时间 | 核心定位 | 具体做了什么（严格依据原论文） | 博客中对这个工作的描述 |
 |---|---|---|---|---|
-| [**Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents**](https://arxiv.org/abs/2505.22954) | 2025-05 | <font color="#4F6B8A">核心不是一般的 harness 迭代，而是让 agent **直接修改包含自身改进能力在内的 codebase，并维护一个多分支 agent archive**。它不是只沿当前最优版本做 hill-climbing，而是保留不同后代作为 stepping stones，进行 open-ended exploration。</font> | 论文**把 coding agent 自己的可编辑 codebase 作为搜索对象**，并保持 base LLM 固定。每轮从已有 agent archive 中选择一个 parent，parent agent 阅读自己的 benchmark evaluation / execution logs，再使用 shell 和代码编辑工具直接修改自身 harness repository，得到一个 child agent。新版本在 coding benchmarks 上重新评估，表现足够好的版本进入 archive；后续不只沿单一路径继续，而是可以从 archive 中不同 parent 分支继续产生后代，形成开放式的 agent evolution tree。 | **“Darwin Gödel Machine 维护不同版本的 agent，让它们修改自身、接受评测并保留更好的后代。”** |
-| [**Automated Design of Agentic Systems**](https://arxiv.org/abs/2408.08435) | 2024-08 | <font color="#4F6B8A">核心是把**agent architecture 本身交给 Meta-Agent 自动发明**。与针对某个已有 harness 做局部修补不同，它把 prompts、tool use、control flow 及其组合放进代码级搜索空间，让 meta-agent 基于历史 archive 编程出新的 agent designs。</font> | 论文**把“如何设计一个 agentic system”本身形式化成自动搜索问题**。系统维护一个包含已有 agent designs 及其表现的 archive；Meta Agent 读取 archive，先提出新的高层 agent 设计，再将其实现为可执行代码，设计空间可以同时涉及 prompts、LLM 调用方式、tool use、角色组织和 control flow。候选 agent 经过执行评估后，新的有效设计继续加入 archive，供后续 Meta Agent 参考和组合。 | **“Automatic Design of Agentic Systems 把 agent architecture 本身变成搜索对象。”** |
+| [**Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents**](https://arxiv.org/abs/2505.22954) | 2025-05 | <font color="#4F6B8A">核心不是一般的 harness 迭代，而是让 agent **直接修改包含自身改进能力在内的 codebase，并维护一个多分支 agent archive**。它不是只沿当前最优版本做 hill-climbing，而是保留不同后代作为 stepping stones，进行 open-ended exploration。</font> | 论文**把 coding agent 自己的可编辑 codebase 作为搜索对象 (对整个harness修改)**，并保持 base LLM 固定。每轮从已有 agent archive 中选择一个 parent，parent agent 阅读自己的 benchmark evaluation / execution logs，再使用 shell 和代码编辑工具直接修改自身 harness repository，得到一个 child agent。新版本在 coding benchmarks 上重新评估，表现足够好的版本进入 archive；**后续不只沿单一路径继续，而是可以从 archive 中不同 parent 分支继续产生后代，形成开放式的 agent evolution tree**。 | **“Darwin Gödel Machine 维护不同版本的 agent，让它们修改自身、接受评测并保留更好的后代。”** |
+| [**Automated Design of Agentic Systems**](https://arxiv.org/abs/2408.08435) | 2024-08 | <font color="#4F6B8A">核心是把**agent architecture 本身交给 Meta-Agent 自动发明**。与针对某个已有 harness 做局部修补不同，它把 prompts、tool use、control flow 及其组合放进代码级搜索空间，让 meta-agent 基于历史 archive 编程出新的 agent designs。</font> | 论文**把“如何设计一个 agentic system (一段组织LLM调用的workflow code)”本身形式化成自动搜索问题**。系统维护一个包含已有 agent designs 及其表现的 archive；Meta Agent 读取 archive，先提出新的高层 agent 设计，再将其实现为可执行代码，设计空间可以同时涉及 prompts、LLM 调用方式、tool use、角色组织和 control flow。候选 agent 经过执行评估后，新的有效设计继续加入 archive，供后续 Meta Agent 参考和组合。 | **“Automatic Design of Agentic Systems 把 agent architecture 本身变成搜索对象。”** |
 | [**Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses**](https://arxiv.org/abs/2604.25850) | 2026-04 | <font color="#4F6B8A">核心判断是：自动 harness evolution 的瓶颈不只是“不会提修改”，而是**不知道改了什么、为什么改、改完到底造成了什么结果**。因此论文用 component、experience、decision 三层 observability，把每次 edit 变成之后能被 outcome 验证的可证伪预测，从而改善归因。</font> | ==论文认为自动 harness evolution 的主要瓶颈是 observability，因此把 harness、experience 和 edit decision 都显式化==。首先把 system prompt、tool description/implementation、middleware、skill、sub-agent configuration、long-term memory 等可编辑组件表示为文件；其次保存 raw trajectories，并由 debugger 生成 per-task root-cause report 和 benchmark-level overview；最后 Evolve Agent 根据这些 evidence 决定修改哪个组件，并为每次 edit 写出 evidence、root cause、targeted fix、expected fixes 和可能 regression。下一轮 evaluation 用来验证这些预测，从而使修改可追踪、可证伪和可回滚。 | **“AHE 把 harness 中可编辑的组件、执行证据和每次修改的预期结果显式记录下来。”** |
-| [**Self-Harness: Harnesses That Improve Themselves**](https://arxiv.org/abs/2606.09498) | 2026-06 | <font color="#4F6B8A">核心是强调 **harness 应该针对具体 base model 的 failure 来自我修复**：先从 execution traces 挖 model-specific weakness，再提出与该 weakness 对应的最小修改。候选修改必须经过 regression validation，目标是可靠修补而不是开放式重写整个 architecture。</font> | 论文**采用 propose–evaluate–accept 的 harness self-improvement loop**。首先在当前 harness 上运行任务并收集完整 trajectories，通过 weakness mining 将失败归纳为 verifier-grounded failure patterns；然后 proposer 根据这些 failure patterns、当前 editable surfaces、需要保留的 passing behaviors 和历史尝试提出 bounded harness edits；候选修改不会直接上线，而是分别在 held-in 与 held-out tasks 上做 regression test，只有既修复目标 weakness、又没有引入明显 regression 的修改才合并到下一版 active harness。被拒绝的修改及其结果也会保留供后续轮次参考。 | **“Self-Harness 让模型从自己的 trajectory 中发现 weakness，提出最小化 harness 修改，再通过 regression test 决定是否保留。”** |
-| [**Recursive Harness Self-Improvement**](https://arxiv.org/abs/2607.15524) | 2026-07 | <font color="#4F6B8A">核心是把 harness 收缩成**task-specific 的 prompt-level agent-loop specification**，重点优化不同 agent/hop 之间传什么 context。它利用自身 revision history 的 pairwise feedback 做少量迭代，希望以较低成本改善 trace quality 和 inter-agent information flow。</font> | **论文把 harness 显式表示为可修改的 agent-loop specification**，其中既包括 agent design，也包括 workflow 中不同 hop 之间的信息传递 contract。每轮用当前 harness 完成任务，再由 evaluator 对当前版本与历史/上一版本结果做 pairwise comparison；这些偏好反馈累积为 self-comparison history，harness optimizer 根据历史继续修改 harness。论文尤其关注 task-specific context contract 和 inter-agent information flow，希望减少不必要的 context 传播并改进执行轨迹。 | **“Recursive Harness Self-Improvement 研究如何通过 harness 的 revision history 持续改善信息流和执行轨迹。”** |
+| [**Self-Harness: Harnesses That Improve Themselves**](https://arxiv.org/abs/2606.09498) | 2026-06 | <font color="#4F6B8A">核心是强调 **harness 应该针对具体 base model 的 failure 来自我修复**：先从 execution traces 挖 model-specific weakness，再提出与该 weakness 对应的最小修改。候选修改必须经过 regression validation，目标是可靠修补而不是开放式重写整个 architecture。</font> | 论文**采用 propose–evaluate–accept 的 harness self-improvement loop**。首先在当前 harness 上运行任务并收集完整 trajectories，通过 weakness mining **将失败归纳为 verifier-grounded failure patterns**（通过很多轨迹归纳出failure pattern）；然后 proposer 根据这些 failure patterns、当前 editable surfaces、需要保留的 passing behaviors 和历史尝试提出 bounded harness edits；候选修改不会直接上线，而是分别在 held-in 与 held-out tasks 上做 regression test，只有既修复目标 weakness、又没有引入明显 regression 的修改才合并到下一版 active harness。被拒绝的修改及其结果也会保留供后续轮次参考。 | **“Self-Harness 让模型从自己的 trajectory 中发现 weakness，提出最小化 harness 修改，再通过 regression test 决定是否保留。”** |
+| [**Recursive Harness Self-Improvement**](https://arxiv.org/abs/2607.15524) | 2026-07 | <font color="#4F6B8A">核心是把 harness 收缩成**task-specific 的 prompt-level agent-loop specification**，重点优化不同 agent之间传什么 context。它利用自身 revision history 的 pairwise feedback 做少量迭代，希望以较低成本改善 trace quality 和 inter-agent information flow。</font> | 希望改进workflow**论文把 harness 显式表示为可修改的 agent-loop specification**。这既包括 agent design(有哪些agent，每个agent的role和instruction)，也包括 workflow 中不同 hop (workflow，步骤/交互结构) 之间的信息传递 contract（ agents 之间通过 communication interface 传递哪些信息）。每轮用当前 harness 完成任务，再由 evaluator 对当前版本与历史/上一版本结果做 pairwise comparison；这些偏好反馈累积为 self-comparison history，harness optimizer 根据历史继续修改 harness。论文尤其关注 task-specific context contract 和 inter-agent information flow，**希望减少不必要的 context 传播并改进执行轨迹。**<br />比如一个流程是: Research -> Coder -> Evaluator，从researcher直接把整个研究历史都丢给coder，迭代成给coder具体的重要历史和逻辑 | **“Recursive Harness Self-Improvement 研究如何通过 harness 的 revision history 持续改善信息流和执行轨迹。”** |
 | [**SkillSmith: Co-Evolving Skills and Tools for Self-Improving Agent Systems**](https://arxiv.org/abs/2606.01314) | 2026-06 | <font color="#4F6B8A">核心是指出只演化 skill 而固定 tool layer 会限制能力增长，因此让 **skills 和 executable tools 联合演化**。同时它显式建模 skill 之间的互补与冲突，使系统既能改“怎么做”，也能在能力缺口出现时直接改“拿什么工具做”。</font> | ==同时优化工具使用和工具本身==。论文不把长期经验只写成文字 skill，而是同时把 skills 与 executable tools 放进可演化空间。系统从任务执行和 reflection 中识别 reusable capability gap；如果问题仅靠新增/修改 skill 无法解决，就可以进一步对已有 tool 做 wrap、edit、compose、split，或者 retire 不再适用的 tool。Skill 与 tool 的修改被作为相互关联的 capability update 管理，从而使**“知道怎么做”和“真正有工具做”能够共同演化**。 | **“SkillSmith 则把 skill evolution 扩展到 skill-tool co-evolution：如果现有 tool 无法支持某种能力，系统不仅可以补充 skill，也可以修改、组合、包装或者淘汰 tool。”** |
 | [**SIA: Self Improving AI with Harness & Weight Updates**](https://arxiv.org/abs/2605.27276) | 2026-05 | <font color="#4F6B8A">核心是把原本分离的两条 self-improvement 路线放到**同一个 feedback loop**：既允许改 harness，也允许改 model weights。它研究的是 task feedback 能否同时驱动外部 scaffold 和内部参数两种 improvement lever，而不是预先固定只走其中一条。</font> | ==自动触发是更新harness还是更新模型权重==。论文试图打破“只改 harness”或“只改 weights”的单一更新路径。系统包含负责提出/维护 agent scaffold 的 Meta-Agent、执行任务并产生 trajectory 的 Task-Specific Agent，以及读取近期 trajectory 的 Feedback-Agent。Feedback-Agent 根据执行反馈判断下一轮更适合修改 harness/scaffold，还是触发模型参数更新；权重更新通过训练过程完成，harness 更新则直接改变 agent 外部结构，因此两种 improvement lever 被放在同一个反馈循环中选择。 | **“SIA 更进一步，同时开放 harness updates 和 weight updates。”** |
 | [**Harness Updating Is Not Harness Benefit: Disentangling Evolution Capabilities in Self-Evolving LLM Agents**](https://arxiv.org/abs/2605.30621) | 2026-05 | <font color="#4F6B8A">核心不是提出新的 evolution algorithm，而是指出“harness evolution 好不好”其实包含**两个不同能力**：能否写出有用的持久更新，以及 task solver 能否真正调用、理解并遵循这些更新。论文把两者拆开后发现，它们与 base-model capability 的关系并不相同。</font> | ==将模型的harness-updating和harness-benefit分开评测==。论文指出以往“harness evolution 有效”常把两个不同问题混在一起，因此将其拆成独立能力评估。Harness-updating 测试模型能否根据 execution evidence 产生有价值、可持久化的 harness update；harness-benefit 则固定已有更新，测试 task-solving model 能否在正确时机激活、理解并遵循这些更新，从而真正提高任务表现。论文据此比较不同能力模型在“写出好的 harness update”和“从 update 中受益”两方面的差异。 | 博客据此强调：**“一个模型可能总结出正确经验，却在下一次完全想不起调用。也可能成功检索了 skill，却无法理解或长期遵循。”** |
@@ -182,7 +177,7 @@ Harness Updating Is Not Harness Benefit 将能力进一步拆成 **harness-updat
 
 | Title + Link | 首次发表时间 | 核心定位 | 具体做了什么（严格依据原论文） | 博客中对这个工作的描述 |
 |---|---|---|---|---|
-| [**Emergent Complexity and Zero-shot Transfer via Unsupervised Environment Design (PAIRED)**](https://arxiv.org/abs/2012.02096) | 2020-12 | <font color="#4F6B8A">核心是解决自动环境生成中“随机环境不随 learner 变化，而纯 adversarial 环境又可能不可解”的问题。PAIRED 用 **protagonist–antagonist regret** 训练 environment generator，让它生成对当前 learner 有挑战、但存在可行解的环境。</font> | 论文研究 Unsupervised Environment Design：不预先给定固定任务 curriculum，而是同时训练 protagonist、antagonist 和 environment-generating adversary。Environment generator 根据 protagonist 与 antagonist 的相对表现构造 regret 信号，并据此生成既能暴露 protagonist weakness、又仍然可解的 environments；随着 agents 能力提升，生成环境的难度和结构也随之变化，形成自适应 curriculum。 | 与 POET 一起概括为：**“PAIRED、POET 一类工作较早研究了 agent 和环境的共同演化。”** |
+| [**Emergent Complexity and Zero-shot Transfer via Unsupervised Environment Design (PAIRED)**](https://arxiv.org/abs/2012.02096) | 2020-12 | <font color="#4F6B8A">核心是解决自动环境生成中“随机环境不随 learner 变化，而纯 adversarial 环境又可能不可解”的问题。PAIRED 用 **protagonist–antagonist regret** 训练 environment generator，让它**生成对当前 learner 有挑战、但存在可行解的环境。**</font> | 论文研究 Unsupervised Environment Design：不预先给定固定任务 curriculum，而是同时训练 protagonist、antagonist 和 environment-generating adversary。Environment generator 根据 protagonist 与 antagonist 的相对表现构造 regret 信号，并据此生成既能暴露 protagonist weakness、又仍然可解的 environments；随着 agents 能力提升，生成环境的难度和结构也随之变化，形成自适应 curriculum。 | 与 POET 一起概括为：**“PAIRED、POET 一类工作较早研究了 agent 和环境的共同演化。”** |
 | [**Paired Open-Ended Trailblazer (POET)**](https://arxiv.org/abs/1901.01753) | 2019-01 | <font color="#4F6B8A">核心是追求 **open-ended problem–solution co-evolution**：不是维护一条越来越难的 curriculum，而是同时维护多个 environment–agent pair。不同环境间还允许 solution transfer，使某条路径上的能力成为另一条路径继续突破的 stepping stone。</font> | 论文提出 open-ended co-evolution：系统持续产生新的 environment，同时为每个 environment 优化对应 agent，而不是围绕一个固定任务收敛。它维护一个不断扩张的 environment–agent population；新环境只有在既不太容易、也不完全不可解时才被保留。已有 agent 还会在不同环境之间尝试 transfer，如果某个已有 solution 能在新环境中取得更好表现，就可以成为新的 starting point，从而利用跨环境 stepping stones 推动持续复杂化。 | **“PAIRED、POET 一类工作较早研究了 agent 和环境的共同演化。”** |
 | [**Absolute Zero: Reinforced Self-play Reasoning with Zero Data**](https://arxiv.org/abs/2505.03335) | 2025-05 | <font color="#4F6B8A">核心是进一步去掉**外部题库和答案数据**：同一个模型既提出可验证的新任务，又求解这些任务，再由代码执行器验证有效性和答案。它把“出题—解题—验证—RL”闭成一个 zero-data reasoning self-play loop。</font> | 从 environment-generation 视角看，论文不再使用固定外部题库，而是让模型的 proposer 持续产生新的可执行 reasoning tasks。代码执行器过滤无效任务并提供答案验证，solver 在这些动态生成的问题上学习；因此随着模型能力变化，后续训练看到的问题集合也由系统自身持续扩展和更新，训练分布不是静态给定的。 | **“Absolute Zero、R-Zero 也可以从 environment generation 的角度理解：系统不仅在解决任务，还在扩展自己的问题分布。”** |
 | [**R-Zero: Self-Evolving Reasoning LLM from Zero Data**](https://arxiv.org/abs/2508.05004) | 2025-08 | <font color="#4F6B8A">核心是把 proposer–solver 拆成**独立共演化的 Challenger 与 Solver**。Challenger 的目标不是盲目制造难题，而是持续把任务推到 Solver 当前能力边界，因此问题分布会随 learner 能力动态变化。</font> | 从 curriculum 视角看，Challenger 被训练为根据 Solver 的当前能力生成“恰好有挑战”的问题，而不是固定采样一个数据集。Solver 的成功/失败会改变 Challenger 的 reward，因此 Solver 变强后，Challenger 会把问题分布推向新的能力边界；随后 Solver 又在新的问题上继续训练，形成 learner 与 curriculum generator 相互驱动的动态闭环。 | **“系统不仅在解决任务，还在扩展自己的问题分布。”** |
@@ -245,13 +240,12 @@ Rehearse 讨论的 confidence cliff 指向同一个问题：越接近能力边�
 
 | Title + Link | 首次发表时间 | 核心定位 | 具体做了什么（严格依据原论文） | 博客中对这个工作的描述 |
 |---|---|---|---|---|
-| [**EvoTrainer: Co-Evolving LLM Policies and Training Harnesses for Autonomous Agentic Reinforcement Learning**](https://arxiv.org/abs/2606.03108) | 2026-06 | <font color="#4F6B8A">核心是认为 autonomous training 不应只等价于“搜索更好的 recipe”，因为**解释 rollout、诊断 failure、决定 intervention 的 training harness 也应持续演化**。因此 policy 与 diagnostics、backtesting procedure 和 reusable training skills 一起被反馈更新。</font> | 论文把训练 policy 和“负责训练它的 training-side harness”同时放入演化过程。Trainer 读取 rollout-level evidence，不只看最终 reward，而是通过 diagnostics 定位具体 failure mode；随后它可以修改 diagnostics、提出 training intervention，并先用历史/已有 rollout 做 backtesting，再决定是否真正投入训练。被验证有效的训练经验还会沉淀为 reusable training skills，因此跨轮积累的不只是新 policy，也包括 trainer 自己用于诊断和干预的训练能力。 | **“EvoTrainer 不只搜索训练 recipe，还让 training-side harness 与 policy 一起演化。Trainer 需要阅读 rollout-level evidence，发现具体 failure mode，修改 diagnostics，回测 intervention，并积累能够复用的训练 skill。”** |
+| [**EvoTrainer: Co-Evolving LLM Policies and Training Harnesses for Autonomous Agentic Reinforcement Learning**](https://arxiv.org/abs/2606.03108) | 2026-06 | <font color="#4F6B8A">核心是认为 autonomous training 不应只等价于“搜索更好的 recipe”，因为**解释 rollout、诊断 failure、决定 intervention 的 training harness 也应持续演化**。因此 policy 与 diagnostics、backtesting procedure 和 reusable training skills 一起被反馈更新。</font> | 论文让 **policy training 与 trainer-side harness 同时迭代**。每轮先对当前 policy 的 rollout 进行多层诊断，不只看最终 benchmark score，还分析 reward signal、trajectory behavior 和不同 training version 的变化，以定位具体训练问题；Trainer 据此提出针对性的 training intervention，如修改 reward、过滤策略或训练配置，并可先利用已有 rollouts 做 backtesting，验证 intervention 是否真的改善目标训练信号，再决定是否执行新的 RL 训练。与此同时，Trainer 还可以持续增加或修改 diagnostics、analyzers 和分析流程；经过验证有效的诊断方法或训练机制会被保存为 reusable skills，供后续任务和训练轮次复用。因此，跨轮演化的不只是 policy，也包括 Trainer 用来**理解训练、验证干预并决定下一步训练方式**的外部 training harness。 | **“EvoTrainer 不只搜索训练 recipe，还让 training-side harness 与 policy 一起演化。Trainer 需要阅读 rollout-level evidence，发现具体 failure mode，修改 diagnostics，回测 intervention，并积累能够复用的训练 skill。”** |
 | [**Bilevel Autoresearch: Meta-Autoresearching Itself**](https://arxiv.org/abs/2603.23420) | 2026-03 | <font color="#4F6B8A">核心是把 autoresearch 真正提升到**bilevel meta-research**：inner loop 优化 task，outer loop 读取 inner 的代码与搜索轨迹，直接生成新的 search mechanisms 来改变“以后怎么搜”。两层使用同一个 LLM，因此提升不是来自更强的 meta model，而是 search procedure 被修改。</font> | 论文把 autoresearch 拆成 inner 和 outer 两层。Inner loop 像普通 autoresearch 一样不断修改 task solution / code 并根据 evaluation 搜索更好结果；Outer loop 不直接解决下游任务，而是读取 inner-loop code、search history 和 trajectories，分析 inner search 为什么停滞或低效，然后动态生成新的 Python search mechanisms，并把它们注入 inner loop。于是外层优化的对象不是某个 task candidate，而是“内层以后应该如何搜索”。 | **“内层优化任务。外层阅读内层代码和 trajectory，寻找搜索机制中的瓶颈，再修改‘内层应该如何研究’。被改进的已经不只是 task model，而是 search mechanism。”** |
 | [**From Trainee to Trainer: LLM-Designed Training Environment for RL with Multi-Agent Reasoning**](https://arxiv.org/abs/2606.17682) | 2026-06 | <font color="#4F6B8A">核心是把下一阶段 environment design 从外部人类 teacher 交给**当前正在被训练的 policy 自己**。更关键的是论文还比较训练前后的 checkpoint 作为 environment engineer 的能力，因此直接检查“trainee 变强后，是否也更会训练下一代”。</font> | 论文让当前 policy 兼任 trainee 与 environment designer：它根据自身 failure trajectories、行为摘要和环境统计，提出下一阶段训练环境/任务配置；系统用这些配置继续 RL 训练，再基于新的 failure 更新下一阶段环境。论文进一步把原始 base model 与训练后 checkpoint 都放到 environment engineer 角色上比较，检验训练是否不仅提升 task-solving policy，也提升其设计后续训练环境的能力。 | **“From Trainee to Trainer 让当前 policy 参与设计下一轮训练环境。”** |
-| [**AutoTrainess: Teaching Language Models to Improve Language Models Autonomously**](https://arxiv.org/abs/2606.31551) | 2026-06 | <font color="#4F6B8A">核心观点是 autonomous post-training 不只是“给 agent 一个 shell”。论文把人类训练经验外显成 **planning、data、train、eval、logging 等 agent-computer interfaces、workflow 和约束**，研究什么样的 training harness 才能让 agent 长时间稳定完成模型训练。</font> | 论文关注“如何让语言模型真正承担训练另一个语言模型”的系统接口问题。它把模型训练拆成 planning、data preparation、training、evaluation、logging 等可调用的 agent-computer interfaces，并将人类训练经验外显为 workflow、rules 和 execution constraints，使 trainer agent 不必直接在完全裸露的 CLI / infrastructure 上工作，而可以通过结构化接口制定计划、准备数据、启动训练、读取评测并记录实验历史。 | **“AutoTrainess 则从另一个角度说明，trainer agent 的能力不仅取决于模型，也取决于它拥有什么样的 planning、data、training、evaluation 和 logging interface。”** |
-| [**RSIBench-Data: Benchmarking Data-Centric Research for Recursive Self-Improvement**](https://arxiv.org/abs/2607.25886) | 2026-07 | <font color="#4F6B8A">核心是用**控制变量的方法单独测 research capability**：固定 target model、training、serving、evaluation 和预算，只允许 researcher 修改 data strategy。这样可以把“是否会根据 checkpoint feedback 做数据研究”与系统工程能力分离，并进一步观察 best attempt 能否被稳定保留到 final。</font> | 论文为了单独测“data-centric research ability”，刻意把其他变量固定：target model、training pipeline、serving、official evaluation 和资源预算都由 benchmark 提供，researcher 不能任意修改。Agent 先观察 base model 的 failures 和已有 evaluation，提出数据相关 hypothesis，设计 synthetic-data / filtering / mixture strategy；系统按固定 Train Service 训练新 checkpoint，再由独立 Eval Service 返回结果。Researcher 根据 checkpoint feedback 继续下一轮数据研究，因此测的是“分析失败 → 提数据方案 → 训练验证 → 保留/修改方案”的研究闭环，而不是一般 shell 工程能力。 | **“RSIBench-Data 测的也是 researcher scope，只是把可修改对象限制在 data。模型、训练栈、serving、正式 evaluation 和预算尽量保持固定。Agent 负责分析失败、提出 hypothesis、设计数据策略，再根据新 checkpoint 的结果继续研究。”** 博客进一步强调，agent 往往能够找到更好的中间策略，但继续搜索后 final version 经常低于中途 best version：**“它能够发现进步，却还不会稳定地管理进步。”** |
-| [**RSIBench-Data 中的 Kimi K2.6 same-family experiment**](https://arxiv.org/abs/2607.25886) | 2026-07（同论文实验） | <font color="#4F6B8A">这一实验专门测试 **same-family self-improvement**：Kimi K2.6 作为 researcher 去设计如何通过 synthetic data 改进 Kimi K2.6 target。重点是看没有更强外部 researcher 时，同系列模型能否依靠自己的研究循环稳定超过初始 base。</font> | 这是 RSIBench-Data 中的 same-family self-improvement 实验：使用 Kimi K2.6 作为 researcher，同时把 Kimi K2.6 的 instruction-tuned model 作为待改进 target。Researcher 不能直接改训练栈，而是多轮分析 SWE-bench Pro 上的失败和 checkpoint feedback，修改 synthetic-data 的生成格式、内容和 pipeline，再通过固定的 LoRA SFT 得到新 checkpoint。实验用来观察“同系列模型研究如何训练自己”时，数据策略能否跨轮真正带来稳定增益。 | **“让 K26 训练 K26 的实验也呈现出类似现象：模型能够改进数据格式和合成 pipeline，却仍然很难稳定超过初始 base。”** |
-| [**Rehearse: Stepping Back from the Confidence Cliff in Self-Improving Autoresearch**](https://arxiv.org/abs/2607.27687) | 2026-07 | <font color="#4F6B8A">核心是把 autoresearch 的瓶颈从“能否继续提出 idea”转向**执行前能否正确判断哪个 idea 值得花一次昂贵训练预算**。论文发现越到搜索后期，有效 modification 越少、pre-execution judgment 越不可靠，但 agent 仍保持决策意愿，从而形成 confidence cliff。</font> | 论文研究 autoresearch 中一个更细的 bottleneck：在真正花费训练/实验预算之前，agent 能否判断 proposed modification 值不值得执行。作者跟踪这种 pre-execution judgment 随迭代轮数的变化，发现早期 low-hanging fruit 较多时判断更可靠，而搜索后期有效 modification 变少后，判断准确性下降但模型信心并没有同步下降，即 confidence cliff。Rehearse 因此让 agent 先生成多个 candidate ideas、在执行前相互比较，并检索与当前 modification 相关的历史 outcome memory，再决定真正执行哪一个。 | **“在 autoresearch 的早期，明显的低垂果实很多，agent 提出的 modification 更容易有效。随着成功改进不断积累，剩余问题越来越难，有效 modification 的比例开始下降。更危险的是，agent 的判断可靠性已经下降，却仍然很有信心。”** |
+| [**AutoTrainess: Teaching Language Models to Improve Language Models Autonomously**](https://arxiv.org/abs/2606.31551) | 2026-06 | <font color="#4F6B8A">核心观点是 autonomous post-training 不只是“给 agent 一个 shell”。论文把人类训练经验外显成 **planning、data、train、eval、logging 等 agent-computer interfaces、workflow 和约束**，研究什么样的 training harness 才能让 agent 长时间稳定完成模型训练。</font> | 论文认为一个有经验的人类 ML engineer 脑子里其实有很多有用的规则，比如应该先去定eval template，跑baseline等。作者设计好了一套 **固定的、包含人类训练经验的 AutoTrainHub**，然后研究它能不能让 trainer agent 更好地自主训练 target model。论文把模型训练拆成 planning、data preparation、training、evaluation、logging 等可调用的 agent-computer interfaces，**并将人类训练经验外显为 workflow、rules 和 execution constraints**，定义好了训练应该有哪些阶段，每个阶段应该做什么，不能做什么，使 trainer agent 不必直接在完全裸露的 CLI / infrastructure 上工作，而可以通过结构化接口制定计划、准备数据、启动训练、读取评测并记录实验历史。 | **“AutoTrainess 则从另一个角度说明，trainer agent 的能力不仅取决于模型，也取决于它拥有什么样的 planning、data、training、evaluation 和 logging interface。”** |
+| [**RSIBench-Data: Benchmarking Data-Centric Research for Recursive Self-Improvement**](https://arxiv.org/abs/2607.25886) | 2026-07 | <font color="#4F6B8A">核心是用**控制变量的方法单独测 research capability**：固定 target model、training、serving、evaluation 和预算，只允许 researcher 修改 data strategy。这样可以把“是否会根据 checkpoint feedback 做数据研究”与系统工程能力分离，并进一步观察 best attempt 能否被稳定保留到 final。</font> | 论文为了**单独测“data-centric research ability”**，刻意把其他变量固定：target model、training pipeline、serving、official evaluation 和资源预算都由 benchmark 提供，researcher 不能任意修改。Agent 先观察 base model 的 failures 和已有 evaluation，提出数据相关 hypothesis，设计 synthetic-data / filtering / mixture strategy；系统按固定 Train Service 训练新 checkpoint，再由独立 Eval Service 返回结果。Researcher 根据 checkpoint feedback 继续下一轮数据研究，因此测的是“分析失败 → 提数据方案 → 训练验证 → 保留/修改方案”的研究闭环，而不是一般 shell 工程能力。 | **“RSIBench-Data 测的也是 researcher scope，只是把可修改对象限制在 data。模型、训练栈、serving、正式 evaluation 和预算尽量保持固定。Agent 负责分析失败、提出 hypothesis、设计数据策略，再根据新 checkpoint 的结果继续研究。”** 博客进一步强调，agent 往往能够找到更好的中间策略，但继续搜索后 final version 经常低于中途 best version：**“它能够发现进步，却还不会稳定地管理进步。”** |
+| [**Rehearse: Stepping Back from the Confidence Cliff in Self-Improving Autoresearch**](https://arxiv.org/abs/2607.27687) | 2026-07 | <font color="#4F6B8A">核心是把 autoresearch 的瓶颈从“能否继续提出 idea”转向**执行前能否正确判断哪个 idea 值得花一次昂贵训练预算**。论文发现越到搜索后期，有效 modification 越少、pre-execution judgment 越不可靠，但 agent 仍保持决策意愿，从而形成 confidence cliff。</font> | 论文研究 autoresearch 中一个更细的 bottleneck：**在真正花费训练/实验预算之前，agent 能否判断 proposed modification 值不值得执行**。作者跟踪这种 pre-execution judgment 随迭代轮数的变化，发现早期 low-hanging fruit 较多时判断更可靠，而搜索后期有效 modification 变少后，判断准确性下降但模型信心并没有同步下降，即 confidence cliff。Rehearse 因此让 agent 先生成多个 candidate ideas、在执行前相互比较，并检索与当前 modification 相关的历史 outcome memory，再决定真正执行哪一个。 | **“在 autoresearch 的早期，明显的低垂果实很多，agent 提出的 modification 更容易有效。随着成功改进不断积累，剩余问题越来越难，有效 modification 的比例开始下降。更危险的是，agent 的判断可靠性已经下降，却仍然很有信心。”** |
 
 # 后半部分：如何构建真正可研究的 RSI 系统
 
@@ -628,19 +622,25 @@ Service 化之后，不同 researcher 可以在同一个任务和预算下比较
 
 ---
 
-# 整篇博客的核心观点总结
+# Takeaways
 
-这篇博客可以被压缩成以下六个核心判断。
+## 第一部分：如何理解现有的 Self-Evolve 与 RSI？
 
-### 1. RSI 的核心不是“循环”，而是“递归依赖”
+### 1. RSI 的核心不是多轮循环，而是递归依赖
 
-是否 recursive，不取决于运行多少轮，而取决于：
+一个系统反复生成、评估和修改结果，只能说明它在进行 iterative optimization。严格意义上的 **RSI（Recursive Self-Improvement）** 还要求：
 
-> **被改进后的对象有没有成为下一轮更强的改进者。**
+> **被改进后的 improver 成为下一轮更强的 improver，并继续提高后续的改进能力。**
 
-### 2. Self-Evolve 的发展可以理解为“可修改 scope 不断向外扩张”
+因此，判断一个系统是否 recursive，关键不是它运行了多少轮，也不是它获得了多高的最终分数，而是有没有形成：
 
-博客沿着下面的路线组织现有工作：
+> **improver → improved improver → next-round improver**
+
+这样的依赖关系。新 model 更会解题，可以称为 Model Improvement；新 harness 让 agent 表现更好，可以称为 System Improvement；只有负责改进它们的 researcher / trainer 本身变强并重新进入下一轮，才开始接近 Recursive Improvement。
+
+### 2. 现有工作可以沿两个互补的维度分类
+
+第一个维度是 **“什么被允许修改”**。Self-Evolve 的发展可以理解为可修改 scope 不断向外扩张：
 
 > Output / Trajectory<br>
 > → Data / Reward / Weights<br>
@@ -649,82 +649,68 @@ Service 化之后，不同 researcher 可以在同一个任务和预算下比较
 > → AI R&D Process<br>
 > → Trainer / Researcher
 
-越往外层，系统越接近“修改负责改进的机制本身”。
+这个维度告诉我们 improvement 发生在哪里。越往外层，系统越接近修改“产生改进的机制”；但 scope 更大并不自动等于 recursion。
 
-### 3. 当前最关键的能力瓶颈逐渐从 generation 转向 research judgment
+第二个维度是 **“系统实际支持多强的 claim”**：
 
-早期 self-evolve 更多关注：
+- **Task Improvement**：同一个 agent 把当前任务做得更好；
+- **Model Improvement**：得到任务能力更强的 model；
+- **System Improvement**：prompt、skill、tool、memory、workflow 或 harness 得到改进；
+- **Improver Improvement**：trainer、researcher 等改进者本身得到改进；
+- **Recursive Improvement**：改进后的 improver 被重新投入循环，而且 improver gain 能够跨轮累积。
 
-> 能不能生成新的答案、新的数据、新的 skill、新的 modification？
+这两个维度不能混为一谈。前者描述修改对象，后者描述证据能够支持的结论。一个系统可以开放很大的修改范围，却只证明了 task improvement；也可以在严格受限的 scope 内，清楚地研究某一种 improver capability。
 
-而当系统逐渐接近能力边界后，更困难的问题变成：
+### 3. 当前瓶颈正从“产生候选”转向“管理进步”
 
-- 应该改什么？
-- 哪个 experiment 值得执行？
-- improvement 是否可信？
-- best version 是否应该被保留？
-- 是否应该继续搜索？
-- 下一次 budget 应该花在哪里？
+现有 agent 已经能够生成新的答案、数据、skill、环境和 training modification。越接近能力边界，真正困难的事情越不只是继续生成，而是进行可靠的 research judgment：判断应该改什么、哪个实验值得执行、一次提升是否可信、何时保留或回滚版本，以及下一份预算应该花在哪里。
 
-因此，博客认为真正稀缺的是 **持续管理 improvement trajectory 的能力**。
+所以，**发现一次 improvement** 与 **管理一条持续 improvement trajectory** 是两种不同能力。真正的 RSI 不仅需要 discovery，还需要 selection、retention、transfer，以及对错误方向的及时停止。它需要的不是永远高置信地继续搜索，而是让每轮研究产生的正面和负面证据都能改善下一轮决策。
 
-### 4. RSI 首先是一个 research-system problem
+## 第二部分：为了研究 RSI，应该怎么做？
 
-博客并不把 RSI 简单理解成一个新的 training algorithm。
+### 1. 从可归因的 Scoped Improvement 开始，而不是先造“万能 Agent”
 
-要验证 RSI，必须能够：
+我认同这篇博客提出的基本路线：不要一开始就把 data、model、harness、training、environment 和 evaluation 全部开放给同一个 agent。可修改范围过大时，即使 final score 上升，也很难知道提升来自哪里；同时还会扩大 reward hacking、data leakage 和环境污染的空间。
 
-- 隔离不同可修改对象；
-- 明确权限边界；
-- 提供独立 evaluation；
-- 保存和版本化 candidate；
-- 进行 rollback；
-- 比较不同 improver；
-- 让 improved improver 重新进入下一轮。
+更可靠的起点，是固定大部分系统，只开放一个明确 scope，分别研究 Data、Harness、Train、Environment、Eval 或 Agent improvement。这样得到的 claim 更小，但结果更容易复现、比较和积累。
 
-所以：
+### 2. 用 Everything as Service 建立 RSI 的实验架构
+
+把 Model、Data、Train、Serve、Eval、Environment、Harness 和 Agent 分成边界清楚的 service，不只是为了工程便利，而是为了获得三种研究能力：
+
+- **归因**：明确这一轮什么可以变、什么保持固定，知道 improvement 来自哪里；
+- **隔离**：控制权限、独立 evaluation，减少 leakage、test hacking 和无关系统噪声；
+- **组合**：同一个组件可以在当前实验中固定，在更外层实验中重新成为优化对象。
+
+因此：
 
 > **Everything as Service 是 RSI 的实验架构。**
 
-### 5. Agent 必须成为可以被版本化和重新投入循环的对象
+它让不同研究工作能够围绕相同接口比较 improver，也让 scoped result 将来可以组合成 joint system。
 
-如果 researcher 永远固定在 benchmark 外部，就只能测它如何改别人。
+### 3. 用 Agent as Service 把 improver 本身放进实验
 
-只有将 researcher 本身做成 **Agent as Service**：
-
-- 可以保存；
-- 可以比较；
-- 可以复测；
-- 可以被改进；
-- 可以重新进入下一轮；
-
-才能真正测试 **Improver Improvement → Recursive Improvement**。
-
-所以：
+如果 researcher 永远位于 benchmark 外部，我们最多只能研究“它如何改进其他对象”，无法验证 researcher 自己是否变得更会研究。要测试 recursion，Agent 必须像 model checkpoint 一样成为可保存、可版本化、可比较、可复测和可替换的对象。
 
 > **Agent as Service 是 recursion 的接口。**
 
-### 6. RSI 的研究路线应该从 Scoped 走向 Joint，再走向 Recursive
+只有这样，实验才能比较旧 researcher 与新 researcher，在相同任务、预算和环境下测量 improver gain，并把胜出的版本重新投入下一轮。否则，“改进后的 improver”只是一个概念，无法成为可验证的实验对象。
 
-博客最终提出的研究路线不是一开始就做“万能 RSI agent”，而是：
+### 4. 按 Scoped → Joint → Recursive 逐步提高研究 claim
 
-> **Scoped → Joint → Recursive**
+我认为最合理的研究路线是：
 
-先分别测清：
+1. **Scoped**：先分别测清 data、harness、training、environment、evaluation 和 agent 等单一 scope 的改进能力；
+2. **Joint**：再让 researcher 根据 failure evidence 诊断瓶颈，自主决定这一轮应该修改哪个 service；
+3. **Recursive**：最后把改进后的 researcher 放回下一轮，测试它是否比旧版本更会产生 successor，以及这种 improver gain 能否跨多轮累积。
 
-- Data；
-- Harness；
-- Train；
-- Environment；
-- Eval；
-- Agent；
+这条路线不是把系统越做越大，而是在每扩张一步 scope 时都保留清楚的归因和独立验证。**Joint 的重点是学会选择改什么，Recursive 的重点是选择和改进的方法本身也变得更好。**
 
-再让 agent 自己诊断应该修改哪个部分，最后才测试：
+### 5. Evaluation 必须从 final score 扩展到 improvement trajectory
 
-> **新的 researcher 是否比旧 researcher 更会继续产生 successor，并且这种 improver gain 能否跨轮累积。**
+RSI benchmark 不应只报告最终 task score。至少还需要观察：系统能否发现有效修改（Discovery）、选中真正更好的候选（Selection）、保留而不遗失已有进步（Retention）、把经验迁移到新任务或新模型（Transfer）、以合理成本取得提升（Efficiency），以及新 improver 是否真的优于旧 improver（Improver Gain），这种优势能否跨轮累积（Compounding）。
 
----
+最终，RSI 研究需要回答的不是“Agent 有没有偶然找到一个更高分的版本”，而是：
 
-# 一句话总结
-
-> **这篇博客认为，Self-Evolve 的发展是在不断扩大“AI 能改什么”；真正的 RSI 则要求“负责改进的 improver 本身也被改进，并作为更强的 improver 重新进入下一轮”。为了科学地验证这一点，需要用 Everything as Service 隔离和归因不同 improvement scope，用 Agent as Service 让 researcher 本身可版本化、可复测、可重新投入循环，并沿着 Scoped → Joint → Recursive 的 benchmark 路线逐步验证。**
+> **我们能否隔离并验证每一次 improvement，让改进后的 researcher 稳定成为下一轮更好的 researcher？**
