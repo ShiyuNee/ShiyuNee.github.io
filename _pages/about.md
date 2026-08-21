@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I am a third-year Ph.D. student in Computer Science at [Institute of Computing Technology](http://www.ict.ac.cn/), [Chinese Academy of Sciences](http://www.cas.cn/), advised by Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/) and Prof. [Keping Bi](https://kepingbi.github.io/). I am a member of [CAS Key Lab of Web Data Science and Technology](http://www.bigdatalab.ac.cn/) and [TIME Group](https://stay-hungry-time.github.io/). My research interests lie in the general area of Information Retrieval (IR) and NLP, with a special focus on Hallucination Detection, LLMs' Knowledge Boundaries, and Adaptive RAG. If you are interested in any form of collaboration, feel free to contact me. Email: nishiyu23z@ict.ac.cn.
+I am a fourth-year Ph.D. student in Computer Science at [Institute of Computing Technology](http://www.ict.ac.cn/), [Chinese Academy of Sciences](http://www.cas.cn/), advised by Prof. [Jiafeng Guo](http://www.bigdatalab.ac.cn/gjf/) and Prof. [Keping Bi](https://kepingbi.github.io/). I am a member of [CAS Key Lab of Web Data Science and Technology](http://www.bigdatalab.ac.cn/) and [TIME Group](https://stay-hungry-time.github.io/). My research interests lie in the general area of Information Retrieval (IR) and NLP, with a special focus on Hallucination Detection, LLMs' Knowledge Boundaries, and Adaptive RAG. If you are interested in any form of collaboration, feel free to contact me. Email: nishiyu23z@ict.ac.cn.
 
 
 ## Highlight
@@ -19,6 +19,7 @@ I am a third-year Ph.D. student in Computer Science at [Institute of Computing T
   - [Awesome-When-To-Retrieve-Papers](https://github.com/ShiyuNee/Awesome-When-To-Retrieve-Papers)
 
 ## News
+- [Aug 2026] One paper is accepted by **EMNLP 2026**
 - [Apr 2026] One paper is accepted by **ACL 2026**
 - [Jan 2026] One paper is accepted by **ICLR 2026**
 - [Dec 2025] Selected for the 2025 China Association for Science and Technology Young Scientific and Technological Talent Cultivation Program-Doctoral Track (**中国科协青年科技人才培育工程博士生专项计划**)
