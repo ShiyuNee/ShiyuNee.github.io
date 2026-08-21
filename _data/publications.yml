@@ -24,6 +24,19 @@
 - section: Does the Model Know the Answer?
   subtitle: LLM Honesty Alignment / Self-assessment
   papers:
+    - title: "Popular but Wrong: Understanding and Calibrating LLM Overconfidence through Knowledge Popularity"
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, and Xueqi Cheng"
+      venue: "EMNLP 2026 · Conference on Empirical Methods in Natural Language Processing"
+      description: "We provide a knowledge-popularity perspective for understanding and mitigating model overconfidence."
+      theme: Knowledge popularity
+      accent: blue
+      thumbnail: /images/publications/knowledge-popularity.jpg
+      conference: EMNLP'26
+      google_citations: 10
+      links:
+        - label: PDF
+          icon: ai ai-arxiv
+          url: https://arxiv.org/pdf/2505.17537
     - title: Annotation-Efficient Universal Honesty Alignment
       authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, Minghao Tang, Jingtong Wu, Zengxin Han, and Xueqi Cheng"
       venue: "ICLR 2026 · The Fourteenth International Conference on Learning Representations"
@@ -108,19 +121,6 @@
         - label: Code
           icon: fab fa-github
           url: https://github.com/ShiyuNee/LVLM-Knowledge-Boundary-Perception
-    - title: How Knowledge Popularity Influences and Enhances LLM Knowledge Boundary Perception
-      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, and Xueqi Cheng"
-      venue: Preprint
-      description: "We provide a knowledge-popularity perspective for understanding and mitigating model overconfidence."
-      theme: Knowledge popularity
-      accent: blue
-      thumbnail: /images/publications/knowledge-popularity.jpg
-      conference: arXiv
-      google_citations: 10
-      links:
-        - label: PDF
-          icon: ai ai-arxiv
-          url: https://arxiv.org/pdf/2505.17537
     - title: Evaluating and Calibrating LLM Confidence on Questions with Multiple Correct Answers
       authors: "Yuhan Wang<sup>†</sup>, <strong>Shiyu Ni<sup>†</sup></strong>, Zhikai Ding, Zihang Zhan, Yuanzi Li, and Keping Bi"
       venue: Preprint

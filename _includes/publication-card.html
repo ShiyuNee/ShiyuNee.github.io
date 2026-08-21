@@ -1,28 +1,26 @@
-<article class="publication-card publication-card--{{ paper.accent | default: 'blue' }}">
-  <div class="publication-card__media">
-    {% if paper.thumbnail %}
-      <img class="publication-card__image" src="{{ paper.thumbnail | relative_url }}" alt="Illustration for {{ paper.title }}">
-    {% else %}
-      <div class="publication-card__cover" aria-hidden="true">
-        <span class="publication-card__cover-label">{{ paper.theme }}</span>
-        <span class="publication-card__cover-line"></span>
-        <span class="publication-card__cover-mark">SN</span>
-      </div>
+{% assign title_url = nil %}
+{% for link in paper.links %}
+  {% assign normalized_label = link.label | replace: 'arXiv', 'PDF' %}
+  {% if normalized_label == 'PDF' or link.label == 'Preprint' %}
+    {% assign title_url = link.url %}
+  {% endif %}
+{% endfor %}
+
+<article class="publication-card">
+  <div class="publication-card__heading">
+    {% if paper.conference %}
+      {% assign conference_type = paper.conference | downcase %}
+      <span class="publication-card__conference{% if conference_type == 'arxiv' or conference_type == 'preprint' %} publication-card__conference--preprint{% endif %}" title="{{ paper.venue }}">{{ paper.conference }}</span>
     {% endif %}
-    {% if paper.conference %}<span class="publication-card__conference" title="{{ paper.venue }}">{{ paper.conference }}</span>{% endif %}
-  </div>
-  <div class="publication-card__body">
-    <h3 class="publication-card__title">{{ paper.title }}</h3>
-    <p class="publication-card__authors">{{ paper.authors }}</p>
-    <p class="publication-card__description">{{ paper.description }}</p>
-    {% if paper.note %}<p class="publication-card__note">{{ paper.note }}</p>{% endif %}
-    <nav class="publication-card__links" aria-label="Links for {{ paper.title }}">
+    <h3 class="publication-card__title">
+      {% if title_url %}<a href="{{ title_url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>{% else %}{{ paper.title }}{% endif %}
+    </h3>
+    <nav class="publication-card__links" aria-label="Additional links for {{ paper.title }}">
       {% for link in paper.links %}
         {% assign link_label = link.label | replace: 'arXiv', 'PDF' %}
-        <a class="publication-card__link publication-card__link--{{ link_label | downcase | replace: ' ', '-' }}" href="{{ link.url }}" target="_blank" rel="noopener noreferrer" title="{{ link_label }}" aria-label="{{ link_label }}">{% include publication-icon.html label=link_label %}<span class="publication-card__link-label">{{ link_label }}</span></a>
+        {% unless link_label == 'PDF' or link.label == 'Preprint' %}<a href="{{ link.url }}" target="_blank" rel="noopener noreferrer">[{{ link_label }}]</a>{% endunless %}
       {% endfor %}
-      <a class="publication-card__link publication-card__link--citation publication-card__link--google-scholar" href="https://scholar.google.com/scholar?q={{ paper.title | uri_escape }}" target="_blank" rel="noopener noreferrer" title="Google Scholar{% if paper.google_citations != nil %} · {{ paper.google_citations }} citations{% endif %}" aria-label="Google Scholar{% if paper.google_citations != nil %}, {{ paper.google_citations }} citations{% endif %}">{% include publication-icon.html label="Google Scholar" %}<span class="publication-card__link-label">Google Scholar</span>{% if paper.google_citations != nil %}<span class="publication-card__citation-count">{{ paper.google_citations }}</span>{% endif %}</a>
-      {% if paper.researchgate_citations != nil %}<a class="publication-card__link publication-card__link--citation" href="https://www.researchgate.net/search/publication?q={{ paper.title | uri_escape }}" target="_blank" rel="noopener noreferrer" title="ResearchGate · {{ paper.researchgate_citations }} citations" aria-label="ResearchGate, {{ paper.researchgate_citations }} citations">{% include publication-icon.html label="ResearchGate" %}<span class="publication-card__link-label">ResearchGate</span><span class="publication-card__citation-count">{{ paper.researchgate_citations }}</span></a>{% endif %}
     </nav>
   </div>
+  <p class="publication-card__authors">{{ paper.authors }}</p>
 </article>
