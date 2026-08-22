@@ -19,6 +19,8 @@ I am a fourth-year Ph.D. student in Computer Science at [Institute of Computing 
   - [Awesome-When-To-Retrieve-Papers](https://github.com/ShiyuNee/Awesome-When-To-Retrieve-Papers)
 
 ## News
+<div class="news-scroll" markdown="1">
+
 - [Aug 2026] One paper is accepted by **EMNLP 2026**
 - [Apr 2026] One paper is accepted by **ACL 2026**
 - [Jan 2026] One paper is accepted by **ICLR 2026**
@@ -31,6 +33,8 @@ I am a fourth-year Ph.D. student in Computer Science at [Institute of Computing 
 - [Sep 2024] One paper is accepted by **CCIR 2024**
 - [May 2024] One paper is accepted by **ACL 2024**.
 - [Sep 2023] One paper is accepted by **SIGIR-AP 2023**.
+
+</div>
 
 ## Talks
 
