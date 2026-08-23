@@ -140,6 +140,7 @@
 
 - section: Does the Model Know the Answer?
   subtitle: LLM-as-a-judge / External Verifier
+  hide_section: true
   papers:
     - title: How Long Reasoning Chains Influence LLMs' Judgment of Answer Factuality
       authors: "Minzhu Tu<sup>†</sup>, <strong>Shiyu Ni<sup>†</sup></strong>, and Keping Bi"

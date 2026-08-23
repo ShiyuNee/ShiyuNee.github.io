@@ -9,9 +9,11 @@ redirect_from:
 My research centers on building trustworthy knowledge-intensive AI systems, organized around a unified question-answering pipeline: given a user query, (1) understanding what the query is truly asking, (2) assessing whether the model knows the answer, (3) evaluating whether external evidence is reliable, and (4) effectively leveraging external knowledge when needed. Each stage addresses a critical challenge in ensuring that AI systems produce accurate, honest, and well-grounded responses.
 
 {% for group in site.data.publications %}
+{% unless group.hide_section %}
 ## {{ group.section }}
+{% endunless %}
 
-{% if group.subtitle %}<p class="publication-section-subtitle">{{ group.subtitle }}</p>{% endif %}
+{% if group.subtitle %}<p class="publication-section-subtitle{% if group.hide_section %} publication-section-subtitle--continuation{% endif %}">{{ group.subtitle }}</p>{% endif %}
 {% for paper in group.papers %}
   {% include publication-card.html paper=paper %}
 {% endfor %}
