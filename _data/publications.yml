@@ -198,6 +198,7 @@
 
 - section: How to Leverage External Knowledge?
   subtitle: Parametric Injection
+  hide_section: true
   papers:
     - title: The Role of Parametric Injection-A Systematic Study of Parametric Retrieval-Augmented Generation
       authors: "Minghao Tang, <strong>Shiyu Ni</strong>, Jingtong Wu, Zengxin Han, and Keping Bi"
