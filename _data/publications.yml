@@ -24,7 +24,7 @@
 - section: Does the Model Know the Answer?
   subtitle: LLM Honesty Alignment / Self-assessment
   papers:
-    - title: "Popular but Wrong: Understanding and Calibrating LLM Overconfidence through Knowledge Popularity"
+    - title: "Popular but Wrong: Understanding and Mitigating LLM Overconfidence through Knowledge Popularity"
       authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, and Xueqi Cheng"
       venue: "EMNLP 2026 · Conference on Empirical Methods in Natural Language Processing"
       description: "We provide a knowledge-popularity perspective for understanding and mitigating model overconfidence."
@@ -37,6 +37,9 @@
         - label: PDF
           icon: ai ai-arxiv
           url: https://arxiv.org/pdf/2505.17537
+        - label: Code
+          icon: fab fa-github
+          url: https://github.com/Trustworthy-Information-Access/Popular-but-Wrong
     - title: Annotation-Efficient Universal Honesty Alignment
       authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, Minghao Tang, Jingtong Wu, Zengxin Han, and Xueqi Cheng"
       venue: "ICLR 2026 · The Fourteenth International Conference on Learning Representations"
