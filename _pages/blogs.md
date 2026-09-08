@@ -7,6 +7,12 @@ author_profile: true
 欢迎来到我的博客！这里记录我对前沿技术的思考与探索，包括技术解读、工具实践和研究笔记。
 
 <div class="blog-list">
+  <a class="blog-entry" href="https://shiyunee.github.io/rsi-atlas/" target="_blank" rel="noopener noreferrer">
+    <h2 class="blog-entry__title">RSI Atlas — Harness Evolution 论文地图</h2>
+    <p class="blog-entry__description">按可变对象、执行者、修改者、基础 harness、反馈来源与评估隔离筛选 RSI 论文，查看经典工作笔记与最新补充。</p>
+    <p class="blog-entry__meta">2026-09-08 · Recursive Self-Improvement · 交互式论文库 · 打开网站 ↗</p>
+  </a>
+
   <a class="blog-entry" href="{{ '/blogs/RSI-Where-the-Loop-Closes/' | relative_url }}">
     <h2 class="blog-entry__title">递归如何闭环？——从可修改范围到 Agent as Service</h2>
     <p class="blog-entry__description">“走向递归自我改进”系列下篇：沿可修改范围的扩张理解递归依赖，并讨论可验证、可归因的 RSI 实验系统。</p>
