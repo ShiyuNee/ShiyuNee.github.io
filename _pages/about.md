@@ -21,6 +21,7 @@ I am a fourth-year Ph.D. student in Computer Science at [Institute of Computing 
 ## News
 <div class="news-scroll" markdown="1">
 
+- [Sep 2026] One paper is selected as **Oral** by EMNLP 2026
 - [Aug 2026] One paper is accepted by **EMNLP 2026**
 - [Apr 2026] One paper is accepted by **ACL 2026**
 - [Jan 2026] One paper is accepted by **ICLR 2026**
