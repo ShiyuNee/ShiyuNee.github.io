@@ -32,6 +32,7 @@
       accent: blue
       thumbnail: /images/publications/knowledge-popularity.jpg
       conference: EMNLP'26
+      presentation: Oral
       google_citations: 10
       links:
         - label: PDF

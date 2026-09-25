@@ -12,6 +12,9 @@
       {% assign conference_type = paper.conference | downcase %}
       <span class="publication-card__conference{% if conference_type == 'arxiv' or conference_type == 'preprint' %} publication-card__conference--preprint{% endif %}" title="{{ paper.venue }}">{{ paper.conference }}</span>
     {% endif %}
+    {% if paper.presentation %}
+      <span class="publication-card__conference publication-card__presentation" title="Presentation type">{{ paper.presentation }}</span>
+    {% endif %}
     <h3 class="publication-card__title">
       {% if title_url %}<a href="{{ title_url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>{% else %}{{ paper.title }}{% endif %}
     </h3>
