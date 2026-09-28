@@ -75,6 +75,17 @@
   margin: -0.85em 0 0.55em;
 }
 
+.research-overview-link {
+  border-left: 3px solid #205b76;
+  padding: 0.65em 1em;
+  margin: 1.4em 0 2em;
+  background: #f3f6f7;
+  > span { display: block; font-size: 0.65em; letter-spacing: 0.08em; text-transform: uppercase; color: #526471; }
+  > a { display: inline-block; margin: 0.25em 0; font-size: 0.95em; font-weight: 600; color: #205b76; text-decoration: none; }
+  > a:hover { text-decoration: underline; }
+  small { display: block; font-size: 0.7em; color: #526471; }
+}
+
 .publication-section-subtitle--continuation {
   margin-top: 1.5em;
 }

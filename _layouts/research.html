@@ -1,0 +1,39 @@
+---
+layout: compress
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include seo.html %}
+  <meta name="theme-color" content="#f8f7f3">
+  <link rel="icon" type="image/svg+xml" href="{{ '/images/research/favicon.svg' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/research.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body class="research-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="research-header">
+    <a class="research-home" href="{{ '/' | relative_url }}">Shiyu Ni<span>Research</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#why">Why it matters</a>
+      <a href="#research">The research</a>
+      <a href="{{ '/publications/' | relative_url }}">All publications <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main id="main">{{ content }}</main>
+  <footer class="research-footer">
+    <div><strong>Shiyu Ni</strong><p>Institute of Computing Technology, Chinese Academy of Sciences</p></div>
+    <div><a href="{{ '/' | relative_url }}">Personal homepage</a><a href="mailto:nishiyu23z@ict.ac.cn">Get in touch <span aria-hidden="true">↗</span></a></div>
+  </footer>
+  <dialog class="figure-dialog" id="figure-dialog" aria-labelledby="figure-dialog-caption">
+    <div class="figure-dialog__toolbar">
+      <button type="button" class="figure-dialog__zoom" aria-pressed="false" hidden>Read at full size</button>
+      <button type="button" class="figure-dialog__close" autofocus aria-label="Close enlarged figure">Close <span aria-hidden="true">×</span></button>
+    </div>
+    <div class="figure-dialog__viewport" tabindex="0" aria-label="Figure view. Scroll to read when enlarged."><img alt=""></div>
+    <p id="figure-dialog-caption"></p>
+  </dialog>
+  <script src="{{ '/assets/js/research.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+</body>
+</html>

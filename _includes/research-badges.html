@@ -1,0 +1,9 @@
+{% assign badge_venue = include.paper.venue %}
+{% assign badge_distinction = include.paper.distinction | default: include.paper.note %}
+<span class="research-badge research-badge--venue{% if badge_venue == 'Preprint' or badge_venue contains 'submission' %} research-badge--pending{% endif %}">{{ badge_venue }}</span>
+{% if badge_distinction %}
+<span class="research-badge research-badge--award{% if badge_distinction == 'SAC Oral Recommendation' %} research-badge--recommendation{% endif %}" title="{{ include.paper.distinction_note | default: badge_distinction | escape }}">
+  <svg class="research-badge__medal" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 2h5l3 7-4 2L6 2Zm7 0h5l-4 9-4-2 3-7Z" fill="currentColor" opacity=".65"/><circle cx="12" cy="15" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m12 10 1.4 2.8 3.1.5-2.2 2.2.5 3.1-2.8-1.5-2.8 1.5.5-3.1-2.2-2.2 3.1-.5Z" fill="currentColor"/></svg>
+  {{ badge_distinction }}
+</span>
+{% endif %}

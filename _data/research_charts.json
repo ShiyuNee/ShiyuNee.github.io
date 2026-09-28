@@ -1,0 +1,135 @@
+{
+  "retrieval": {
+    "kind": "bars",
+    "eyebrow": "01 / Observing the knowledge gap",
+    "title": "Knowing vs. thinking you know",
+    "subtitle": "Natural Questions · vanilla prompting · models evaluated in the 2024 study",
+    "metric": "Share of answers (%)",
+    "maximum": 100,
+    "ticks": [0, 25, 50, 75, 100],
+    "precision": 1,
+    "series": [
+      {"key": "accuracy", "label": "Actually correct", "color": "#2872b8"},
+      {"key": "certain", "label": "Says ‘certain’", "color": "#d5645e"}
+    ],
+    "data": [
+      {"label": "Vicuna", "accuracy": 26.34, "uncertain_rate": 0.0278},
+      {"label": "LLaMA2", "accuracy": 29.86, "uncertain_rate": 0.1684},
+      {"label": "GPT-Instruct", "accuracy": 40.03, "uncertain_rate": 0.1900},
+      {"label": "ChatGPT", "accuracy": 38.50, "uncertain_rate": 0.2917},
+      {"label": "GPT-4", "accuracy": 48.96, "uncertain_rate": 0.1894}
+    ],
+    "derive": "certain = 100 * (1 - uncertain_rate); gap = certain - accuracy",
+    "source": "ACL 2024 Findings · Table 2, p. 4; definitions in Section 3.2",
+    "source_url": "https://aclanthology.org/2024.findings-acl.675/",
+    "footnotes": [
+      "‘Certain’ is a binary self-report, not an average probability. Gap = certain rate − accuracy (percentage points).",
+      "This aggregate gap is not the paper’s sample-level Overconfidence metric. All five Table 2 models are shown."
+    ]
+  },
+  "internal-signals": {
+    "kind": "bars",
+    "eyebrow": "02 / Locating the signal",
+    "title": "Self-assessment signals before and after generation",
+    "subtitle": "Llama3-8B-Instruct · vanilla prompting · 2,000 training examples per dataset",
+    "metric": "Confidence–correctness alignment (%) ↑",
+    "maximum": 100,
+    "ticks": [0, 25, 50, 75, 100],
+    "precision": 2,
+    "series": [
+      {"key": "pre", "label": "Pre-generation state", "color": "#2872b8"},
+      {"key": "post", "label": "Post-generation average state", "color": "#20887f"}
+    ],
+    "data": [
+      {"label": "Natural Questions", "pre": 73.79, "post": 75.35},
+      {"label": "HotpotQA", "pre": 78.58, "post": 80.61},
+      {"label": "MMLU", "pre": 71.95, "post": 73.98}
+    ],
+    "source": "ACL 2025 · Table 1, p. 6",
+    "source_url": "https://arxiv.org/pdf/2502.11677v2#page=6",
+    "footnotes": [
+      "Alignment is binary confidence–correctness agreement, not answer accuracy; test-class balance affects it.",
+      "One matched model/prompt setting. These results do not compare pre-generation states with verbal confidence."
+    ]
+  },
+  "popularity": {
+    "kind": "heatmap",
+    "eyebrow": "03 / Explaining overconfident errors",
+    "title": "Familiarity can accompany confidence in wrong answers",
+    "subtitle": "Question–answer co-occurrence vs. confidence · incorrect answers only",
+    "metric": "Partial Spearman correlation (ρ)",
+    "minimum": -1,
+    "maximum": 1,
+    "precision": 3,
+    "columns": [
+      {"key": "movies", "label": "Movies"},
+      {"key": "songs", "label": "Songs"},
+      {"key": "basketball", "label": "Basketball"}
+    ],
+    "data": [
+      {"label": "Llama-3-8B", "movies": 0.267, "songs": 0.458, "basketball": -0.102},
+      {"label": "Qwen2-7B", "movies": 0.179, "songs": 0.140, "basketball": -0.024},
+      {"label": "ChatGPT", "sub_label": "GPT-3.5-Turbo-1106", "movies": 0.499, "songs": 0.656, "basketball": 0.040}
+    ],
+    "source": "EMNLP 2026 · arXiv:2505.17537v2 · Table 4",
+    "source_url": "https://arxiv.org/html/2505.17537v2",
+    "footnotes": [
+      "Controls: question and generated-answer popularity. Confidence: mean answer-token probability.",
+      "Three models with all three datasets. Positive in Movies/Songs, weak or negative in Basketball; not causation."
+    ]
+  },
+  "elical": {
+    "kind": "dots",
+    "eyebrow": "04 / Learning with fewer correctness labels",
+    "title": "Strong discrimination with 1,000 correctness labels",
+    "subtitle": "Qwen2.5-7B-Instruct · HonestyBench · paper-reported averages",
+    "metric": "AUROC × 100 ↑ (50 = chance)",
+    "minimum": 50,
+    "maximum": 100,
+    "ticks": [50, 60, 70, 80, 90, 100],
+    "precision": 2,
+    "columns": [
+      {"key": "in_domain", "label": "In-domain"},
+      {"key": "out_of_domain", "label": "Out-of-domain"}
+    ],
+    "data": [
+      {"label": "Cal-Only", "sub_label": "1k correctness labels", "color": "#9aa8b2", "in_domain": 73.41, "out_of_domain": 77.32},
+      {"label": "EliCal", "sub_label": "1k correctness labels", "color": "#20887f", "in_domain": 84.36, "out_of_domain": 84.47},
+      {"label": "Cal-Only", "sub_label": "560k correctness labels", "color": "#2872b8", "in_domain": 86.20, "out_of_domain": 85.75}
+    ],
+    "source": "ICLR 2026 · Table 2; training protocol in Sections 6–7",
+    "source_url": "https://arxiv.org/html/2510.17509v3#S6",
+    "footnotes": [
+      "EliCal additionally uses large-scale self-consistency supervision. Counts refer only to correctness labels.",
+      "AUROC measures error discrimination, not calibration or task accuracy. ‘560k’ follows the paper’s label."
+    ]
+  },
+  "cocal": {
+    "kind": "bars",
+    "eyebrow": "05 / Learning alongside capability",
+    "title": "Lower average calibration error, unchanged task accuracy",
+    "subtitle": "Qwen3-8B · 120 training steps · matched binary-supervision comparison",
+    "metric": "Expected calibration error (ECE) ↓",
+    "maximum": 0.30,
+    "ticks": [0, 0.1, 0.2, 0.3],
+    "precision": 3,
+    "series": [
+      {"key": "postcal", "label": "Post-hoc calibration", "color": "#9aa8b2"},
+      {"key": "cocal", "label": "CoCal", "color": "#20887f"}
+    ],
+    "data": [
+      {"label": "MATH500", "postcal": 0.049, "cocal": 0.038},
+      {"label": "AIME24", "postcal": 0.134, "cocal": 0.102},
+      {"label": "AIME25", "postcal": 0.245, "cocal": 0.147},
+      {"label": "AMC23", "postcal": 0.083, "cocal": 0.118},
+      {"label": "AMC24", "postcal": 0.090, "cocal": 0.077}
+    ],
+    "summary": "Macro ECE: 0.120 → 0.096     ·     Same macro task accuracy: 63.8%",
+    "source": "CoCal preprint · Table 1, p. 7",
+    "source_url": null,
+    "footnotes": [
+      "All five math datasets are shown; ECE improves on average, not on every dataset (AMC23 increases).",
+      "Matched calibrator architecture and supervision. CoCal replays cached training experience chronologically."
+    ]
+  }
+}

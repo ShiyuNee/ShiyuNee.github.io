@@ -1,0 +1,110 @@
+---
+layout: research
+permalink: /research/knowledge-boundaries/
+title: "Knowledge Boundaries & Honest AI"
+excerpt: "A connected research program on knowledge-boundary perception and honesty alignment: making self-assessment measurable, explaining its biases, and learning reliable confidence as capabilities evolve."
+author_profile: false
+---
+
+<section class="research-hero research-hero--compact wrap" aria-labelledby="research-title">
+  <div class="hero-copy">
+    <div class="hero-title-block">
+    <p class="eyebrow">A connected research program · Shiyu Ni · 2024–2026</p>
+    <h1 id="research-title">Knowledge boundaries.<br><em>Honest AI.</em></h1>
+    </div>
+    <div class="hero-intro">
+    <p class="hero-lead">Knowing an answer is not the same as knowing when to trust it.</p>
+    <p class="hero-description">Our work connects knowledge-boundary evaluation, the explanation of overconfidence, and honesty alignment—with one goal: helping models make better decisions about their own answers.</p>
+    <a class="text-link" href="#research">Explore the research story <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="why-section" id="why" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="section-heading"><p class="eyebrow">01 / Our perspective</p><h2 id="why-title">Self-assessment is part of decision-making.</h2><p>Recognizing its limits helps a model decide when to answer, seek evidence, or defer. We study how to make this judgment reliable—not merely how to attach a confidence score.</p></div>
+    <figure class="motivation-figure motivation-figure--paper">
+      <a class="figure-zoom motivation-zoom" href="{{ '/images/research/knowledge-boundaries-framework-v3.png' | relative_url }}" data-caption="Five-part conceptual overview. Knowledge-boundary perception means knowing what the model knows and what it does not know. Blue represents what the model knows; red represents what it thinks it knows. Evaluate calibration and error discrimination; explain popularity–confidence associations; improve self-assessment through calibration, label-efficient honesty alignment, and companion learning; apply confidence alongside task needs and costs. Plots are schematic, not empirical results. Verified-feedback self-improvement is a research outlook." aria-label="Read the five-part research framework at full size">
+        <img src="{{ '/images/research/knowledge-boundaries-framework-v3.png' | relative_url }}" width="1448" height="1086" alt="Five-part research framework. Definition: knowledge-boundary perception means knowing what the model knows and what it does not know. The blue region represents what the model knows; the red region represents what it thinks it knows. Blue-only areas indicate underconfidence; red-only areas indicate overconfidence. Evaluation: calibration and error discrimination. Explanation: popularity is associated with confidence but is not correctness. Improvement: calibrate signals, perform honesty alignment with fewer labels, and learn confidence alongside capability. Applications: answer or abstain, adaptive retrieval, model routing, and reasoning budgets, taking task needs and costs into account. Verified feedback for self-improvement is marked as an outlook. All plots are conceptual illustrations.">
+      </a>
+      <figcaption><span>A conceptual overview of the research direction; plots are schematic. Click to read at full size.</span><a class="figure-original" href="{{ '/images/research/knowledge-boundaries-framework-v3.png' | relative_url }}" target="_blank" rel="noopener">Open original <span aria-hidden="true">↗</span></a></figcaption>
+    </figure>
+    <nav class="paper-index" id="core-papers" aria-labelledby="core-papers-title">
+      <h3 id="core-papers-title">Papers in this research program</h3>
+      <ol class="paper-tree" role="list">
+        {% for chapter in site.data.research_story.chapters %}
+        {% assign index_works = site.data.research_story.works | where: 'chapter', chapter.id %}
+        {% assign index_count = index_works.size %}
+        {% for work in index_works %}{% if work.companion %}{% assign index_count = index_count | plus: 1 %}{% endif %}{% endfor %}
+        <li class="paper-tree-group">
+          <div class="paper-tree-heading"><span class="paper-tree-number" aria-hidden="true">{{ chapter.number }}</span><h4><a href="#{{ chapter.id }}">{{ chapter.nav_title }}</a></h4><span class="paper-tree-count">{{ index_count }} {% if index_count == 1 %}paper{% else %}papers{% endif %}</span></div>
+          <ul class="paper-tree-papers" role="list">
+            {% for work in index_works %}
+            {% if work.companion %}{% include research-paper-entry.html paper=work.companion %}{% endif %}
+            {% include research-paper-entry.html paper=work %}
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+        <li class="paper-tree-group">
+          <div class="paper-tree-heading"><span class="paper-tree-number" aria-hidden="true">04</span><h4><a href="#extensions">{{ site.data.research_story.extensions_title }}</a></h4><span class="paper-tree-count">{{ site.data.research_story.extensions.size }} papers</span></div>
+          <ul class="paper-tree-papers" role="list">{% for item in site.data.research_story.extensions %}{% include research-paper-entry.html paper=item %}{% endfor %}</ul>
+        </li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="research-story wrap" id="research" aria-labelledby="story-title">
+  <div class="section-heading"><p class="eyebrow">02 / Developing the argument</p><h2 id="story-title">From observing a gap<br>to learning reliable self-assessment.</h2><p>Across this program, one question persists: how can a model’s judgment of its own answers better reflect what it can actually do?</p></div>
+  <nav class="story-map" aria-label="Chapters of the research program">
+    {% for chapter in site.data.research_story.chapters %}<a href="#{{ chapter.id }}"><span>{{ chapter.number }}</span> {{ chapter.nav_title }}</a>{% endfor %}
+  </nav>
+  {% for chapter in site.data.research_story.chapters %}
+  <section class="story-chapter" id="{{ chapter.id }}" aria-labelledby="{{ chapter.id }}-title">
+    <header class="chapter-heading"><p class="eyebrow">Chapter {{ chapter.number }}</p><h3 id="{{ chapter.id }}-title">{{ chapter.title }}</h3><p>{{ chapter.introduction }}</p></header>
+    {% assign chapter_works = site.data.research_story.works | where: 'chapter', chapter.id %}
+    {% for work in chapter_works %}
+    {% assign chart = site.data.research_charts[work.chart] %}
+    <article class="research-work" id="{{ work.id }}" aria-labelledby="{{ work.id }}-title">
+      <header class="work-heading"><h4 id="{{ work.id }}-title">{% if work.paper %}<a href="{{ work.paper }}">{{ work.title }}</a>{% else %}{{ work.title }}{% endif %}</h4><div class="work-meta">{% include research-badges.html paper=work %}<span>{{ work.role }}</span>{% if work.status %}<span class="work-status">{{ work.status }}</span>{% endif %}</div></header>
+      <div class="work-grid">
+        <div class="work-copy">
+          {% for paragraph in work.narrative %}<p>{{ paragraph }}</p>{% endfor %}
+          {% if work.metric %}<div class="work-metric"><strong>{{ work.metric }}</strong><span>{{ work.metric_label }}</span><p>{{ work.metric_note }}</p></div>{% endif %}
+          <div class="paper-reference"><div class="paper-links">{% if work.paper %}<a href="{{ work.paper }}">Paper <span aria-hidden="true">↗</span></a>{% endif %}{% if work.code %}<a href="{{ work.code }}">Code & resources <span aria-hidden="true">↗</span></a>{% endif %}{% unless work.paper %}<span>Public paper link will be added after the arXiv release.</span>{% endunless %}</div></div>
+        </div>
+        <figure class="work-figure work-figure--original"><a href="{{ work.image | relative_url }}" class="figure-zoom" data-caption="{{ work.caption | escape }}" aria-label="Enlarge figure: {{ work.title | escape }}"><img src="{{ work.image | relative_url }}" alt="{{ work.image_alt | escape }}" loading="lazy" decoding="async"><span class="figure-hint">Enlarge figure <span aria-hidden="true">↗</span></span></a><figcaption>{{ work.caption }}</figcaption></figure>
+      </div>
+      {% if chart %}
+      <div class="work-evidence">
+        <p class="eyebrow">Supporting evidence · The capability–confidence gap</p>
+        {% capture chart_base %}/images/research/charts/{{ work.chart }}{% endcapture %}
+        <figure class="work-figure work-figure--data">
+          <a href="{{ chart_base | append: '.svg' | relative_url }}" class="figure-zoom data-chart-zoom" data-caption="{{ chart.title | escape }}. {{ chart.subtitle | escape }}. {{ chart.source | escape }}. {{ chart.footnotes | join: ' ' | escape }}" aria-label="Enlarge chart: {{ chart.title | escape }}"><img src="{{ chart_base | append: '.svg' | relative_url }}" width="1080" height="660" alt="{{ chart.title | escape }}. {{ chart.subtitle | escape }}. Metric: {{ chart.metric | escape }}. Values and experimental notes are available below." loading="lazy" decoding="async"><span class="figure-hint">Enlarge chart <span aria-hidden="true">↗</span></span></a>
+          <figcaption class="chart-caption"><span>Redrawn from {% if chart.source_url %}<a href="{{ chart.source_url }}">{{ chart.source }}</a>{% else %}{{ chart.source }}{% endif %}.</span><span class="chart-downloads"><a href="{{ chart_base | append: '.svg' | relative_url }}" download>SVG</a><a href="{{ chart_base | append: '.png' | relative_url }}" download>PNG</a><a href="{{ chart_base | append: '.csv' | relative_url }}" download>Data</a></span></figcaption>
+          <details class="chart-notes"><summary>Data and experimental setting</summary><p>{{ chart.subtitle }}. {{ chart.metric }}.</p>{% for note in chart.footnotes %}<p>{{ note }}</p>{% endfor %}<div class="chart-table-wrap"><table><caption>{{ chart.title }}</caption><thead><tr><th scope="col">{% if chart.kind == 'dots' %}Method{% else %}Setting{% endif %}</th>{% if chart.kind == 'dots' or chart.kind == 'heatmap' %}{% for column in chart.columns %}<th scope="col">{{ column.label }}</th>{% endfor %}{% else %}{% for series in chart.series %}<th scope="col">{{ series.label }}</th>{% endfor %}{% endif %}</tr></thead><tbody>{% for row in chart.data %}<tr><th scope="row">{{ row.label }}{% if row.sub_label %} ({{ row.sub_label }}){% endif %}</th>{% if chart.kind == 'dots' or chart.kind == 'heatmap' %}{% for column in chart.columns %}<td>{{ row[column.key] }}</td>{% endfor %}{% else %}{% for series in chart.series %}<td>{% if series.key == 'certain' %}{{ 1 | minus: row.uncertain_rate | times: 100 | round: 2 }}{% else %}{{ row[series.key] }}{% endif %}</td>{% endfor %}{% endif %}</tr>{% endfor %}</tbody></table></div></details>
+        </figure>
+      </div>
+      {% endif %}
+      {% if work.caveat %}<p class="work-caveat"><strong>Scope.</strong> {{ work.caveat }}</p>{% endif %}
+      {% if work.companion %}<aside class="companion-work" id="{{ work.companion.id }}"><div class="companion-work-meta">{% include research-badges.html paper=work.companion %}<span>{{ work.companion.role }}</span></div><div><h5><a href="{{ work.companion.url }}">{{ work.companion.title }}</a></h5><p>{{ work.companion.text }}</p></div></aside>{% endif %}
+    </article>
+    {% if work.transition %}<p class="story-transition"><span aria-hidden="true">↓</span>{{ work.transition }}</p>{% endif %}
+    {% endfor %}
+  </section>
+  {% endfor %}
+  <div class="program-synthesis"><p class="eyebrow">What this program adds up to</p><p>Our question has developed from <strong>whether models recognize their limits</strong>, to <strong>why they misjudge them</strong>, and <strong>how that judgment can be learned as capabilities change</strong>. The goal is not indiscriminate caution, but self-assessment that supports better decisions. Confidence remains a signal—not proof of correctness.</p></div>
+</section>
+
+<section class="extensions-section" id="extensions" aria-labelledby="extensions-title"><div class="wrap">
+  <div class="section-heading"><p class="eyebrow">03 / Testing the scope of this perspective</p><h2 id="extensions-title">{{ site.data.research_story.extensions_title }}</h2><p>Our related studies test this perspective as the evidence, the meaning of correctness, and the object of evaluation become more complex—from visual answers to factuality judgments and ranked evidence.</p></div>
+  <div class="extension-grid">{% for item in site.data.research_story.extensions %}<article id="{{ item.id }}"><p class="extension-venue">{% include research-badges.html paper=item %}<span class="extension-role">{{ item.role }}</span></p><h3><a href="{{ item.url }}">{{ item.title }} <span aria-hidden="true">↗</span></a></h3><p>{{ item.connection }}</p></article>{% endfor %}</div>
+  <p class="survey-note"><strong>A broader view of research agents.</strong> In <a href="https://www.preprints.org/manuscript/202511.2077">Deep Research: A Systematic Survey</a>, I contributed the sections on retrieval timing and its open challenges (§3.2.2 and §6.1), connecting knowledge-boundary perception to reliable information-seeking decisions.</p>
+</div></section>
+
+<section class="outlook-section wrap" id="outlook" aria-labelledby="outlook-title">
+  <div class="section-heading"><p class="eyebrow">04 / Research outlook</p><h2 id="outlook-title">From “I may be wrong”<br>to “here is what would help.”</h2></div>
+  <div class="outlook-grid"><div><p class="outlook-lead">From assessing an answer to diagnosing and improving it.</p><p>The program so far asks how reliably a model can assess its answers. In open-ended tasks, an answer may be only partly correct. Our next question is finer-grained: which claim is wrong or uncertain, why, and what evidence or reasoning would resolve the gap?</p><p>Such diagnoses could guide retrieval, clarification, and revision. Independently verified outcomes could then support further learning—connecting knowledge-boundary perception to iterative self-improvement.</p></div><ol class="outlook-loop"><li><span>Locate</span>Which claim is uncertain or wrong?</li><li><span>Diagnose</span>What knowledge, evidence, or reasoning is missing?</li><li><span>Correct</span>What action would resolve the gap?</li><li><span>Verify & learn</span>Did the correction work, and does it transfer?</li></ol></div>
+  <div class="closing-line"><p>More capable models should also become<br><strong>better judges of their own limits.</strong></p><a class="text-link" href="{{ '/publications/' | relative_url }}">Browse all publications <span aria-hidden="true">↗</span></a></div>
+</section>

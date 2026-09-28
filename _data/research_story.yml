@@ -1,0 +1,141 @@
+# A connected argument, grouped by scientific questions rather than publication dates.
+# Add the public arXiv URL to the final work when it becomes available.
+chapters:
+  - id: recognize-boundaries
+    number: "01"
+    nav_title: Understanding knowledge boundaries
+    title: Understanding knowledge boundaries
+    introduction: "We began with a practical question: when should a model rely on its own knowledge, and when should it retrieve? Answering it requires measuring the gap between what a model knows and what it thinks it knows."
+  - id: learn-reliability
+    number: "02"
+    nav_title: Explaining and improving self-assessment
+    title: Explaining and improving self-assessment
+    introduction: "The gap between capability and self-assessment raises two connected questions: what systematically biases confidence, and how can reliable confidence be learned beyond a single task?"
+  - id: evolving-capability
+    number: "03"
+    nav_title: Learning confidence alongside capability
+    title: Learning confidence alongside capability
+    introduction: "A model’s capabilities change during training. Rather than calibrating only the final model, can we also learn from the successes, failures, and verified outcomes along the way?"
+
+extensions_title: Extending to more demanding settings
+
+works:
+  - id: retrieval
+    chapter: recognize-boundaries
+    chart: retrieval
+    title: "When Do LLMs Need Retrieval Augmentation? Mitigating LLMs' Overconfidence Helps Retrieval Augmentation"
+    venue: ACL 2024 Findings
+    role: First author
+    narrative:
+      - "Our ACL 2024 Findings study makes this gap measurable and identifies overconfidence as an obstacle to deciding when retrieval is needed. Mitigating overconfidence improves self-assessment and helps the model seek external knowledge when its own knowledge is insufficient."
+      - "The result connects evaluation to action: better knowledge-boundary perception supports comparable or stronger question-answering performance with fewer retrieval calls. Self-assessment matters because it can improve decisions, not just evaluation scores."
+    image: /images/research/adaptive-retrieval.png
+    image_alt: "Paper figure comparing confidence in incorrect answers before and after confidence alignment across models and datasets."
+    caption: "Reducing confidence in incorrect answers helps expose the knowledge gaps that motivate retrieval. Figure from the ACL 2024 Findings paper."
+    paper: https://aclanthology.org/2024.findings-acl.675/
+    code: https://github.com/ShiyuNee/When-to-Retrieve
+    transition: "Once confidence guides decisions, its source matters: does the model reveal everything it knows about its own limits?"
+
+  - id: internal-signals
+    chapter: recognize-boundaries
+    title: Towards Fully Exploiting LLM Internal States to Enhance Knowledge Boundary Perception
+    venue: ACL 2025
+    role: First author
+    narrative:
+      - "We therefore look beyond a model’s verbal confidence to its internal representations. Our ACL 2025 study finds useful knowledge-boundary signals before answer generation and examines how generation changes them, opening the possibility of assessing knowledge gaps before producing a complete answer."
+      - "For post-generation assessment, Confidence Consistency-based Calibration uses reformulated questions to improve the recognition of those gaps. Together with our comparison of confidence expressions below, this work distinguishes the information a model contains from how reliably it communicates that information."
+    image: /images/research/internal-states.png
+    image_alt: "Paper diagram showing where internal representations are extracted before and after answer generation."
+    caption: "Probing internal representations before and after generation reveals when self-assessment signals become available. Figure from the ACL 2025 paper."
+    paper: https://arxiv.org/abs/2502.11677
+    code: https://github.com/ShiyuNee/LLM-Knowledge-Boundary-Perception-via-Internal-States
+    companion:
+      id: confidence-expressions
+      title: Are Large Language Models More Honest in Their Probabilistic or Verbalized Confidence?
+      text: "Our CCIR 2024 study compares token-probability and verbalized confidence, complementing the internal-state analysis by asking how the choice of confidence signal affects honesty."
+      url: https://arxiv.org/abs/2408.09773
+      venue: CCIR 2024
+      role: First author
+      label: CCIR 2024 · First author
+    transition: "These studies establish the value of self-assessment and identify useful signals. The next challenge is to understand—and reduce—their errors."
+
+  - id: popularity
+    chapter: learn-reliability
+    title: "Popular but Wrong: Understanding and Mitigating LLM Overconfidence through Knowledge Popularity"
+    venue: EMNLP 2026
+    distinction: Oral
+    role: First author
+    narrative:
+      - "To understand why self-assessment fails, we examine knowledge popularity. Popular wrong answers—and answers strongly associated with the question—can attract high confidence. This reveals a structured bias: familiarity can be mistaken for evidence of correctness."
+      - "Incorporating popularity-related signals improves calibration. The work thus connects an explanation of overconfidence to a practical way of mitigating it: understanding what biases confidence helps us correct its relationship to actual performance."
+    image: /images/publications/knowledge-popularity.jpg
+    image_alt: "Knowledge-popularity framework contrasting a popular wrong answer with a correct answer and illustrating popularity-aware confidence calibration."
+    caption: "A familiar wrong alternative can attract high confidence. The paper distinguishes ground-truth and generation-side popularity signals."
+    paper: https://arxiv.org/abs/2505.17537
+    code: https://github.com/Trustworthy-Information-Access/Popular-but-Wrong
+    transition: "Explaining a specific bias is one part of the problem. A complementary challenge is learning reliable confidence across tasks without labeling every answer."
+
+  - id: elical
+    chapter: learn-reliability
+    title: Annotation-Efficient Universal Honesty Alignment
+    venue: ICLR 2026
+    role: First author
+    narrative:
+      - "EliCal addresses this learning problem by separating two objectives: eliciting an informative confidence signal and calibrating it against correctness. Large-scale self-consistency supervision supports the first stage; a small set of correctness labels supports the second. HonestyBench provides the training and evaluation resource."
+      - "Where popularity-aware calibration targets an identifiable bias, EliCal studies how to learn reliable confidence more generally. Its two-stage design reduces dependence on costly correctness labels, making annotation efficiency part of the honesty-alignment problem."
+    metric: "1,000"
+    metric_label: correctness annotations
+    metric_note: "About 0.18% of the full-supervision correctness labels, approaching fully supervised alignment in the reported experiments; additional self-consistency supervision is used."
+    image: /images/publications/honesty-alignment.jpg
+    image_alt: "EliCal two-stage training diagram: confidence elicitation from large-scale consistency data, followed by calibration using a small correctness-labeled set."
+    caption: "EliCal separates low-cost confidence elicitation from correctness-based calibration, with HonestyBench as the supporting data resource."
+    paper: https://arxiv.org/abs/2510.17509
+    code: https://github.com/Trustworthy-Information-Access/Annotation-Efficient-Universal-Honesty-Alignment
+    transition: "EliCal reduces the cost of learning honest confidence. But as task training changes what a model can do, its self-assessment must also keep pace."
+
+  - id: cocal
+    chapter: evolving-capability
+    title: "Shared Experience, Separate Learning: Companion Confidence Calibration for LLMs"
+    venue: Preprint
+    status: Under review · arXiv forthcoming
+    role: First author
+    narrative:
+      - "Our latest work, CoCal, extends the learning question to capability-building experience itself. A lightweight confidence companion learns from internal states and verifier feedback in rollouts collected during reinforcement learning with verifiable rewards (RLVR)."
+      - "Task learning and confidence learning share experience, but use separate parameters and optimization; the task-training objective remains unchanged. This explores a further principle for the research program: the experience that builds capability can also support learning to judge that capability, without coupling the two objectives."
+    metric: "0.120 → 0.096"
+    metric_label: expected calibration error ↓
+    metric_note: "Matched post-hoc calibration → CoCal (binary). Qwen3-8B, five math benchmarks, 120 training steps; both retain 63.8% task accuracy."
+    image: /images/research/cocal.png
+    image_alt: "CoCal conceptual comparison: post-hoc calibration, coupled reinforcement learning, and shared experience with separate capability and confidence learning."
+    caption: "CoCal reuses capability-training experience without coupling confidence learning to policy optimization. Figure 1 from the latest manuscript."
+    caveat: "The companion requires access to hidden states and does not directly change verbalized confidence. Experiments train it by replaying cached training experience in chronological order."
+    paper:
+    code:
+
+extensions:
+  - id: multimodal-boundaries
+    title: Do LVLMs Know What They Know? A Systematic Study of Knowledge Boundary Perception in LVLMs
+    connection: "Extends knowledge-boundary evaluation to answers that depend on visual evidence."
+    venue: EMNLP 2025 Findings
+    role: Second author
+    url: https://arxiv.org/abs/2508.19111
+  - id: multiple-correct-answers
+    title: Evaluating and Calibrating LLM Confidence on Questions with Multiple Correct Answers
+    connection: "Revisits evaluation and calibration when correctness is not restricted to a single valid answer."
+    venue: Preprint
+    role: Co-first author
+    url: https://arxiv.org/abs/2602.07842
+  - id: factuality-judgments
+    title: How Long Reasoning Chains Influence LLMs' Judgment of Answer Factuality
+    connection: "Examines the reliability of factuality judgments when the evaluator itself is a reasoning model."
+    venue: ACL 2026
+    role: Co-first author
+    note: SAC Oral Recommendation
+    distinction_note: Recommended for an oral presentation by the Senior Area Chair; not a confirmed Oral acceptance.
+    url: https://arxiv.org/abs/2604.06756
+  - id: ranking-self-assessment
+    title: Can LLM Rerankers Predict Their Own Ranking Performance?
+    connection: "Carries self-assessment from answer correctness to the quality of ranked evidence."
+    venue: Preprint
+    role: First author
+    url: https://arxiv.org/abs/2606.03535

@@ -1,0 +1,5 @@
+<li class="paper-tree-paper">
+  {% include research-badges.html paper=include.paper %}
+  <a class="paper-tree-title" href="#{{ include.paper.id }}">{{ include.paper.title }}</a>
+  {% if include.paper.status %}<span class="paper-tree-status">{{ include.paper.status }}</span>{% endif %}
+</li>

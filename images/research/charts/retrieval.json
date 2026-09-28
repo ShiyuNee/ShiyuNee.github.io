@@ -1,0 +1,72 @@
+{
+  "kind": "bars",
+  "eyebrow": "01 / Observing the knowledge gap",
+  "title": "Knowing vs. thinking you know",
+  "subtitle": "Natural Questions · vanilla prompting · models evaluated in the 2024 study",
+  "metric": "Share of answers (%)",
+  "maximum": 100,
+  "ticks": [
+    0,
+    25,
+    50,
+    75,
+    100
+  ],
+  "precision": 1,
+  "series": [
+    {
+      "key": "accuracy",
+      "label": "Actually correct",
+      "color": "#2872b8"
+    },
+    {
+      "key": "certain",
+      "label": "Says ‘certain’",
+      "color": "#d5645e"
+    }
+  ],
+  "data": [
+    {
+      "label": "Vicuna",
+      "accuracy": 26.34,
+      "uncertain_rate": 0.0278,
+      "certain": 97.22,
+      "gap": 70.88
+    },
+    {
+      "label": "LLaMA2",
+      "accuracy": 29.86,
+      "uncertain_rate": 0.1684,
+      "certain": 83.16,
+      "gap": 53.3
+    },
+    {
+      "label": "GPT-Instruct",
+      "accuracy": 40.03,
+      "uncertain_rate": 0.19,
+      "certain": 81,
+      "gap": 40.97
+    },
+    {
+      "label": "ChatGPT",
+      "accuracy": 38.5,
+      "uncertain_rate": 0.2917,
+      "certain": 70.83,
+      "gap": 32.33
+    },
+    {
+      "label": "GPT-4",
+      "accuracy": 48.96,
+      "uncertain_rate": 0.1894,
+      "certain": 81.06,
+      "gap": 32.1
+    }
+  ],
+  "derive": "certain = 100 * (1 - uncertain_rate); gap = certain - accuracy",
+  "source": "ACL 2024 Findings · Table 2, p. 4; definitions in Section 3.2",
+  "source_url": "https://aclanthology.org/2024.findings-acl.675/",
+  "footnotes": [
+    "‘Certain’ is a binary self-report, not an average probability. Gap = certain rate − accuracy (percentage points).",
+    "This aggregate gap is not the paper’s sample-level Overconfidence metric. All five Table 2 models are shown."
+  ]
+}
