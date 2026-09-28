@@ -83,6 +83,22 @@
   > span { display: block; font-size: 0.65em; letter-spacing: 0.08em; text-transform: uppercase; color: #526471; }
   > a { display: inline-block; margin: 0.25em 0; font-size: 0.95em; font-weight: 600; color: #205b76; text-decoration: none; }
   > a:hover { text-decoration: underline; }
+  > .research-overview-link__status {
+    display: inline-block;
+    margin: 0.25em 0 0.25em 0.65em;
+    padding: 0.18em 0.55em;
+    border: 1px solid #dfcf9d;
+    border-radius: 4px;
+    background: #fff6db;
+    color: #786020;
+    font-size: 0.65em;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
+    vertical-align: 0.1em;
+    white-space: nowrap;
+  }
   small { display: block; font-size: 0.7em; color: #526471; }
 }
 
