@@ -154,6 +154,8 @@
       accent: orange
       thumbnail: /images/publications/reasoning-factuality.jpg
       conference: ACL'26
+      presentation: SAC Oral Recommendation
+      presentation_note: Recommended for an oral presentation by the Senior Area Chair; not a confirmed Oral acceptance.
       google_citations: 4
       links:
         - label: PDF

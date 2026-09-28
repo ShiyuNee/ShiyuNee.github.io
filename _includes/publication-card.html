@@ -13,7 +13,10 @@
       <span class="publication-card__conference{% if conference_type == 'arxiv' or conference_type == 'preprint' %} publication-card__conference--preprint{% endif %}" title="{{ paper.venue }}">{{ paper.conference }}</span>
     {% endif %}
     {% if paper.presentation %}
-      <span class="publication-card__conference publication-card__presentation" title="Presentation type">{{ paper.presentation }}</span>
+      <span class="publication-card__conference publication-card__presentation" title="{{ paper.presentation_note | default: paper.presentation | escape }}">
+        <svg class="publication-card__medal" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 2h5l3 7-4 2L6 2Zm7 0h5l-4 9-4-2 3-7Z" fill="currentColor" opacity=".65"/><circle cx="12" cy="15" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m12 10 1.4 2.8 3.1.5-2.2 2.2.5 3.1-2.8-1.5-2.8 1.5.5-3.1-2.2-2.2 3.1-.5Z" fill="currentColor"/></svg>
+        {{ paper.presentation }}
+      </span>
     {% endif %}
     <h3 class="publication-card__title">
       {% if title_url %}<a href="{{ title_url }}" target="_blank" rel="noopener noreferrer">{{ paper.title }}</a>{% else %}{{ paper.title }}{% endif %}
