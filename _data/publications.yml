@@ -153,7 +153,7 @@
       theme: Factuality judging
       accent: orange
       thumbnail: /images/publications/reasoning-factuality.jpg
-      conference: ACL'26
+      conference: ACL'26 · VulGen@SIGIR2026
       presentation: SAC Oral Recommendation
       presentation_note: Recommended for an oral presentation by the Senior Area Chair; not a confirmed Oral acceptance.
       google_citations: 4
@@ -164,6 +164,12 @@
         - label: Code
           icon: fab fa-github
           url: https://github.com/Trustworthy-Information-Access/Reasoning-Affects-LLM-Judge
+        - label: Slides
+          icon: fas fa-file-powerpoint
+          url: https://github.com/Trustworthy-Information-Access/Reasoning-Affects-LLM-Judge/blob/main/slides.pdf
+        - label: Poster
+          icon: fas fa-image
+          url: https://github.com/Trustworthy-Information-Access/Reasoning-Affects-LLM-Judge/blob/main/poster.pdf
 
 - section: Is External Evidence Good?
   subtitle: Query Performance Prediction
