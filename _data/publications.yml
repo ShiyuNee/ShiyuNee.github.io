@@ -24,6 +24,18 @@
 - section: Does the Model Know the Answer?
   subtitle: LLM Honesty Alignment / Self-assessment
   papers:
+    - title: "Shared Experience, Separate Learning: Companion Confidence Calibration for LLMs"
+      authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, Yilong Xu, Jingtong Wu, Zengxin Han, and Xueqi Cheng"
+      venue: Preprint
+      description: "Learns confidence alongside capability from shared RLVR experience, using a separate lightweight companion without changing task optimization."
+      theme: Companion confidence calibration
+      accent: teal
+      thumbnail: /images/research/cocal.png
+      conference: Preprint
+      links:
+        - label: PDF
+          icon: ai ai-arxiv
+          url: https://arxiv.org/pdf/2609.33721
     - title: "Popular but Wrong: Understanding and Mitigating LLM Overconfidence through Knowledge Popularity"
       authors: "<strong>Shiyu Ni</strong>, Keping Bi, Jiafeng Guo, and Xueqi Cheng"
       venue: "EMNLP 2026 · Conference on Empirical Methods in Natural Language Processing"

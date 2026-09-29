@@ -126,7 +126,7 @@
     ],
     "summary": "Macro ECE: 0.120 → 0.096     ·     Same macro task accuracy: 63.8%",
     "source": "CoCal preprint · Table 1, p. 7",
-    "source_url": null,
+    "source_url": "https://arxiv.org/abs/2609.33721",
     "footnotes": [
       "All five math datasets are shown; ECE improves on average, not on every dataset (AMC23 increases).",
       "Matched calibrator architecture and supervision. CoCal replays cached training experience chronologically."

@@ -1,5 +1,4 @@
 # A connected argument, grouped by scientific questions rather than publication dates.
-# Add the public arXiv URL to the final work when it becomes available.
 chapters:
   - id: recognize-boundaries
     number: "01"
@@ -97,7 +96,7 @@ works:
     chapter: evolving-capability
     title: "Shared Experience, Separate Learning: Companion Confidence Calibration for LLMs"
     venue: Preprint
-    status: Under review · arXiv forthcoming
+    status: Under review
     role: First author
     narrative:
       - "Our latest work, CoCal, extends the learning question to capability-building experience itself. A lightweight confidence companion learns from internal states and verifier feedback in rollouts collected during reinforcement learning with verifiable rewards (RLVR)."
@@ -107,9 +106,9 @@ works:
     metric_note: "Matched post-hoc calibration → CoCal (binary). Qwen3-8B, five math benchmarks, 120 training steps; both retain 63.8% task accuracy."
     image: /images/research/cocal.png
     image_alt: "CoCal conceptual comparison: post-hoc calibration, coupled reinforcement learning, and shared experience with separate capability and confidence learning."
-    caption: "CoCal reuses capability-training experience without coupling confidence learning to policy optimization. Figure 1 from the latest manuscript."
+    caption: "CoCal reuses capability-training experience without coupling confidence learning to policy optimization. Figure 1 from the CoCal preprint."
     caveat: "The companion requires access to hidden states and does not directly change verbalized confidence. Experiments train it by replaying cached training experience in chronological order."
-    paper:
+    paper: https://arxiv.org/abs/2609.33721
     code:
 
 extensions:
